@@ -32,7 +32,7 @@ describe('#sqs', () => {
     });
   });
 
-  it('should allow overrides', () => {
+  it('should allow partial overrides', () => {
     const event = sqsEventStub([
       sqsRecordStub(
         {
