@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "incremental": true,
+    "composite": true,
+    "target": "ES2023",
+    "experimentalDecorators": true,
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "baseUrl": ".",
+    "declaration": true,
+    "removeComments": false,
+    "isolatedModules": true,
+    "declarationMap": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "pretty": true // Enable pretty formatting for output messages.
+  }
+}

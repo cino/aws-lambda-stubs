@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { eventBridgeEventStub } from '../src/event-bridge';
+import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from '../src/utils';
 
 describe('#event-bridge', () => {
   it('should return a valid event', () => {
@@ -10,9 +11,9 @@ describe('#event-bridge', () => {
       id: '12345678-1234-1234-1234-123456789012',
       'detail-type': 'TestDetailType',
       source: 'test',
-      account: '123456789012',
+      account: DEFAULT_ACCOUNT_ID,
       time: expect.any(String),
-      region: 'us-east-1',
+      region: DEFAULT_REGION,
       resources: [],
       detail: { key: 'value' },
     });

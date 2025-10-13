@@ -1,5 +1,12 @@
 # Dependency directories
 node_modules
 
+# NPM cache directory
+.npm
+
 # OS
 .DS_Store
+
+# TS build files
+tsconfig.tsbuildinfo
+.tsbuildinfo

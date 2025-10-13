@@ -23,15 +23,18 @@
     "@biomejs/biome": "2.2.6",
     "@types/aws-lambda": "^8.10.155",
     "@types/node": "^24.7.2",
+    "@tsconfig/node24": "^24.0.1",
     "deepmerge": "^4.3.1",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.4",
+    "typescript": "5.9.3",
     "vitest": "^3.2.4"
   },
   "scripts": {
     "lint": "biome lint",
     "prepare": "husky",
-    "test": "vitest"
+    "test": "vitest",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "lint-staged": {
     "*.{js,ts,json}": "biome check --write --no-errors-on-unmatched"

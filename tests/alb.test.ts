@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { ALBEventStub } from '../src/alb';
+import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from '../src/utils';
 
 describe('#alb', () => {
   it('should return a valid event', () => {
@@ -8,8 +9,7 @@ describe('#alb', () => {
     expect(event).toEqual({
       requestContext: {
         elb: {
-          targetGroupArn:
-            'arn:aws:elasticloadbalancing:region:account-id:targetgroup/my-targets/1234567890123456',
+          targetGroupArn: `arn:aws:elasticloadbalancing:${DEFAULT_REGION}:${DEFAULT_ACCOUNT_ID}:targetgroup/my-targets/1234567890123456`,
         },
       },
       httpMethod: 'GET',
@@ -33,8 +33,7 @@ describe('#alb', () => {
     expect(event).toEqual({
       requestContext: {
         elb: {
-          targetGroupArn:
-            'arn:aws:elasticloadbalancing:region:account-id:targetgroup/my-targets/1234567890123456',
+          targetGroupArn: `arn:aws:elasticloadbalancing:${DEFAULT_REGION}:${DEFAULT_ACCOUNT_ID}:targetgroup/my-targets/1234567890123456`,
         },
       },
       httpMethod: 'POST',
