@@ -10,10 +10,7 @@ interface PartialSQSRecord extends Omit<Partial<SQSRecord>, omittedKeys> {
   messageAttributes?: Partial<SQSRecord['messageAttributes']>;
 }
 
-export const sqsRecordStub = (
-  body: object,
-  overrides: PartialSQSRecord = {}
-): SQSRecord => {
+export const sqsRecordStub = (body: object, overrides: PartialSQSRecord = {}): SQSRecord => {
   const stringifiedBody = JSON.stringify(body);
   const currentEpoch = Date.now().toString();
 

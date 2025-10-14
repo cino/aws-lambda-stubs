@@ -6,9 +6,7 @@ interface PartialSnsRecord extends Omit<Partial<SNSEventRecord>, 'Sns'> {
   Sns?: Partial<SNSEventRecord['Sns']>;
 }
 
-export const snsEventRecordStub = (
-  overrides: PartialSnsRecord = {}
-): SNSEventRecord => {
+export const snsEventRecordStub = (overrides: PartialSnsRecord = {}): SNSEventRecord => {
   return deepmerge(
     {
       EventVersion: '1.0',

@@ -2,7 +2,7 @@ import { snsEventRecordStub, snsEventStub } from 'src/sns';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from 'src/utils';
 import { describe, expect, it } from 'vitest';
 
-describe('#sqs', () => {
+describe('#sns', () => {
   it('should return a valid event', () => {
     const event = snsEventStub([snsEventRecordStub()]);
 
