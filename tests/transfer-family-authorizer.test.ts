@@ -1,4 +1,4 @@
-import { transferFamilyAuthorizerEventStub } from 'src/transfer-family-authorizer';
+import { transferFamilyAuthorizerEventStub } from 'src';
 import { describe, expect, it } from 'vitest';
 
 describe('#transfer-family-authorizer', () => {

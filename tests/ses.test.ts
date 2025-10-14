@@ -1,4 +1,4 @@
-import { SESEventRecordStub, SESEventStub } from 'src/ses';
+import { SESEventRecordStub, SESEventStub } from 'src';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from 'src/utils';
 import { describe, expect, it } from 'vitest';
 

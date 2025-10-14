@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { sqsEventStub, sqsRecordStub } from '../src/sqs';
+import { sqsEventStub, sqsRecordStub } from '../src';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from '../src/utils';
 
 describe('#sqs', () => {
