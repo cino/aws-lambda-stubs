@@ -1,4 +1,4 @@
-import { randomIpAddress } from 'src/utils';
+import { randomIpAddress } from 'src/common';
 import { ipv4Regex, ipv6Regex } from 'tests/helpers';
 import { describe, expect, it } from 'vitest';
 

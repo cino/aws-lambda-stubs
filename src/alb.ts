@@ -1,6 +1,6 @@
 import type { ALBEvent } from 'aws-lambda';
 import deepmerge from 'deepmerge';
-import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './utils';
+import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './common';
 
 export const ALBEventStub = (overrides: Partial<ALBEvent> = {}): ALBEvent => {
   return deepmerge(

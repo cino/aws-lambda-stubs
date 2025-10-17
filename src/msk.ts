@@ -1,5 +1,5 @@
 import type { MSKEvent } from 'aws-lambda';
-import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './utils';
+import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './common';
 
 export const mskEventStub = (overrides: Partial<MSKEvent> = {}): MSKEvent => {
   return {

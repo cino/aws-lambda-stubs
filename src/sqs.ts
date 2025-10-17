@@ -1,7 +1,7 @@
 import crypto from 'node:crypto';
 import type { SQSEvent, SQSRecord } from 'aws-lambda';
 import deepmerge from 'deepmerge';
-import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './utils';
+import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './common';
 
 type omittedKeys = 'attributes' | 'messageAttributes';
 

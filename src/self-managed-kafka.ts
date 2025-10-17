@@ -1,5 +1,5 @@
 import type { SelfManagedKafkaEvent } from 'aws-lambda';
-import { DEFAULT_REGION } from './utils';
+import { DEFAULT_REGION } from './common';
 
 export const selfManagedKafkaStub = (overrides: Partial<SelfManagedKafkaEvent> = {}): SelfManagedKafkaEvent => {
   return {

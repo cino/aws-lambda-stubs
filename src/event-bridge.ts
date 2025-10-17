@@ -1,5 +1,5 @@
 import type { EventBridgeEvent } from 'aws-lambda';
-import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './utils';
+import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './common';
 
 export const eventBridgeEventStub = (
   detailType: string,

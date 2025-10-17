@@ -1,6 +1,6 @@
 import type { S3Event, S3EventRecord } from 'aws-lambda';
 import deepmerge from 'deepmerge';
-import { DEFAULT_REGION, randomIpAddress } from './utils';
+import { DEFAULT_REGION, randomIpAddress } from './common';
 
 interface PartialS3EventRecord extends Omit<Partial<S3EventRecord>, 's3'> {
   s3?: {

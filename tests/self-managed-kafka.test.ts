@@ -1,6 +1,6 @@
 import { selfManagedKafkaStub } from 'src/self-managed-kafka';
 import { describe, expect, it } from 'vitest';
-import { DEFAULT_REGION } from '../src/utils';
+import { DEFAULT_REGION } from '../src/common';
 
 describe('#self-managed-kafka', () => {
   it('should return a valid event', () => {

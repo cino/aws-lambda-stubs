@@ -1,6 +1,6 @@
 import type { SNSEvent, SNSEventRecord } from 'aws-lambda';
 import deepmerge from 'deepmerge';
-import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './utils';
+import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './common';
 
 interface PartialSnsRecord extends Omit<Partial<SNSEventRecord>, 'Sns'> {
   Sns?: Partial<SNSEventRecord['Sns']>;

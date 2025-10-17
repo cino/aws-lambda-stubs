@@ -13,7 +13,7 @@ import type {
   SESReceiptWorkMailAction,
 } from 'aws-lambda';
 import deepmerge from 'deepmerge';
-import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './utils';
+import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './common';
 
 interface PartialSESMail extends Omit<Partial<SESMail>, 'commonHeaders'> {
   commonHeaders?: Partial<SESMailCommonHeaders>;
