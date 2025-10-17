@@ -1,4 +1,6 @@
 export * from './alb';
+export * from './autoscaling';
+export * from './cloudfront-request';
 export * from './event-bridge';
 export * from './msk';
 export * from './s3';
