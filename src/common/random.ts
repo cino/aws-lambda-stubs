@@ -11,3 +11,13 @@ export const randomIpAddress = (type: IPType = 'ipv4'): string => {
       .padStart(4, '0')
   ).join(':');
 };
+
+type InstanceId = `i-${string}`;
+export const randomInstanceId = (): InstanceId => {
+  const randomHex = () =>
+    Math.floor(Math.random() * 0xffffffff)
+      .toString(16)
+      .padStart(8, '0');
+
+  return `i-${randomHex()}${randomHex()}` as InstanceId;
+};

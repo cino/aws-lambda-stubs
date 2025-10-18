@@ -1,5 +1,5 @@
 import type { AutoScalingScaleInEvent } from 'aws-lambda';
-import { DEFAULT_ACCOUNT_ID, DEFAULT_AVAILABILITY_ZONE, DEFAULT_REGION } from './common';
+import { DEFAULT_ACCOUNT_ID, DEFAULT_AVAILABILITY_ZONE, DEFAULT_REGION, randomInstanceId } from './common';
 
 export const autoScalingScaleInEventStub = (
   overrides: Partial<AutoScalingScaleInEvent> = {}
@@ -20,7 +20,7 @@ export const autoScalingScaleInEventStub = (
     Instances: [
       {
         AvailabilityZone: DEFAULT_AVAILABILITY_ZONE,
-        InstanceId: 'i-1234567890abcdef0',
+        InstanceId: randomInstanceId(),
         InstanceType: 't2.micro',
         InstanceMarketOption: 'on-demand',
       },

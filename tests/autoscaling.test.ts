@@ -1,6 +1,7 @@
 import { autoScalingScaleInEventStub } from 'src';
 import { describe, expect, it } from 'vitest';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from '../src/common';
+import { instanceIdRegex } from './helpers';
 
 describe('#autoscaling', () => {
   it('should return a valid event', () => {
@@ -19,7 +20,7 @@ describe('#autoscaling', () => {
       Instances: [
         {
           AvailabilityZone: 'us-east-1a',
-          InstanceId: 'i-1234567890abcdef0',
+          InstanceId: expect.stringMatching(instanceIdRegex),
           InstanceType: 't2.micro',
           InstanceMarketOption: 'on-demand',
         },
@@ -47,7 +48,7 @@ describe('#autoscaling', () => {
       Instances: [
         {
           AvailabilityZone: 'us-east-1a',
-          InstanceId: 'i-1234567890abcdef0',
+          InstanceId: expect.stringMatching(instanceIdRegex),
           InstanceType: 't2.micro',
           InstanceMarketOption: 'on-demand',
         },
