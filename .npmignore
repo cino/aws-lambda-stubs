@@ -1,0 +1,9 @@
+.github
+.husky
+.vscode
+.nvmrc
+tsconfig.tsbuildinfo
+biome.json
+examples
+tests
+node_modules

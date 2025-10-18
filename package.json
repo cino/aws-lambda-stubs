@@ -1,11 +1,9 @@
 {
   "name": "aws-lambda-stubs",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "index.ts",
-  "author": {
-    "name": "Ricardo Cino",
-    "url": "https://cino.io"
-  },
+  "author": "Ricardo Cino <ricardo@cino.io>",
+  "description": "Providing stubs for all AWS Lambda invocation types for easy unit testing",
   "keywords": [
     "aws",
     "lambda",
@@ -14,6 +12,10 @@
     "stubs"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cino/aws-lambda-stubs.git"
+  },
   "bugs": {
     "url": "https://github.com/cino/aws-lambda-stubs/issues"
   },
