@@ -1,27 +1,8 @@
 import type { CloudFrontRequest, CloudFrontRequestEvent, CloudFrontRequestEventRecord } from 'aws-lambda';
 import deepmerge from 'deepmerge';
-import { randomIpAddress } from './common';
+import { cloudFrontRequestStub } from './common';
 
-export const cloudFrontRequestStub = (overrides: Partial<CloudFrontRequest> = {}): CloudFrontRequest => {
-  return {
-    clientIp: randomIpAddress(),
-    method: 'GET',
-    uri: '/images/image.jpg',
-    querystring: '',
-    headers: {
-      host: [
-        {
-          key: 'Host',
-          value: 'random.cloudfront.net',
-        },
-      ],
-    },
-
-    ...overrides,
-  };
-};
-
-interface PartialCloudFrontRequestEventRecord {
+export interface PartialCloudFrontRequestEventRecord {
   cf?: {
     config?: Partial<{
       distributionDomainName: string;
@@ -30,6 +11,7 @@ interface PartialCloudFrontRequestEventRecord {
       requestId: string;
     }>;
   };
+  request?: Partial<CloudFrontRequest>;
 }
 
 export const cloudFrontRequestEventRecordStub = (
@@ -58,7 +40,6 @@ export const cloudFrontRequestEventRecordStub = (
         }),
       },
     },
-
     overrides
   ) as CloudFrontRequestEventRecord;
 };

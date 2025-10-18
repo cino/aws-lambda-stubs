@@ -38,5 +38,8 @@
   },
   "lint-staged": {
     "*.{js,ts,json}": "biome check --write --no-errors-on-unmatched"
+  },
+  "exports": {
+    "./src/index.ts": "./src/index.ts"
   }
 }
