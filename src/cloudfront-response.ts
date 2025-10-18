@@ -7,7 +7,7 @@ import type {
 import deepmerge from 'deepmerge';
 import { randomIpAddress } from './common';
 
-export interface PartialCloudFrontRequestEventRecord {
+export interface PartialCloudFrontResponseEventRecord {
   cf?: {
     config?: Partial<{
       distributionDomainName: string;
@@ -21,7 +21,7 @@ export interface PartialCloudFrontRequestEventRecord {
 }
 
 export const cloudFrontResponseEventRecordStub = (
-  overrides: PartialCloudFrontRequestEventRecord = {}
+  overrides: PartialCloudFrontResponseEventRecord = {}
 ): CloudFrontResponseEventRecord => {
   const distributionDomainName = overrides.cf?.config?.distributionDomainName || 'd111111abcdef8.cloudfront.net';
 
