@@ -1,6 +1,6 @@
 {
   "name": "aws-lambda-stubs",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "index.ts",
   "author": "Ricardo Cino <ricardo@cino.io>",
   "description": "Providing stubs for all AWS Lambda invocation types for easy unit testing",
@@ -21,15 +21,17 @@
   },
   "homepage": "https://github.com/cino/aws-lambda-stubs#readme",
   "private": false,
+  "dependencies": {
+    "@types/aws-lambda": "^8.10.155",
+    "deepmerge": "^4.3.1",
+    "type-fest": "^5.1.0"
+  },
   "devDependencies": {
     "@biomejs/biome": "2.2.6",
     "@tsconfig/node24": "^24.0.1",
-    "@types/aws-lambda": "^8.10.155",
     "@types/node": "^24.7.2",
-    "deepmerge": "^4.3.1",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.4",
-    "type-fest": "^5.1.0",
     "typescript": "5.9.3",
     "vitest": "^3.2.4"
   },

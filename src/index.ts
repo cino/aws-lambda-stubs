@@ -5,6 +5,7 @@ export * from './cloudfront-response';
 export * from './cloudwatch-logs';
 export * from './codecommit';
 export * from './event-bridge';
+export * from './guard-duty-event-notification';
 export * from './iot';
 export * from './msk';
 export * from './s3';
