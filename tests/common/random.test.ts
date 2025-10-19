@@ -27,8 +27,6 @@ describe('#utils', () => {
     it('should generate a valid EC2 Instance ID', () => {
       const instanceId = randomInstanceId();
 
-      console.log(instanceId);
-
       expect(instanceId).toMatch(/^i-[0-9a-f]{16}$/);
     });
   });

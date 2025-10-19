@@ -2,7 +2,7 @@ import type { CloudFrontRequest, CloudFrontRequestEvent, CloudFrontRequestEventR
 import deepmerge from 'deepmerge';
 import { cloudFrontRequestStub } from './common';
 
-export interface PartialCloudFrontRequestEventRecord {
+interface PartialCloudFrontRequestEventRecord {
   cf?: {
     config?: Partial<{
       distributionDomainName: string;
