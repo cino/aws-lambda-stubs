@@ -7,3 +7,5 @@ biome.json
 examples
 tests
 node_modules
+*.md
+!README.md

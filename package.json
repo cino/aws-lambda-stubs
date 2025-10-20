@@ -1,7 +1,8 @@
 {
   "name": "aws-lambda-stubs",
-  "version": "0.0.3",
-  "main": "index.ts",
+  "version": "0.0.6",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
   "author": "Ricardo Cino <ricardo@cino.io>",
   "description": "Providing stubs for all AWS Lambda invocation types for easy unit testing",
   "keywords": [
@@ -43,8 +44,5 @@
   },
   "lint-staged": {
     "*.{js,ts,json}": "biome check --write --no-errors-on-unmatched"
-  },
-  "exports": {
-    "./src/index.ts": "./src/index.ts"
   }
 }

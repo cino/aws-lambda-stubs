@@ -7,6 +7,7 @@ export * from './codecommit';
 export * from './event-bridge';
 export * from './guard-duty-event-notification';
 export * from './iot';
+export * from './iot-authorizer';
 export * from './kinesis-firehose-transformation';
 export * from './kinesis-stream';
 export * from './lex';
