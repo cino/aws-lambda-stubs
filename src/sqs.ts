@@ -12,18 +12,18 @@ interface PartialSQSRecord extends Omit<Partial<SQSRecord>, omittedKeys> {
 
 export const sqsRecordStub = (body: object, overrides: PartialSQSRecord = {}): SQSRecord => {
   const stringifiedBody = JSON.stringify(body);
-  const currentEpoch = Date.now().toString();
+  const now = Date.now().toString();
 
-  return deepmerge(
+  return deepmerge<SQSRecord>(
     {
       messageId: '1',
       receiptHandle: 'receipt-handle',
       body: stringifiedBody,
       attributes: {
         ApproximateReceiveCount: '1',
-        SentTimestamp: currentEpoch,
+        SentTimestamp: now,
         SenderId: 'sender-id',
-        ApproximateFirstReceiveTimestamp: currentEpoch,
+        ApproximateFirstReceiveTimestamp: now,
       },
       messageAttributes: {},
       md5OfBody: crypto.createHash('md5').update(stringifiedBody).digest('hex'),
@@ -31,7 +31,7 @@ export const sqsRecordStub = (body: object, overrides: PartialSQSRecord = {}): S
       eventSourceARN: `sarn:aws:sqs:${DEFAULT_REGION}:${DEFAULT_ACCOUNT_ID}:queue-name`,
       awsRegion: DEFAULT_REGION,
     },
-    overrides
+    overrides as Partial<SQSRecord>
   ) as SQSRecord;
 };
 
