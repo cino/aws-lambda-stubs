@@ -7,6 +7,8 @@ export * from './codecommit';
 export * from './event-bridge';
 export * from './guard-duty-event-notification';
 export * from './iot';
+export * from './lex';
+export * from './lex-v2';
 export * from './msk';
 export * from './s3';
 export * from './s3-batch';
