@@ -11,7 +11,7 @@ jobs:
   typecheck:
     runs-on: ubuntu-latest
     permissions:
-      content: read
+      contents: read
 
 
     steps:
@@ -30,7 +30,7 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     permissions:
-      content: read
+      contents: read
 
     steps:
       - name: Checkout code
@@ -48,7 +48,7 @@ jobs:
   tests:
     runs-on: ubuntu-latest
     permissions:
-      content: read
+      contents: read
       pull-requests: write
     strategy:
       matrix:
