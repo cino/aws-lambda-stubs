@@ -2,7 +2,7 @@ import { cloudWatchLogsEventStub, cloudWatchLogsLogEventStub } from 'src';
 import { describe, expect, it } from 'vitest';
 import { DEFAULT_ACCOUNT_ID } from '../src/common';
 
-describe('#cloudwatch', () => {
+describe('#cloudwatch-logs', () => {
   describe('#cloudWatchLogsEventStub', () => {
     it('should return a valid event', () => {
       const event = cloudWatchLogsEventStub();
