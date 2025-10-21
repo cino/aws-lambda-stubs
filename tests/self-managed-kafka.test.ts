@@ -1,4 +1,4 @@
-import { selfManagedKafkaStub } from 'src/self-managed-kafka';
+import { selfManagedKafkaStub } from 'src';
 import { describe, expect, it } from 'vitest';
 import { DEFAULT_REGION } from '../src/common';
 

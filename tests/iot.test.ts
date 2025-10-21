@@ -1,4 +1,4 @@
-import { IoTPreProvisioningHookEventStub } from 'src/iot';
+import { IoTPreProvisioningHookEventStub } from 'src';
 import { describe, expect, it } from 'vitest';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from '../src/common';
 

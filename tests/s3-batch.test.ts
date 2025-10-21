@@ -1,4 +1,4 @@
-import { S3BatchEventStub } from 'src/s3-batch';
+import { S3BatchEventStub } from 'src';
 import { describe, expect, it } from 'vitest';
 
 describe('#s3', () => {
