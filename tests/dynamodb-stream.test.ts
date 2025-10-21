@@ -1,5 +1,5 @@
+import { dynamoDBRecordStub, dynamoDBStreamEventStub } from 'src';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from 'src/common';
-import { dynamoDBRecordStub, dynamoDBStreamEventStub } from 'src/dynamodb-stream';
 import { describe, expect, it } from 'vitest';
 
 describe('#dynamodb-stream', () => {
