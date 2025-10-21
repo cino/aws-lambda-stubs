@@ -10,6 +10,9 @@ on:
 jobs:
   typecheck:
     runs-on: ubuntu-latest
+    permissions:
+      content: read
+
 
     steps:
       - name: Checkout code
@@ -26,6 +29,8 @@ jobs:
 
   lint:
     runs-on: ubuntu-latest
+    permissions:
+      content: read
 
     steps:
       - name: Checkout code
@@ -43,6 +48,7 @@ jobs:
   tests:
     runs-on: ubuntu-latest
     permissions:
+      content: read
       pull-requests: write
     strategy:
       matrix:
