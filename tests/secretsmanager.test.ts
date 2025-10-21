@@ -1,4 +1,4 @@
-import { secretsManagerRotationStub } from 'src/secretsmanager';
+import { secretsManagerRotationStub } from 'src';
 import { describe, expect, it } from 'vitest';
 
 describe('#secretsManager', () => {
