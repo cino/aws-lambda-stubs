@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/cino/aws-lambda-stubs#readme",
   "private": false,
-  "dependencies": {
+  "peerDependencies": {
     "@types/aws-lambda": "^8.10.155",
     "deepmerge": "^4.3.1",
     "type-fest": "^5.1.0"
