@@ -1,10 +1,14 @@
-import type { SNSEvent, SNSEventRecord } from 'aws-lambda';
+import type { SNSEvent, SNSEventRecord, SNSMessage } from 'aws-lambda';
 import deepmerge from 'deepmerge';
+import type { Merge } from 'type-fest';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './common';
 
-interface PartialSnsRecord extends Omit<Partial<SNSEventRecord>, 'Sns'> {
-  Sns?: Partial<SNSEventRecord['Sns']>;
-}
+type PartialSnsRecord = Merge<
+  Partial<SNSEventRecord>,
+  {
+    Sns?: Partial<SNSMessage>;
+  }
+>;
 
 export const snsEventRecordStub = (overrides: PartialSnsRecord = {}): SNSEventRecord => {
   return deepmerge(

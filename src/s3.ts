@@ -1,13 +1,20 @@
 import type { S3Event, S3EventRecord } from 'aws-lambda';
 import deepmerge from 'deepmerge';
+import type { Merge } from 'type-fest';
 import { DEFAULT_REGION, randomIpAddress } from './common';
 
-interface PartialS3EventRecord extends Omit<Partial<S3EventRecord>, 's3'> {
-  s3?: {
-    bucket?: Partial<S3EventRecord['s3']['bucket']>;
-    object?: Partial<S3EventRecord['s3']['object']>;
-  };
-}
+type PartialS3EventRecord = Merge<
+  Partial<S3EventRecord>,
+  {
+    s3?: Merge<
+      Partial<S3EventRecord['s3']>,
+      {
+        bucket?: Partial<S3EventRecord['s3']['bucket']>;
+        object?: Partial<S3EventRecord['s3']['object']>;
+      }
+    >;
+  }
+>;
 
 export const S3EventRecordStub = (overrides: PartialS3EventRecord = {}): S3EventRecord => {
   const bucketName = overrides.s3?.bucket?.name || 'example-bucket';

@@ -7,13 +7,13 @@ import type { PartialEventBridgeEvent } from './common/event-bridge';
 type PartialGuardDutyScanResultNotificationEvent = Merge<
   PartialEventBridgeEvent,
   {
-    detail?: Partial<{
-      schemaVersion?: '1.0';
-      scanStatus?: 'COMPLETED' | 'SKIPPED' | 'FAILED';
-      resourceType?: 'S3_OBJECT';
-      s3ObjectDetails?: Partial<GuardDutyScanResultNotificationEventDetail['s3ObjectDetails']>;
-      scanResultDetails?: Partial<GuardDutyScanResultNotificationEventDetail['scanResultDetails']>;
-    }>;
+    detail?: Merge<
+      Partial<GuardDutyScanResultNotificationEventDetail>,
+      {
+        s3ObjectDetails?: Partial<GuardDutyScanResultNotificationEventDetail['s3ObjectDetails']>;
+        scanResultDetails?: Partial<GuardDutyScanResultNotificationEventDetail['scanResultDetails']>;
+      }
+    >;
   }
 >;
 

@@ -4,6 +4,7 @@ export * from './cloudfront-request';
 export * from './cloudfront-response';
 export * from './cloudwatch-logs';
 export * from './codecommit';
+export * from './dynamodb-stream';
 export * from './event-bridge';
 export * from './guard-duty-event-notification';
 export * from './iot';

@@ -13,31 +13,43 @@ import type {
   SESReceiptWorkMailAction,
 } from 'aws-lambda';
 import deepmerge from 'deepmerge';
+import type { Merge } from 'type-fest';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './common';
 
-interface PartialSESMail extends Omit<Partial<SESMail>, 'commonHeaders'> {
-  commonHeaders?: Partial<SESMailCommonHeaders>;
-}
+type PartialSESMail = Merge<
+  Partial<SESMail>,
+  {
+    commonHeaders?: Partial<SESMailCommonHeaders>;
+  }
+>;
 
-interface PartialSESReceipt extends Omit<Partial<SESReceipt>, 'action'> {
-  action?: Partial<
-    | SESReceiptS3Action
-    | SESReceiptSnsAction
-    | SESReceiptBounceAction
-    | SESReceiptLambdaAction
-    | SESReceiptStopAction
-    | SESReceiptWorkMailAction
-  >;
-}
+type PartialSESReceipt = Merge<
+  Partial<SESReceipt>,
+  {
+    action?:
+      | Partial<SESReceiptS3Action>
+      | Partial<SESReceiptSnsAction>
+      | Partial<SESReceiptBounceAction>
+      | Partial<SESReceiptLambdaAction>
+      | Partial<SESReceiptStopAction>
+      | Partial<SESReceiptWorkMailAction>;
+  }
+>;
 
-interface PartialSESMessage extends Omit<Partial<SESMessage>, 'mail' | 'receipt'> {
-  mail?: PartialSESMail;
-  receipt?: PartialSESReceipt;
-}
+type PartialSESMessage = Merge<
+  Partial<SESMessage>,
+  {
+    mail?: PartialSESMail;
+    receipt?: PartialSESReceipt;
+  }
+>;
 
-interface PartialSESEventRecord extends Omit<Partial<SESEventRecord>, 'ses'> {
-  ses?: PartialSESMessage;
-}
+type PartialSESEventRecord = Merge<
+  Partial<SESEventRecord>,
+  {
+    ses?: PartialSESMessage;
+  }
+>;
 
 export const SESEventRecordStub = (overrides: PartialSESEventRecord = {}): SESEventRecord => {
   return deepmerge(
