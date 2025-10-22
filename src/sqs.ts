@@ -28,7 +28,7 @@ export const sqsRecordStub = (body: object, overrides: PartialSQSRecord = {}): S
       messageAttributes: {},
       md5OfBody: crypto.createHash('md5').update(stringifiedBody).digest('hex'),
       eventSource: 'aws:sqs',
-      eventSourceARN: `sarn:aws:sqs:${DEFAULT_REGION}:${DEFAULT_ACCOUNT_ID}:queue-name`,
+      eventSourceARN: `arn:aws:sqs:${DEFAULT_REGION}:${DEFAULT_ACCOUNT_ID}:queue-name`,
       awsRegion: DEFAULT_REGION,
     },
     overrides as Partial<SQSRecord>
