@@ -1,5 +1,6 @@
-import type { AppSyncAuthorizerEvent } from 'aws-lambda';
+import type { AppSyncAuthorizerEvent, AppSyncResolverEvent } from 'aws-lambda';
 import deepmerge from 'deepmerge';
+import type { Merge } from 'type-fest';
 import { DEFAULT_ACCOUNT_ID } from './common';
 
 export const appSyncAuthorizerEventStub = (overrides: Partial<AppSyncAuthorizerEvent> = {}): AppSyncAuthorizerEvent => {
@@ -23,5 +24,44 @@ export const appSyncAuthorizerEventStub = (overrides: Partial<AppSyncAuthorizerE
       },
     },
     overrides
+  );
+};
+
+type PartialAppSyncResolverEvent<TArguments, TSource> = Merge<
+  Partial<AppSyncResolverEvent<TArguments, TSource>>,
+  {
+    info?: Partial<AppSyncResolverEvent<TArguments, TSource>['info']>;
+    request?: Partial<AppSyncResolverEvent<TArguments, TSource>['request']>;
+  }
+>;
+
+export const appSyncResolverEventStub = <TArguments = undefined, TSource = Record<string, any> | null>(
+  overrides: PartialAppSyncResolverEvent<TArguments, TSource> = {}
+): AppSyncResolverEvent<TArguments, TSource> => {
+  return deepmerge<AppSyncResolverEvent<TArguments, TSource>>(
+    {
+      arguments: {} as TArguments,
+      identity: undefined,
+      source: {} as TSource,
+      request: {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer abcdef123456',
+        },
+        domainName: 'api.example.com',
+      },
+      info: {
+        selectionSetList: ['id', 'name'],
+        selectionSetGraphQL: '{ id name }',
+        parentTypeName: 'Query',
+        fieldName: 'getUser',
+        variables: {
+          id: '1',
+        },
+      },
+      prev: null,
+      stash: {},
+    },
+    overrides as Partial<AppSyncResolverEvent<TArguments, TSource>>
   );
 };

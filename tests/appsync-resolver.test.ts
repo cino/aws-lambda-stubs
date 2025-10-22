@@ -1,5 +1,5 @@
-import { appSyncAuthorizerEventStub } from 'src/appsync-resolver';
-import { DEFAULT_ACCOUNT_ID } from 'src/common';
+import { appSyncAuthorizerEventStub, appSyncResolverEventStub } from 'src';
+import { appSyncIdentityStub, DEFAULT_ACCOUNT_ID } from 'src/common';
 import { describe, expect, it } from 'vitest';
 
 describe('#appsync-resolver', () => {
@@ -52,6 +52,72 @@ describe('#appsync-resolver', () => {
           Authorization: 'Bearer newtoken123456',
           'X-Api-Key': 'xyz987654321',
         },
+      });
+    });
+  });
+
+  describe('#resolver-event', () => {
+    it('should return a valid event', () => {
+      const event = appSyncResolverEventStub();
+
+      expect(event).toEqual({
+        arguments: {},
+        identity: undefined,
+        source: {} as { name: string },
+        request: {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer abcdef123456',
+          },
+          domainName: 'api.example.com',
+        },
+        info: {
+          selectionSetList: ['id', 'name'],
+          selectionSetGraphQL: '{ id name }',
+          parentTypeName: 'Query',
+          fieldName: 'getUser',
+          variables: {
+            id: '1',
+          },
+        },
+        prev: null,
+        stash: {},
+      });
+    });
+
+    it('should allow overrides', () => {
+      const event = appSyncResolverEventStub({
+        arguments: { id: '2' },
+        info: {
+          fieldName: 'listUsers',
+        },
+        identity: appSyncIdentityStub('lambda', { resolverContext: { username: 'custom_lambda_user' } }),
+      });
+
+      expect(event).toEqual({
+        arguments: { id: '2' },
+        identity: {
+          resolverContext: { username: 'custom_lambda_user' },
+        },
+        source: {} as { name: string },
+        request: {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer abcdef123456',
+          },
+          domainName: 'api.example.com',
+        },
+        info: {
+          selectionSetList: ['id', 'name'],
+          selectionSetGraphQL: '{ id name }',
+          parentTypeName: 'Query',
+          fieldName: 'listUsers',
+          variables: {
+            id: '1',
+          },
+        },
+        prev: null,
+        stash: {},
       });
     });
   });
