@@ -1,8 +1,8 @@
 import type { GuardDutyScanResultNotificationEvent, GuardDutyScanResultNotificationEventDetail } from 'aws-lambda';
 import deepmerge from 'deepmerge';
 import type { Merge } from 'type-fest';
+import type { PartialEventBridgeEvent } from './common';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './common';
-import type { PartialEventBridgeEvent } from './common/event-bridge';
 
 type PartialGuardDutyScanResultNotificationEvent = Merge<
   PartialEventBridgeEvent,
