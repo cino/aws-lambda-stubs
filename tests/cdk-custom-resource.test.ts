@@ -1,0 +1,173 @@
+import { cdkCustomResourceCreateEventStub, cdkCustomResourceIsCompleteEventStub } from 'src';
+import { describe, expect, it } from 'vitest';
+
+describe('#cloudformation-custom-resource', () => {
+  describe('#create-event', () => {
+    it('should return a valid create event', () => {
+      const event = cdkCustomResourceCreateEventStub();
+
+      expect(event).toEqual({
+        RequestType: 'Create',
+        ServiceToken: 'arn:aws:lambda:us-east-1:012345678901:function:my-function',
+        ResponseURL: 'https://cdk-custom-resource-response-useast1.s3.amazonaws.com/...',
+        StackId: 'arn:aws:cloudformation:us-east-1:012345678901:stack/my-stack/abcd1234-ef56-7890-abcd-1234ef567890',
+        RequestId: 'unique-request-id',
+        ResourceType: 'Custom::MyCustomResource',
+        LogicalResourceId: 'MyCustomResource',
+        ResourceProperties: {
+          ServiceToken: 'arn:aws:lambda:us-east-1:012345678901:function:my-function',
+          Key1: 'Value1',
+          Key2: 'Value2',
+        },
+      });
+    });
+
+    it('should allow overrides', () => {
+      const event = cdkCustomResourceCreateEventStub({
+        ResourceProperties: {
+          Key1: 'OverriddenValue1',
+          Key3: 'Value3',
+          ServiceToken: 'arn:aws:lambda:us-east-1:012345678901:function:my-function',
+        },
+      });
+
+      expect(event).toEqual({
+        RequestType: 'Create',
+        ServiceToken: 'arn:aws:lambda:us-east-1:012345678901:function:my-function',
+        ResponseURL: 'https://cdk-custom-resource-response-useast1.s3.amazonaws.com/...',
+        StackId: 'arn:aws:cloudformation:us-east-1:012345678901:stack/my-stack/abcd1234-ef56-7890-abcd-1234ef567890',
+        RequestId: 'unique-request-id',
+        ResourceType: 'Custom::MyCustomResource',
+        LogicalResourceId: 'MyCustomResource',
+        ResourceProperties: {
+          Key1: 'OverriddenValue1',
+          Key3: 'Value3',
+          ServiceToken: 'arn:aws:lambda:us-east-1:012345678901:function:my-function',
+        },
+      });
+    });
+  });
+
+  describe('#update-event', () => {
+    it('should return a valid update event', () => {
+      const event = cdkCustomResourceCreateEventStub();
+
+      expect(event).toEqual({
+        RequestType: 'Create',
+        ServiceToken: 'arn:aws:lambda:us-east-1:012345678901:function:my-function',
+        ResponseURL: 'https://cdk-custom-resource-response-useast1.s3.amazonaws.com/...',
+        StackId: 'arn:aws:cloudformation:us-east-1:012345678901:stack/my-stack/abcd1234-ef56-7890-abcd-1234ef567890',
+        RequestId: 'unique-request-id',
+        ResourceType: 'Custom::MyCustomResource',
+        LogicalResourceId: 'MyCustomResource',
+        ResourceProperties: {
+          ServiceToken: 'arn:aws:lambda:us-east-1:012345678901:function:my-function',
+          Key1: 'Value1',
+          Key2: 'Value2',
+        },
+      });
+    });
+
+    it('should allow overrides', () => {
+      const event = cdkCustomResourceCreateEventStub({
+        ResourceProperties: {
+          Key1: 'OverriddenValue1',
+          Key3: 'Value3',
+          ServiceToken: 'arn:aws:lambda:us-east-1:012345678901:function:my-function',
+        },
+      });
+
+      expect(event).toEqual({
+        RequestType: 'Create',
+        ServiceToken: 'arn:aws:lambda:us-east-1:012345678901:function:my-function',
+        ResponseURL: 'https://cdk-custom-resource-response-useast1.s3.amazonaws.com/...',
+        StackId: 'arn:aws:cloudformation:us-east-1:012345678901:stack/my-stack/abcd1234-ef56-7890-abcd-1234ef567890',
+        RequestId: 'unique-request-id',
+        ResourceType: 'Custom::MyCustomResource',
+        LogicalResourceId: 'MyCustomResource',
+        ResourceProperties: {
+          Key1: 'OverriddenValue1',
+          Key3: 'Value3',
+          ServiceToken: 'arn:aws:lambda:us-east-1:012345678901:function:my-function',
+        },
+      });
+    });
+  });
+
+  describe('#delete-event', () => {
+    it('should return a valid delete event', () => {
+      const event = cdkCustomResourceCreateEventStub();
+
+      expect(event).toEqual({
+        RequestType: 'Create',
+        ServiceToken: 'arn:aws:lambda:us-east-1:012345678901:function:my-function',
+        ResponseURL: 'https://cdk-custom-resource-response-useast1.s3.amazonaws.com/...',
+        StackId: 'arn:aws:cloudformation:us-east-1:012345678901:stack/my-stack/abcd1234-ef56-7890-abcd-1234ef567890',
+        RequestId: 'unique-request-id',
+        ResourceType: 'Custom::MyCustomResource',
+        LogicalResourceId: 'MyCustomResource',
+        ResourceProperties: {
+          ServiceToken: 'arn:aws:lambda:us-east-1:012345678901:function:my-function',
+          Key1: 'Value1',
+          Key2: 'Value2',
+        },
+      });
+    });
+
+    it('should allow overrides', () => {
+      const event = cdkCustomResourceCreateEventStub({
+        ResourceProperties: {
+          Key1: 'OverriddenValue1',
+          Key3: 'Value3',
+          ServiceToken: 'arn:aws:lambda:us-east-1:012345678901:function:my-function',
+        },
+      });
+
+      expect(event).toEqual({
+        RequestType: 'Create',
+        ServiceToken: 'arn:aws:lambda:us-east-1:012345678901:function:my-function',
+        ResponseURL: 'https://cdk-custom-resource-response-useast1.s3.amazonaws.com/...',
+        StackId: 'arn:aws:cloudformation:us-east-1:012345678901:stack/my-stack/abcd1234-ef56-7890-abcd-1234ef567890',
+        RequestId: 'unique-request-id',
+        ResourceType: 'Custom::MyCustomResource',
+        LogicalResourceId: 'MyCustomResource',
+        ResourceProperties: {
+          Key1: 'OverriddenValue1',
+          Key3: 'Value3',
+          ServiceToken: 'arn:aws:lambda:us-east-1:012345678901:function:my-function',
+        },
+      });
+    });
+  });
+
+  describe('#is-complete-event', () => {
+    it('should return a valid is-complete event', () => {
+      const baseEvent = cdkCustomResourceCreateEventStub();
+      const event = cdkCustomResourceIsCompleteEventStub(baseEvent);
+
+      expect(event).toEqual({
+        ...baseEvent,
+        PhysicalResourceId: 'my-physical-resource-id',
+        Data: {},
+      });
+    });
+
+    it('should allow overrides', () => {
+      const baseEvent = cdkCustomResourceCreateEventStub();
+      const event = cdkCustomResourceIsCompleteEventStub(baseEvent, {
+        PhysicalResourceId: 'overridden-physical-resource-id',
+        Data: {
+          Key1: 'Value1',
+        },
+      });
+
+      expect(event).toEqual({
+        ...baseEvent,
+        PhysicalResourceId: 'overridden-physical-resource-id',
+        Data: {
+          Key1: 'Value1',
+        },
+      });
+    });
+  });
+});

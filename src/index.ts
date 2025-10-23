@@ -2,6 +2,7 @@ export * from './alb';
 export * from './amplify-resolver';
 export * from './appsync-resolver';
 export * from './autoscaling';
+export * from './cdk-custom-resource';
 export * from './cloudformation-custom-resource';
 export * from './cloudfront-request';
 export * from './cloudfront-response';
