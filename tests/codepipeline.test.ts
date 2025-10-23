@@ -1,4 +1,4 @@
-import { codePipelineEventStub } from 'src/codepipeline';
+import { codePipelineEventStub } from 'src';
 import { DEFAULT_ACCOUNT_ID } from 'src/common';
 import { describe, expect, it } from 'vitest';
 
