@@ -1,4 +1,5 @@
 export * from './alb';
+export * from './amplify-resolver';
 export * from './appsync-resolver';
 export * from './autoscaling';
 export * from './cloudfront-request';
