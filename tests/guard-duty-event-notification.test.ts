@@ -1,5 +1,5 @@
-import { guardDutyScanResultNotificationEventStub } from 'src';
 import { describe, expect, it } from 'vitest';
+import { guardDutyScanResultNotificationEventStub } from '../src';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from '../src/common';
 
 describe('#guard-duty-event-notification', () => {

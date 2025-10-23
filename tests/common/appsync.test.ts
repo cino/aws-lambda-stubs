@@ -1,5 +1,5 @@
-import { appSyncIdentityStub, DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from 'src/common';
 import { describe, expect, it } from 'vitest';
+import { appSyncIdentityStub, DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from '../../src/common';
 
 describe('#appsync', () => {
   describe('appSyncIdentityStub', () => {

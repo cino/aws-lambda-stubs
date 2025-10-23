@@ -1,10 +1,10 @@
+import { describe, expect, it } from 'vitest';
 import {
   codePipelineCloudWatchActionEventStub,
   codePipelineCloudWatchPipelineEventStub,
   codePipelineCloudWatchStageEventStub,
-} from 'src';
-import { DEFAULT_ACCOUNT_ID } from 'src/common';
-import { describe, expect, it } from 'vitest';
+} from '../src';
+import { DEFAULT_ACCOUNT_ID } from '../src/common';
 
 describe('#codepipeline-cloudwatch', () => {
   describe('#action-event', () => {

@@ -1,5 +1,5 @@
-import { S3EventRecordStub, S3EventStub } from 'src';
 import { describe, expect, it } from 'vitest';
+import { S3EventRecordStub, S3EventStub } from '../src';
 import { ipRegex } from './helpers';
 
 describe('#s3', () => {

@@ -1,5 +1,5 @@
-import { cloudFrontResponseEventRecordStub, cloudFrontResponseEventStub } from 'src';
 import { describe, expect, it } from 'vitest';
+import { cloudFrontResponseEventRecordStub, cloudFrontResponseEventStub } from '../src';
 
 describe('#cloudfront-response', () => {
   it('should return a valid event', () => {

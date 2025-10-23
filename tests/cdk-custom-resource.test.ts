@@ -1,5 +1,5 @@
-import { cdkCustomResourceCreateEventStub, cdkCustomResourceIsCompleteEventStub } from 'src';
 import { describe, expect, it } from 'vitest';
+import { cdkCustomResourceCreateEventStub, cdkCustomResourceIsCompleteEventStub } from '../src';
 
 describe('#cloudformation-custom-resource', () => {
   describe('#create-event', () => {

@@ -1,5 +1,5 @@
-import { lexEventStub } from 'src';
 import { describe, expect, it } from 'vitest';
+import { lexEventStub } from '../src';
 
 describe('#lex', () => {
   it('should return a valid event', () => {

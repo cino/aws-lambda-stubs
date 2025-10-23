@@ -1,5 +1,5 @@
-import { S3BatchEventStub } from 'src';
 import { describe, expect, it } from 'vitest';
+import { S3BatchEventStub } from '../src';
 
 describe('#s3', () => {
   it('should return a valid event', () => {

@@ -1,5 +1,5 @@
-import { IoTCustomAuthorizerEventStub } from 'src';
 import { describe, expect, it } from 'vitest';
+import { IoTCustomAuthorizerEventStub } from '../src';
 
 describe('#iot-authorizer', () => {
   it('should return a valid event', () => {

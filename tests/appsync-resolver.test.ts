@@ -1,6 +1,6 @@
-import { appSyncAuthorizerEventStub, appSyncResolverEventStub } from 'src';
-import { appSyncIdentityStub, DEFAULT_ACCOUNT_ID } from 'src/common';
 import { describe, expect, it } from 'vitest';
+import { appSyncAuthorizerEventStub, appSyncResolverEventStub } from '../src';
+import { appSyncIdentityStub, DEFAULT_ACCOUNT_ID } from '../src/common';
 
 describe('#appsync-resolver', () => {
   describe('#authorizer-event', () => {

@@ -1,5 +1,5 @@
-import { selfManagedKafkaStub } from 'src';
 import { describe, expect, it } from 'vitest';
+import { selfManagedKafkaStub } from '../src';
 import { DEFAULT_REGION } from '../src/common';
 
 describe('#self-managed-kafka', () => {

@@ -1,5 +1,5 @@
-import { secretsManagerRotationStub } from 'src';
 import { describe, expect, it } from 'vitest';
+import { secretsManagerRotationStub } from '../src';
 
 describe('#secretsManager', () => {
   it('should return a valid event', () => {

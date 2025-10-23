@@ -1,9 +1,9 @@
+import { describe, expect, it } from 'vitest';
 import {
   cloudFormationCustomResourceCreateEventStub,
   cloudFormationCustomResourceDeleteEventStub,
   cloudFormationCustomResourceUpdateEventStub,
-} from 'src';
-import { describe, expect, it } from 'vitest';
+} from '../src';
 
 describe('#cloudformation-custom-resource', () => {
   describe('#create-event', () => {

@@ -1,5 +1,5 @@
-import { amplifyGraphqlResolverEventStub } from 'src';
 import { describe, expect, it } from 'vitest';
+import { amplifyGraphqlResolverEventStub } from '../src';
 
 describe('#amplify', () => {
   describe('#amplify-resolver-event', () => {

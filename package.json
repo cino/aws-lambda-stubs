@@ -23,19 +23,19 @@
   "homepage": "https://github.com/cino/aws-lambda-stubs#readme",
   "private": false,
   "peerDependencies": {
-    "@types/aws-lambda": "^8.10.155",
+    "@types/aws-lambda": "^8.10.156",
     "deepmerge": "^4.3.1",
     "type-fest": "^5.1.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.2.6",
+    "@biomejs/biome": "2.2.7",
     "@tsconfig/node24": "^24.0.1",
-    "@types/node": "^24.7.2",
-    "@vitest/coverage-v8": "^3.2.4",
+    "@types/node": "^24.9.1",
+    "@vitest/coverage-v8": "^4.0.2",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.4",
     "typescript": "5.9.3",
-    "vitest": "^3.2.4"
+    "vitest": "^4.0.2"
   },
   "scripts": {
     "lint": "biome lint",

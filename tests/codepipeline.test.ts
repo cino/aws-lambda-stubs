@@ -1,6 +1,6 @@
-import { codePipelineEventStub } from 'src';
-import { DEFAULT_ACCOUNT_ID } from 'src/common';
 import { describe, expect, it } from 'vitest';
+import { codePipelineEventStub } from '../src';
+import { DEFAULT_ACCOUNT_ID } from '../src/common';
 
 describe('#codepipeline', () => {
   it('should return a valid event', () => {

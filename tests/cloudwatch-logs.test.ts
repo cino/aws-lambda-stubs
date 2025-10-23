@@ -1,5 +1,5 @@
-import { cloudWatchLogsEventStub, cloudWatchLogsLogEventStub } from 'src';
 import { describe, expect, it } from 'vitest';
+import { cloudWatchLogsEventStub, cloudWatchLogsLogEventStub } from '../src';
 import { DEFAULT_ACCOUNT_ID } from '../src/common';
 
 describe('#cloudwatch-logs', () => {
