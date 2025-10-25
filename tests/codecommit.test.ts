@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { CodeCommitTriggerEventStub, CodeCommitTriggerStub } from '../src';
-import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from '../src/common';
+import { CodeCommitTriggerEventStub, CodeCommitTriggerStub, DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from '../src';
 
 describe('#codecommit', () => {
   it('should return a valid event', () => {

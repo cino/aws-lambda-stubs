@@ -1,6 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { KinesisStreamEventStub, KinesisStreamRecordStub, KinesisStreamTumblingWindowEventStub } from '../src';
-import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from '../src/common';
+import {
+  DEFAULT_ACCOUNT_ID,
+  DEFAULT_REGION,
+  KinesisStreamEventStub,
+  KinesisStreamRecordStub,
+  KinesisStreamTumblingWindowEventStub,
+} from '../src';
 
 describe('#kinesis', () => {
   describe('#stream', () => {

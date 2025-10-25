@@ -12,6 +12,7 @@ export * from './cloudwatch-logs';
 export * from './codecommit';
 export * from './codepipeline';
 export * from './codepipeline-cloudwatch';
+export * from './common';
 export * from './connect-contact-flow';
 export * from './dynamodb-stream';
 export * from './event-bridge';

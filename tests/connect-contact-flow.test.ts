@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { ConnectContactFlowStub } from '../src';
-import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from '../src/common';
+import { ConnectContactFlowStub, DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from '../src';
 
 describe('#connect-contact-flow', () => {
   it('should should return a valid event', () => {

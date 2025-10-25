@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { MSKEventStub } from '../src';
-import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from '../src/common';
+import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION, MSKEventStub } from '../src';
 
 describe('#msk', () => {
   it('should return a valid event', () => {
