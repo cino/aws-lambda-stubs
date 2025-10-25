@@ -2,7 +2,7 @@ import type { FirehoseTransformationEvent, FirehoseTransformationEventRecord } f
 import { DateTime } from 'luxon';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './common';
 
-export const fireHoseTransformationEventRecordStub = (
+export const FireHoseTransformationEventRecordStub = (
   overrides: Partial<FirehoseTransformationEventRecord> = {}
 ): FirehoseTransformationEventRecord => {
   return {
@@ -13,7 +13,7 @@ export const fireHoseTransformationEventRecordStub = (
   };
 };
 
-export const fireHoseTransformationEventStub = (
+export const FireHoseTransformationEventStub = (
   records: FirehoseTransformationEventRecord[]
 ): FirehoseTransformationEvent => {
   return {

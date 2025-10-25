@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { snsEventRecordStub, snsEventStub } from '../src';
+import { SNSEventRecordStub, SNSEventStub } from '../src';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from '../src/common';
 
 describe('#sns', () => {
   it('should return a valid event', () => {
-    const event = snsEventStub([snsEventRecordStub()]);
+    const event = SNSEventStub([SNSEventRecordStub()]);
 
     expect(event).toEqual({
       Records: [
@@ -31,8 +31,8 @@ describe('#sns', () => {
   });
 
   it('should allow partial overrides', () => {
-    const event = snsEventStub([
-      snsEventRecordStub({
+    const event = SNSEventStub([
+      SNSEventRecordStub({
         Sns: {
           Message: 'Overridden message',
           MessageAttributes: {

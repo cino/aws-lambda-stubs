@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { sqsEventStub, sqsRecordStub } from '../src';
+import { SQSEventStub, SQSRecordStub } from '../src';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from '../src/common';
 
 describe('#sqs', () => {
   it('should return a valid event', () => {
-    const event = sqsEventStub([
-      sqsRecordStub({
+    const event = SQSEventStub([
+      SQSRecordStub({
         key: 'value',
       }),
     ]);
@@ -33,8 +33,8 @@ describe('#sqs', () => {
   });
 
   it('should allow partial overrides', () => {
-    const event = sqsEventStub([
-      sqsRecordStub(
+    const event = SQSEventStub([
+      SQSRecordStub(
         {
           key: 'value',
         },

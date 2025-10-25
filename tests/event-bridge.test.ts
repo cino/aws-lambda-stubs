@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { eventBridgeEventStub } from '../src';
+import { EventBridgeEventStub } from '../src';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from '../src/common';
 
 describe('#event-bridge', () => {
   it('should return a valid event', () => {
-    const event = eventBridgeEventStub('TestDetailType', { key: 'value' });
+    const event = EventBridgeEventStub('TestDetailType', { key: 'value' });
 
     expect(event).toEqual({
       version: '0',
@@ -20,7 +20,7 @@ describe('#event-bridge', () => {
   });
 
   it('should allow overrides', () => {
-    const event = eventBridgeEventStub(
+    const event = EventBridgeEventStub(
       'TestDetailType',
       { key: 'value' },
       { region: 'us-west-2', account: '098765432109' }

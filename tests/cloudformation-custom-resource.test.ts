@@ -1,15 +1,15 @@
 import { describe, expect, it } from 'vitest';
 import {
-  cloudFormationCustomResourceCreateEventStub,
-  cloudFormationCustomResourceDeleteEventStub,
-  cloudFormationCustomResourceUpdateEventStub,
+  CloudFormationCustomResourceCreateEventStub,
+  CloudFormationCustomResourceDeleteEventStub,
+  CloudFormationCustomResourceUpdateEventStub,
 } from '../src';
 import { isUuidV4Regex } from './helpers';
 
 describe('#cloudformation-custom-resource', () => {
   describe('#create-event', () => {
     it('should return a valid create event', () => {
-      const event = cloudFormationCustomResourceCreateEventStub();
+      const event = CloudFormationCustomResourceCreateEventStub();
 
       expect(event).toEqual({
         RequestType: 'Create',
@@ -28,7 +28,7 @@ describe('#cloudformation-custom-resource', () => {
     });
 
     it('should allow overrides', () => {
-      const event = cloudFormationCustomResourceCreateEventStub({
+      const event = CloudFormationCustomResourceCreateEventStub({
         ResourceProperties: {
           Key1: 'OverriddenValue1',
           Key3: 'Value3',
@@ -55,7 +55,7 @@ describe('#cloudformation-custom-resource', () => {
 
   describe('#update-event', () => {
     it('should return a valid update event', () => {
-      const event = cloudFormationCustomResourceUpdateEventStub();
+      const event = CloudFormationCustomResourceUpdateEventStub();
 
       expect(event).toEqual({
         RequestType: 'Update',
@@ -80,7 +80,7 @@ describe('#cloudformation-custom-resource', () => {
     });
 
     it('should allow overrides', () => {
-      const event = cloudFormationCustomResourceUpdateEventStub({
+      const event = CloudFormationCustomResourceUpdateEventStub({
         ResourceProperties: {
           Key1: 'OverriddenValue1',
           Key3: 'Value3',
@@ -113,7 +113,7 @@ describe('#cloudformation-custom-resource', () => {
 
   describe('#delete-event', () => {
     it('should return a valid delete event', () => {
-      const event = cloudFormationCustomResourceDeleteEventStub();
+      const event = CloudFormationCustomResourceDeleteEventStub();
 
       expect(event).toEqual({
         RequestType: 'Delete',
@@ -133,7 +133,7 @@ describe('#cloudformation-custom-resource', () => {
     });
 
     it('should allow overrides', () => {
-      const event = cloudFormationCustomResourceDeleteEventStub({
+      const event = CloudFormationCustomResourceDeleteEventStub({
         ResourceProperties: {
           Key1: 'OverriddenValue1',
           Key3: 'Value3',

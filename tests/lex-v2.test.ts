@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { lexV2EventStub } from '../src';
+import { LexV2EventStub } from '../src';
 import { isUuidV4Regex } from './helpers';
 
 describe('#lex-v2', () => {
   it('should return a valid event', () => {
-    const event = lexV2EventStub();
+    const event = LexV2EventStub();
 
     expect(event).toEqual({
       messageVersion: '1.0',
@@ -52,7 +52,7 @@ describe('#lex-v2', () => {
   });
 
   it('should allow overrides', () => {
-    const event = lexV2EventStub({
+    const event = LexV2EventStub({
       sessionId: 'custom-session-id',
       bot: {
         id: 'custom-bot-id',

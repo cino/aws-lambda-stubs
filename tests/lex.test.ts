@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { lexEventStub } from '../src';
+import { LexEventStub } from '../src';
 
 describe('#lex', () => {
   it('should return a valid event', () => {
-    const event = lexEventStub();
+    const event = LexEventStub();
 
     expect(event).toEqual({
       currentIntent: {
@@ -32,7 +32,7 @@ describe('#lex', () => {
   });
 
   it('should allow overrides', () => {
-    const event = lexEventStub({
+    const event = LexEventStub({
       userId: 'custom-user-id',
       sessionAttributes: {},
       bot: {

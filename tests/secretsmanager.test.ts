@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { secretsManagerRotationStub } from '../src';
+import { SecretsManagerRotationStub } from '../src';
 
 describe('#secretsManager', () => {
   it('should return a valid event', () => {
-    const event = secretsManagerRotationStub();
+    const event = SecretsManagerRotationStub();
 
     expect(event).toEqual({
       Step: 'createSecret',
@@ -13,7 +13,7 @@ describe('#secretsManager', () => {
   });
 
   it('should allow partial overrides', () => {
-    const event = secretsManagerRotationStub({
+    const event = SecretsManagerRotationStub({
       Step: 'setSecret',
       SecretId: 'overridden-secret',
     });

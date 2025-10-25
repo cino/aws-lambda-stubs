@@ -3,7 +3,7 @@ import deepmerge from 'deepmerge';
 import { DateTime } from 'luxon';
 import { DEFAULT_ACCOUNT_ID } from './common';
 
-export const cloudWatchLogsEventStub = (overrides: Partial<CloudWatchLogsDecodedData> = {}): CloudWatchLogsEvent => {
+export const CloudWatchLogsEventStub = (overrides: Partial<CloudWatchLogsDecodedData> = {}): CloudWatchLogsEvent => {
   return {
     awslogs: {
       data: Buffer.from(
@@ -36,7 +36,7 @@ export const cloudWatchLogsEventStub = (overrides: Partial<CloudWatchLogsDecoded
   };
 };
 
-export const cloudWatchLogsLogEventStub = (overrides: Partial<CloudWatchLogsLogEvent> = {}): CloudWatchLogsLogEvent => {
+export const CloudWatchLogsLogEventStub = (overrides: Partial<CloudWatchLogsLogEvent> = {}): CloudWatchLogsLogEvent => {
   return {
     id: 'eventId1',
     timestamp: DateTime.now().toUnixInteger(),

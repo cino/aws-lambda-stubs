@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { cloudWatchLogsEventStub, cloudWatchLogsLogEventStub } from '../src';
+import { CloudWatchLogsEventStub, CloudWatchLogsLogEventStub } from '../src';
 import { DEFAULT_ACCOUNT_ID } from '../src/common';
 
 describe('#cloudwatch-logs', () => {
   describe('#cloudWatchLogsEventStub', () => {
     it('should return a valid event', () => {
-      const event = cloudWatchLogsEventStub();
+      const event = CloudWatchLogsEventStub();
 
       expect(event).toEqual({
         awslogs: {
@@ -37,7 +37,7 @@ describe('#cloudwatch-logs', () => {
     });
 
     it('should allow overrides', () => {
-      const event = cloudWatchLogsEventStub({
+      const event = CloudWatchLogsEventStub({
         logGroup: '/aws/lambda/overridden-log-group',
       });
 
@@ -67,7 +67,7 @@ describe('#cloudwatch-logs', () => {
 
   describe('#cloudWatchLogsLogEventStub', () => {
     it('should return a valid event', () => {
-      const logEvent = cloudWatchLogsLogEventStub();
+      const logEvent = CloudWatchLogsLogEventStub();
 
       expect(logEvent).toEqual({
         id: 'eventId1',
@@ -77,7 +77,7 @@ describe('#cloudwatch-logs', () => {
     });
 
     it('should allow overrides', () => {
-      const logEvent = cloudWatchLogsLogEventStub({
+      const logEvent = CloudWatchLogsLogEventStub({
         id: 'overriddenEventId',
         message: 'This is an overridden log message',
       });

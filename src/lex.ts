@@ -19,7 +19,7 @@ type PartialLexEvent = Merge<
   }
 >;
 
-export const lexEventStub = (overrides: PartialLexEvent = {}): LexEvent => {
+export const LexEventStub = (overrides: PartialLexEvent = {}): LexEvent => {
   return deepmerge<LexEvent>(
     {
       currentIntent: {

@@ -1,6 +1,6 @@
 import type { TransferFamilyAuthorizerEvent } from 'aws-lambda';
 
-export const transferFamilyAuthorizerEventStub = (
+export const TransferFamilyAuthorizerEventStub = (
   overrides: Partial<TransferFamilyAuthorizerEvent> = {}
 ): TransferFamilyAuthorizerEvent => {
   return {

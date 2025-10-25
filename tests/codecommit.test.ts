@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { codeCommitTriggerEventStub, codeCommitTriggerStub } from '../src';
+import { CodeCommitTriggerEventStub, CodeCommitTriggerStub } from '../src';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from '../src/common';
 
 describe('#codecommit', () => {
   it('should return a valid event', () => {
-    const event = codeCommitTriggerEventStub([codeCommitTriggerStub()]);
+    const event = CodeCommitTriggerEventStub([CodeCommitTriggerStub()]);
 
     expect(event).toEqual({
       Records: [
@@ -37,8 +37,8 @@ describe('#codecommit', () => {
   });
 
   it('should allow overrides', () => {
-    const event = codeCommitTriggerEventStub([
-      codeCommitTriggerStub({
+    const event = CodeCommitTriggerEventStub([
+      CodeCommitTriggerStub({
         eventName: 'MyCustomEvent',
         codecommit: {
           references: [

@@ -17,7 +17,7 @@ type PartialGuardDutyScanResultNotificationEvent = Merge<
   }
 >;
 
-export const guardDutyScanResultNotificationEventStub = (
+export const GuardDutyScanResultNotificationEventStub = (
   overrides: PartialGuardDutyScanResultNotificationEvent = {}
 ): GuardDutyScanResultNotificationEvent => {
   return deepmerge(

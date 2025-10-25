@@ -2,7 +2,7 @@ import type { SelfManagedKafkaEvent } from 'aws-lambda';
 import { DateTime } from 'luxon';
 import { DEFAULT_REGION } from './common';
 
-export const selfManagedKafkaStub = (overrides: Partial<SelfManagedKafkaEvent> = {}): SelfManagedKafkaEvent => {
+export const SelfManagedKafkaStub = (overrides: Partial<SelfManagedKafkaEvent> = {}): SelfManagedKafkaEvent => {
   return {
     eventSource: 'SelfManagedKafka',
     bootstrapServers: `b-2.demo-cluster-1.a1bcde.c1.kafka.${DEFAULT_REGION}.amazonaws.com:9092,b-1.demo-cluster-1.a1bcde.c1.kafka.${DEFAULT_REGION}.amazonaws.com:9092`,

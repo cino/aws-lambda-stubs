@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { appSyncIdentityStub, DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from '../../src/common';
+import { AppSyncIdentityStub, DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from '../../src/common';
 
 describe('#appsync', () => {
   describe('appSyncIdentityStub', () => {
     describe('#iam', () => {
       it('should return the iam identity', () => {
-        const identity = appSyncIdentityStub('iam');
+        const identity = AppSyncIdentityStub('iam');
 
         expect(identity).toEqual({
           accountId: DEFAULT_ACCOUNT_ID,
@@ -20,7 +20,7 @@ describe('#appsync', () => {
       });
 
       it('should allow overrides', () => {
-        const identity = appSyncIdentityStub('iam', {
+        const identity = AppSyncIdentityStub('iam', {
           username: 'override_jane_doe',
           userArn: `arn:aws:iam::${DEFAULT_ACCOUNT_ID}:user/override_jane_doe`,
           sourceIp: ['192.168.1.1'],
@@ -41,7 +41,7 @@ describe('#appsync', () => {
 
     describe('#cognito', () => {
       it('should return the cognito identity', () => {
-        const identity = appSyncIdentityStub('cognito');
+        const identity = AppSyncIdentityStub('cognito');
 
         expect(identity).toEqual({
           sub: 'abcdef123456',
@@ -59,7 +59,7 @@ describe('#appsync', () => {
       });
 
       it('should allow overrides', () => {
-        const identity = appSyncIdentityStub('cognito', {
+        const identity = AppSyncIdentityStub('cognito', {
           sub: 'override-abcdef123456',
           issuer: 'https://override.com/cognito-idp.us-east-1.amazonaws.com/us-east-1_example',
           username: 'override_john_doe',
@@ -91,7 +91,7 @@ describe('#appsync', () => {
 
     describe('#oidc', () => {
       it('should return the oidc identity', () => {
-        const identity = appSyncIdentityStub('oidc');
+        const identity = AppSyncIdentityStub('oidc');
 
         expect(identity).toEqual({
           claims: {
@@ -105,7 +105,7 @@ describe('#appsync', () => {
       });
 
       it('should allow overrides', () => {
-        const identity = appSyncIdentityStub('oidc', {
+        const identity = AppSyncIdentityStub('oidc', {
           claims: {
             email: 'override@example.com',
             name: 'Override Name',
@@ -128,7 +128,7 @@ describe('#appsync', () => {
 
     describe('#lambda', () => {
       it('should return the lambda identity', () => {
-        const identity = appSyncIdentityStub('lambda');
+        const identity = AppSyncIdentityStub('lambda');
 
         expect(identity).toEqual({
           resolverContext: {},
@@ -136,7 +136,7 @@ describe('#appsync', () => {
       });
 
       it('should allow overrides', () => {
-        const identity = appSyncIdentityStub('lambda', {
+        const identity = AppSyncIdentityStub('lambda', {
           resolverContext: {
             user: {
               email: 'override@example.com',

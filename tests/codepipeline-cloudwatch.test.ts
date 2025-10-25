@@ -1,15 +1,15 @@
 import { describe, expect, it } from 'vitest';
 import {
-  codePipelineCloudWatchActionEventStub,
-  codePipelineCloudWatchPipelineEventStub,
-  codePipelineCloudWatchStageEventStub,
+  CodePipelineCloudWatchActionEventStub,
+  CodePipelineCloudWatchPipelineEventStub,
+  CodePipelineCloudWatchStageEventStub,
 } from '../src';
 import { DEFAULT_ACCOUNT_ID } from '../src/common';
 
 describe('#codepipeline-cloudwatch', () => {
   describe('#action-event', () => {
     it('should return a valid action event', () => {
-      const event = codePipelineCloudWatchActionEventStub();
+      const event = CodePipelineCloudWatchActionEventStub();
 
       expect(event).toEqual({
         version: '0',
@@ -38,7 +38,7 @@ describe('#codepipeline-cloudwatch', () => {
     });
 
     it('should allow overrides', () => {
-      const event = codePipelineCloudWatchActionEventStub({
+      const event = CodePipelineCloudWatchActionEventStub({
         detail: {
           state: 'SUCCEEDED',
           action: 'OverriddenAction',
@@ -74,7 +74,7 @@ describe('#codepipeline-cloudwatch', () => {
 
   describe('#pipeline-event', () => {
     it('should return a valid pipeline event', () => {
-      const event = codePipelineCloudWatchPipelineEventStub();
+      const event = CodePipelineCloudWatchPipelineEventStub();
 
       expect(event).toEqual({
         version: '0',
@@ -95,7 +95,7 @@ describe('#codepipeline-cloudwatch', () => {
     });
 
     it('should allow overrides', () => {
-      const event = codePipelineCloudWatchPipelineEventStub({
+      const event = CodePipelineCloudWatchPipelineEventStub({
         detail: {
           state: 'SUCCEEDED',
         },
@@ -122,7 +122,7 @@ describe('#codepipeline-cloudwatch', () => {
 
   describe('#stage-event', () => {
     it('should return a valid stage event', () => {
-      const event = codePipelineCloudWatchStageEventStub();
+      const event = CodePipelineCloudWatchStageEventStub();
 
       expect(event).toEqual({
         version: '0',
@@ -144,7 +144,7 @@ describe('#codepipeline-cloudwatch', () => {
     });
 
     it('should allow overrides', () => {
-      const event = codePipelineCloudWatchStageEventStub({
+      const event = CodePipelineCloudWatchStageEventStub({
         detail: {
           state: 'FAILED',
           stage: 'OverriddenStage',

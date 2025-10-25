@@ -1,7 +1,7 @@
 import type { AmplifyGraphQlResolverEvent } from 'aws-lambda';
 import deepmerge from 'deepmerge';
 import type { Merge } from 'type-fest';
-import { appSyncIdentityStub } from './common';
+import { AppSyncIdentityStub } from './common';
 
 type PartialAmplifyGraphQlResolverEvent<
   // biome-ignore lint/suspicious/noExplicitAny: any in AmplifyGraphQlResolverEvent type
@@ -30,7 +30,7 @@ export const amplifyGraphqlResolverEventStub = <
       arguments: {
         id: '123',
       } as TArguments,
-      identity: appSyncIdentityStub('lambda'),
+      identity: AppSyncIdentityStub('lambda'),
       source: {
         userId: '123',
         name: 'John Doe',

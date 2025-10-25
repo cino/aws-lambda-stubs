@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { cloudFrontRequestEventRecordStub, cloudFrontRequestEventStub } from '../src';
+import { CloudFrontRequestEventRecordStub, CloudFrontRequestEventStub } from '../src';
 import { isUuidV4Regex } from './helpers';
 
 describe('#cloudfront-request', () => {
   it('should return a valid event', () => {
-    const event = cloudFrontRequestEventStub([cloudFrontRequestEventRecordStub()]);
+    const event = CloudFrontRequestEventStub([CloudFrontRequestEventRecordStub()]);
 
     expect(event).toEqual({
       Records: [
@@ -37,8 +37,8 @@ describe('#cloudfront-request', () => {
   });
 
   it('should allow overrides', () => {
-    const event = cloudFrontRequestEventStub([
-      cloudFrontRequestEventRecordStub({
+    const event = CloudFrontRequestEventStub([
+      CloudFrontRequestEventRecordStub({
         cf: {
           config: {
             distributionDomainName: 'override.cloudfront.net',

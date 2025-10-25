@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { cloudWatchScheduledEventStub } from '../src';
+import { CloudWatchScheduledEventStub } from '../src';
 import { DEFAULT_ACCOUNT_ID } from '../src/common';
 
 describe('#cloudwatch-events', () => {
   describe('#cloudWatchScheduledEventStub', () => {
     it('should return a valid event', () => {
-      const event = cloudWatchScheduledEventStub();
+      const event = CloudWatchScheduledEventStub();
 
       expect(event).toEqual({
         version: '0',
@@ -21,7 +21,7 @@ describe('#cloudwatch-events', () => {
     });
 
     it('should allow overrides', () => {
-      const event = cloudWatchScheduledEventStub({
+      const event = CloudWatchScheduledEventStub({
         region: 'us-west-2',
         detail: { key: 'value' },
       });

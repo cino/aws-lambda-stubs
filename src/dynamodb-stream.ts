@@ -2,7 +2,7 @@ import type { DynamoDBRecord, DynamoDBStreamEvent } from 'aws-lambda';
 import deepmerge from 'deepmerge';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './common';
 
-export const dynamoDBRecordStub = (overrides: Partial<DynamoDBRecord> = {}): DynamoDBRecord => {
+export const DynamoDBRecordStub = (overrides: Partial<DynamoDBRecord> = {}): DynamoDBRecord => {
   return deepmerge(
     {
       awsRegion: DEFAULT_REGION,
@@ -16,7 +16,7 @@ export const dynamoDBRecordStub = (overrides: Partial<DynamoDBRecord> = {}): Dyn
   );
 };
 
-export const dynamoDBStreamEventStub = (records: DynamoDBRecord[]): DynamoDBStreamEvent => {
+export const DynamoDBStreamEventStub = (records: DynamoDBRecord[]): DynamoDBStreamEvent => {
   return {
     Records: records,
   };

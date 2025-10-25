@@ -1,7 +1,7 @@
 import type { EventBridgeEvent } from 'aws-lambda';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './common';
 
-export const eventBridgeEventStub = <TDetail extends object>(
+export const EventBridgeEventStub = <TDetail extends object>(
   detailType: string,
   detail: TDetail,
   overrides: Partial<EventBridgeEvent<typeof detailType, typeof detail>> = {}

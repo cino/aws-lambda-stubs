@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { codePipelineEventStub } from '../src';
+import { CodePipelineEventStub } from '../src';
 import { DEFAULT_ACCOUNT_ID } from '../src/common';
 
 describe('#codepipeline', () => {
   it('should return a valid event', () => {
-    const event = codePipelineEventStub();
+    const event = CodePipelineEventStub();
 
     expect(event).toEqual({
       'CodePipeline.job': {
@@ -54,7 +54,7 @@ describe('#codepipeline', () => {
   });
 
   it('should allow overrides', () => {
-    const event = codePipelineEventStub({
+    const event = CodePipelineEventStub({
       'CodePipeline.job': {
         data: {
           actionConfiguration: {

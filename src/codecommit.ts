@@ -1,7 +1,7 @@
 import type { CodeCommitTrigger, CodeCommitTriggerEvent } from 'aws-lambda';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './common';
 
-export const codeCommitTriggerStub = (overrides: Partial<CodeCommitTrigger> = {}): CodeCommitTrigger => {
+export const CodeCommitTriggerStub = (overrides: Partial<CodeCommitTrigger> = {}): CodeCommitTrigger => {
   return {
     awsRegion: DEFAULT_REGION,
     codecommit: {
@@ -30,7 +30,7 @@ export const codeCommitTriggerStub = (overrides: Partial<CodeCommitTrigger> = {}
   };
 };
 
-export const codeCommitTriggerEventStub = (records: CodeCommitTrigger[]): CodeCommitTriggerEvent => {
+export const CodeCommitTriggerEventStub = (records: CodeCommitTrigger[]): CodeCommitTriggerEvent => {
   return {
     Records: records,
   };

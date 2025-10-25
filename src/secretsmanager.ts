@@ -1,6 +1,6 @@
 import type { SecretsManagerRotationEvent } from 'aws-lambda';
 
-export const secretsManagerRotationStub = (
+export const SecretsManagerRotationStub = (
   overrides: Partial<SecretsManagerRotationEvent> = {}
 ): SecretsManagerRotationEvent => {
   return {

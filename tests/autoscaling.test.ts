@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { autoScalingScaleInEventStub } from '../src';
+import { AutoScalingScaleInEventStub } from '../src';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from '../src/common';
 import { instanceIdRegex } from './helpers';
 
 describe('#autoscaling', () => {
   it('should return a valid event', () => {
-    const event = autoScalingScaleInEventStub();
+    const event = AutoScalingScaleInEventStub();
 
     expect(event).toEqual({
       AutoScalingGroupARN: `arn:aws:autoscaling:${DEFAULT_REGION}:${DEFAULT_ACCOUNT_ID}:autoScalingGroup:abcdefg:autoScalingGroupName/my-asg`,
@@ -30,7 +30,7 @@ describe('#autoscaling', () => {
   });
 
   it('should allow overrides', () => {
-    const event = autoScalingScaleInEventStub({
+    const event = AutoScalingScaleInEventStub({
       AutoScalingGroupName: 'custom-asg',
       Cause: 'INSTANCE_REFRESH',
     });

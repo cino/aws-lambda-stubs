@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { cdkCustomResourceCreateEventStub, cdkCustomResourceIsCompleteEventStub } from '../src';
+import { CdkCustomResourceCreateEventStub, CdkCustomResourceIsCompleteEventStub } from '../src';
 import { isUuidV4Regex } from './helpers';
 
 describe('#cdk-custom-resource', () => {
   describe('#create-event', () => {
     it('should return a valid create event', () => {
-      const event = cdkCustomResourceCreateEventStub();
+      const event = CdkCustomResourceCreateEventStub();
 
       expect(event).toEqual({
         RequestType: 'Create',
@@ -24,7 +24,7 @@ describe('#cdk-custom-resource', () => {
     });
 
     it('should allow overrides', () => {
-      const event = cdkCustomResourceCreateEventStub({
+      const event = CdkCustomResourceCreateEventStub({
         ResourceProperties: {
           Key1: 'OverriddenValue1',
           Key3: 'Value3',
@@ -51,7 +51,7 @@ describe('#cdk-custom-resource', () => {
 
   describe('#update-event', () => {
     it('should return a valid update event', () => {
-      const event = cdkCustomResourceCreateEventStub();
+      const event = CdkCustomResourceCreateEventStub();
 
       expect(event).toEqual({
         RequestType: 'Create',
@@ -70,7 +70,7 @@ describe('#cdk-custom-resource', () => {
     });
 
     it('should allow overrides', () => {
-      const event = cdkCustomResourceCreateEventStub({
+      const event = CdkCustomResourceCreateEventStub({
         ResourceProperties: {
           Key1: 'OverriddenValue1',
           Key3: 'Value3',
@@ -97,7 +97,7 @@ describe('#cdk-custom-resource', () => {
 
   describe('#delete-event', () => {
     it('should return a valid delete event', () => {
-      const event = cdkCustomResourceCreateEventStub();
+      const event = CdkCustomResourceCreateEventStub();
 
       expect(event).toEqual({
         RequestType: 'Create',
@@ -116,7 +116,7 @@ describe('#cdk-custom-resource', () => {
     });
 
     it('should allow overrides', () => {
-      const event = cdkCustomResourceCreateEventStub({
+      const event = CdkCustomResourceCreateEventStub({
         ResourceProperties: {
           Key1: 'OverriddenValue1',
           Key3: 'Value3',
@@ -143,8 +143,8 @@ describe('#cdk-custom-resource', () => {
 
   describe('#is-complete-event', () => {
     it('should return a valid is-complete event', () => {
-      const baseEvent = cdkCustomResourceCreateEventStub();
-      const event = cdkCustomResourceIsCompleteEventStub(baseEvent);
+      const baseEvent = CdkCustomResourceCreateEventStub();
+      const event = CdkCustomResourceIsCompleteEventStub(baseEvent);
 
       expect(event).toEqual({
         ...baseEvent,
@@ -154,8 +154,8 @@ describe('#cdk-custom-resource', () => {
     });
 
     it('should allow overrides', () => {
-      const baseEvent = cdkCustomResourceCreateEventStub();
-      const event = cdkCustomResourceIsCompleteEventStub(baseEvent, {
+      const baseEvent = CdkCustomResourceCreateEventStub();
+      const event = CdkCustomResourceIsCompleteEventStub(baseEvent, {
         PhysicalResourceId: 'overridden-physical-resource-id',
         Data: {
           Key1: 'Value1',

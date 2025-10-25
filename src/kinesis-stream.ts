@@ -15,7 +15,7 @@ type PartialKinesisStreamRecord = Merge<
   }
 >;
 
-export const kinesisStreamRecordStub = (overrides: PartialKinesisStreamRecord = {}): KinesisStreamRecord => {
+export const KinesisStreamRecordStub = (overrides: PartialKinesisStreamRecord = {}): KinesisStreamRecord => {
   return deepmerge(
     {
       awsRegion: DEFAULT_REGION,
@@ -38,18 +38,18 @@ export const kinesisStreamRecordStub = (overrides: PartialKinesisStreamRecord = 
   ) as KinesisStreamRecord;
 };
 
-export const kinesisStreamEventStub = (records: KinesisStreamRecord[]): KinesisStreamEvent => {
+export const KinesisStreamEventStub = (records: KinesisStreamRecord[]): KinesisStreamEvent => {
   return {
     Records: records,
   };
 };
 
-export const kinesisStreamTumblingWindowEvent = (
+export const KinesisStreamTumblingWindowEventStub = (
   records: KinesisStreamRecord[],
   overrides: Partial<KinesisStreamTumblingWindowEvent> = {}
 ): KinesisStreamTumblingWindowEvent => {
   return {
-    ...kinesisStreamEventStub(records),
+    ...KinesisStreamEventStub(records),
     window: {
       start: new Date().toISOString(),
       end: new Date(Date.now() + 5 * 60 * 1000).toISOString(), // 5 minutes later

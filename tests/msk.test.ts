@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { mskEventStub } from '../src';
+import { MSKEventStub } from '../src';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from '../src/common';
 
 describe('#msk', () => {
   it('should return a valid event', () => {
-    const event = mskEventStub();
+    const event = MSKEventStub();
 
     expect(event).toEqual({
       eventSource: 'aws:kafka',
@@ -32,7 +32,7 @@ describe('#msk', () => {
   });
 
   it('should allow overrides', () => {
-    const event = mskEventStub({
+    const event = MSKEventStub({
       bootstrapServers: 'custom-bootstrap-server:9092',
       records: {},
     });

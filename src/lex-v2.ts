@@ -10,7 +10,7 @@ type PartialLexV2Event = Merge<
   }
 >;
 
-export const lexV2EventStub = (overrides: PartialLexV2Event = {}): LexV2Event => {
+export const LexV2EventStub = (overrides: PartialLexV2Event = {}): LexV2Event => {
   return deepmerge<LexV2Event>(
     {
       messageVersion: '1.0',

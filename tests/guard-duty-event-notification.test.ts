@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { guardDutyScanResultNotificationEventStub } from '../src';
+import { GuardDutyScanResultNotificationEventStub } from '../src';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from '../src/common';
 
 describe('#guard-duty-event-notification', () => {
   it('should return a valid event', () => {
-    const event = guardDutyScanResultNotificationEventStub();
+    const event = GuardDutyScanResultNotificationEventStub();
 
     expect(event).toEqual({
       version: '1',
@@ -37,7 +37,7 @@ describe('#guard-duty-event-notification', () => {
   });
 
   it('should allow overrides', () => {
-    const event = guardDutyScanResultNotificationEventStub({
+    const event = GuardDutyScanResultNotificationEventStub({
       detail: {
         scanStatus: 'FAILED',
         scanResultDetails: {

@@ -5,7 +5,7 @@ import type {
 } from 'aws-lambda';
 import deepmerge from 'deepmerge';
 import type { Merge } from 'type-fest';
-import { eventBridgeEventStub } from './event-bridge';
+import { EventBridgeEventStub } from './event-bridge';
 
 type PartialCodePipelineCloudWatchActionEvent = Merge<
   Partial<CodePipelineCloudWatchActionEvent>,
@@ -19,11 +19,11 @@ type PartialCodePipelineCloudWatchActionEvent = Merge<
   }
 >;
 
-export const codePipelineCloudWatchActionEventStub = (
+export const CodePipelineCloudWatchActionEventStub = (
   overrides: PartialCodePipelineCloudWatchActionEvent = {}
 ): CodePipelineCloudWatchActionEvent => {
   return deepmerge(
-    eventBridgeEventStub<CodePipelineCloudWatchActionEvent['detail']>('CodePipeline Action Execution State Change', {
+    EventBridgeEventStub<CodePipelineCloudWatchActionEvent['detail']>('CodePipeline Action Execution State Change', {
       pipeline: 'my-pipeline',
       version: 1,
       'execution-id': '12345678-1234-1234-1234-123456789012',
@@ -48,11 +48,11 @@ type PartialCodePipelineCloudWatchPipelineEvent = Merge<
   }
 >;
 
-export const codePipelineCloudWatchPipelineEventStub = (
+export const CodePipelineCloudWatchPipelineEventStub = (
   overrides: PartialCodePipelineCloudWatchPipelineEvent = {}
 ): CodePipelineCloudWatchPipelineEvent => {
   return deepmerge(
-    eventBridgeEventStub<CodePipelineCloudWatchPipelineEvent['detail']>(
+    EventBridgeEventStub<CodePipelineCloudWatchPipelineEvent['detail']>(
       'CodePipeline Pipeline Execution State Change',
       {
         pipeline: 'my-pipeline',
@@ -72,11 +72,11 @@ type PartialCodePipelineCloudWatchStageEvent = Merge<
   }
 >;
 
-export const codePipelineCloudWatchStageEventStub = (
+export const CodePipelineCloudWatchStageEventStub = (
   overrides: PartialCodePipelineCloudWatchStageEvent = {}
 ): CodePipelineCloudWatchStageEvent => {
   return deepmerge(
-    eventBridgeEventStub<CodePipelineCloudWatchStageEvent['detail']>('CodePipeline Stage Execution State Change', {
+    EventBridgeEventStub<CodePipelineCloudWatchStageEvent['detail']>('CodePipeline Stage Execution State Change', {
       pipeline: 'my-pipeline',
       version: 1,
       'execution-id': '12345678-1234-1234-1234-123456789012',

@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { kinesisStreamEventStub, kinesisStreamRecordStub, kinesisStreamTumblingWindowEvent } from '../src';
+import { KinesisStreamEventStub, KinesisStreamRecordStub, KinesisStreamTumblingWindowEventStub } from '../src';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from '../src/common';
 
 describe('#kinesis', () => {
   describe('#stream', () => {
     it('should return a valid event', () => {
-      const event = kinesisStreamEventStub([kinesisStreamRecordStub()]);
+      const event = KinesisStreamEventStub([KinesisStreamRecordStub()]);
 
       expect(event).toEqual({
         Records: [
@@ -30,8 +30,8 @@ describe('#kinesis', () => {
     });
 
     it('should allow overrides', () => {
-      const event = kinesisStreamEventStub([
-        kinesisStreamRecordStub({
+      const event = KinesisStreamEventStub([
+        KinesisStreamRecordStub({
           eventID: 'custom-event-id',
           kinesis: {
             partitionKey: 'custom-partition-key',
@@ -64,7 +64,7 @@ describe('#kinesis', () => {
 
   describe('#stream-tumbling-window', () => {
     it('should have tests', () => {
-      const event = kinesisStreamTumblingWindowEvent([kinesisStreamRecordStub()]);
+      const event = KinesisStreamTumblingWindowEventStub([KinesisStreamRecordStub()]);
 
       expect(event).toEqual({
         Records: [
@@ -95,7 +95,7 @@ describe('#kinesis', () => {
     });
 
     it('should allow overrides', () => {
-      const event = kinesisStreamTumblingWindowEvent([kinesisStreamRecordStub()], {
+      const event = KinesisStreamTumblingWindowEventStub([KinesisStreamRecordStub()], {
         isFinalInvokeForWindow: true,
         isWindowTerminatedEarly: true,
       });

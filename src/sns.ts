@@ -3,14 +3,14 @@ import deepmerge from 'deepmerge';
 import type { Merge } from 'type-fest';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './common';
 
-type PartialSnsRecord = Merge<
+type PartialSNSRecord = Merge<
   Partial<SNSEventRecord>,
   {
     Sns?: Partial<SNSMessage>;
   }
 >;
 
-export const snsEventRecordStub = (overrides: PartialSnsRecord = {}): SNSEventRecord => {
+export const SNSEventRecordStub = (overrides: PartialSNSRecord = {}): SNSEventRecord => {
   return deepmerge(
     {
       EventVersion: '1.0',
@@ -34,7 +34,7 @@ export const snsEventRecordStub = (overrides: PartialSnsRecord = {}): SNSEventRe
   ) as SNSEventRecord;
 };
 
-export const snsEventStub = (records: SNSEventRecord[]): SNSEvent => {
+export const SNSEventStub = (records: SNSEventRecord[]): SNSEvent => {
   return {
     Records: records,
   };

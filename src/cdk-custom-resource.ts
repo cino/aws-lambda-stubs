@@ -4,51 +4,51 @@ import type {
   CloudFormationCustomResourceResourcePropertiesCommon,
 } from 'aws-lambda';
 import {
-  cloudFormationCustomResourceCreateEventStub,
-  cloudFormationCustomResourceDeleteEventStub,
-  cloudFormationCustomResourceUpdateEventStub,
+  CloudFormationCustomResourceCreateEventStub,
+  CloudFormationCustomResourceDeleteEventStub,
+  CloudFormationCustomResourceUpdateEventStub,
 } from './cloudformation-custom-resource';
 
-export const cdkCustomResourceCreateEventStub = <
+export const CdkCustomResourceCreateEventStub = <
   TResourceProperties = CloudFormationCustomResourceResourcePropertiesCommon,
   TOldResourceProperties = TResourceProperties,
 >(
   overrides: Partial<CdkCustomResourceEvent<TResourceProperties, TOldResourceProperties>> = {}
 ): CdkCustomResourceEvent<TResourceProperties, TOldResourceProperties> => {
   return {
-    ...cloudFormationCustomResourceCreateEventStub(),
+    ...CloudFormationCustomResourceCreateEventStub(),
     ResponseURL: 'https://cdk-custom-resource-response-useast1.s3.amazonaws.com/...',
     ...overrides,
   } as CdkCustomResourceEvent<TResourceProperties, TOldResourceProperties>;
 };
 
-export const cdkCustomResourceUpdateEventStub = <
+export const CdkCustomResourceUpdateEventStub = <
   TResourceProperties = CloudFormationCustomResourceResourcePropertiesCommon,
   TOldResourceProperties = TResourceProperties,
 >(
   overrides: Partial<CdkCustomResourceEvent<TResourceProperties, TOldResourceProperties>> = {}
 ): CdkCustomResourceEvent<TResourceProperties, TOldResourceProperties> => {
   return {
-    ...cloudFormationCustomResourceUpdateEventStub(),
+    ...CloudFormationCustomResourceUpdateEventStub(),
     ResponseURL: 'https://cdk-custom-resource-response-useast1.s3.amazonaws.com/...',
     ...overrides,
   } as CdkCustomResourceEvent<TResourceProperties, TOldResourceProperties>;
 };
 
-export const cdkCustomResourceDeleteEventStub = <
+export const CdkCustomResourceDeleteEventStub = <
   TResourceProperties = CloudFormationCustomResourceResourcePropertiesCommon,
   TOldResourceProperties = TResourceProperties,
 >(
   overrides: Partial<CdkCustomResourceEvent<TResourceProperties, TOldResourceProperties>> = {}
 ): CdkCustomResourceEvent<TResourceProperties, TOldResourceProperties> => {
   return {
-    ...cloudFormationCustomResourceDeleteEventStub(),
+    ...CloudFormationCustomResourceDeleteEventStub(),
     ResponseURL: 'https://cdk-custom-resource-response-useast1.s3.amazonaws.com/...',
     ...overrides,
   } as CdkCustomResourceEvent<TResourceProperties, TOldResourceProperties>;
 };
 
-export const cdkCustomResourceIsCompleteEventStub = <
+export const CdkCustomResourceIsCompleteEventStub = <
   TResourceProperties = CloudFormationCustomResourceResourcePropertiesCommon,
   // biome-ignore lint/suspicious/noExplicitAny: is any in CdkCustomResourceIsCompleteEvent
   TData extends Record<string, any> = Record<string, any>,

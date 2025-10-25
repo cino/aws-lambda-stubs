@@ -12,7 +12,7 @@ type PartialCodePipelineEvent = {
   >;
 };
 
-export const codePipelineEventStub = (overrides: PartialCodePipelineEvent = {}): CodePipelineEvent => {
+export const CodePipelineEventStub = (overrides: PartialCodePipelineEvent = {}): CodePipelineEvent => {
   return deepmerge(
     {
       'CodePipeline.job': {

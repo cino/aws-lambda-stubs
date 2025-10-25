@@ -1,12 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { appSyncAuthorizerEventStub, appSyncResolverEventStub } from '../src';
-import { appSyncIdentityStub, DEFAULT_ACCOUNT_ID } from '../src/common';
+import { AppSyncAuthorizerEventStub, AppSyncResolverEventStub } from '../src';
+import { AppSyncIdentityStub, DEFAULT_ACCOUNT_ID } from '../src/common';
 import { isUuidV4Regex } from './helpers';
 
 describe('#appsync-resolver', () => {
   describe('#authorizer-event', () => {
     it('should return a valid event', () => {
-      const event = appSyncAuthorizerEventStub();
+      const event = AppSyncAuthorizerEventStub();
 
       expect(event).toEqual({
         authorizationToken: 'Bearer abcdef123456',
@@ -29,7 +29,7 @@ describe('#appsync-resolver', () => {
     });
 
     it('should allow overrides', () => {
-      const event = appSyncAuthorizerEventStub({
+      const event = AppSyncAuthorizerEventStub({
         authorizationToken: 'Bearer newtoken123456',
         requestHeaders: {
           Authorization: 'Bearer newtoken123456',
@@ -59,7 +59,7 @@ describe('#appsync-resolver', () => {
 
   describe('#resolver-event', () => {
     it('should return a valid event', () => {
-      const event = appSyncResolverEventStub();
+      const event = AppSyncResolverEventStub();
 
       expect(event).toEqual({
         arguments: {},
@@ -87,12 +87,12 @@ describe('#appsync-resolver', () => {
     });
 
     it('should allow overrides', () => {
-      const event = appSyncResolverEventStub({
+      const event = AppSyncResolverEventStub({
         arguments: { id: '2' },
         info: {
           fieldName: 'listUsers',
         },
-        identity: appSyncIdentityStub('lambda', { resolverContext: { username: 'custom_lambda_user' } }),
+        identity: AppSyncIdentityStub('lambda', { resolverContext: { username: 'custom_lambda_user' } }),
       });
 
       expect(event).toEqual({

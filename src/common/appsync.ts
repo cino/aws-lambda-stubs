@@ -16,14 +16,14 @@ type AppSyncIdentityMap = {
   lambda: AppSyncIdentityLambda;
 };
 
-export function appSyncIdentityStub(type: 'iam', overrides?: Partial<AppSyncIdentityIAM>): AppSyncIdentityIAM;
-export function appSyncIdentityStub(
+export function AppSyncIdentityStub(type: 'iam', overrides?: Partial<AppSyncIdentityIAM>): AppSyncIdentityIAM;
+export function AppSyncIdentityStub(
   type: 'cognito',
   overrides?: Partial<AppSyncIdentityCognito>
 ): AppSyncIdentityCognito;
-export function appSyncIdentityStub(type: 'oidc', overrides?: Partial<AppSyncIdentityOIDC>): AppSyncIdentityOIDC;
-export function appSyncIdentityStub(type: 'lambda', overrides?: Partial<AppSyncIdentityLambda>): AppSyncIdentityLambda;
-export function appSyncIdentityStub(
+export function AppSyncIdentityStub(type: 'oidc', overrides?: Partial<AppSyncIdentityOIDC>): AppSyncIdentityOIDC;
+export function AppSyncIdentityStub(type: 'lambda', overrides?: Partial<AppSyncIdentityLambda>): AppSyncIdentityLambda;
+export function AppSyncIdentityStub(
   type: AppSyncIdentityType,
   overrides: Partial<AppSyncIdentityMap[AppSyncIdentityType]> = {}
 ): AppSyncIdentityMap[AppSyncIdentityType] {
@@ -79,6 +79,4 @@ export function appSyncIdentityStub(
         ...overrides,
       };
   }
-
-  throw new Error('This should not happen');
 }

@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { selfManagedKafkaStub } from '../src';
+import { SelfManagedKafkaStub } from '../src';
 import { DEFAULT_REGION } from '../src/common';
 
 describe('#self-managed-kafka', () => {
   it('should return a valid event', () => {
-    const event = selfManagedKafkaStub();
+    const event = SelfManagedKafkaStub();
 
     expect(event).toEqual({
       eventSource: 'SelfManagedKafka',
@@ -31,7 +31,7 @@ describe('#self-managed-kafka', () => {
   });
 
   it('should allow overrides', () => {
-    const event = selfManagedKafkaStub({
+    const event = SelfManagedKafkaStub({
       bootstrapServers: 'custom-bootstrap-server:9092',
       records: {},
     });

@@ -3,7 +3,7 @@ import deepmerge from 'deepmerge';
 import type { Merge } from 'type-fest';
 import { DEFAULT_ACCOUNT_ID } from './common';
 
-export const appSyncAuthorizerEventStub = (overrides: Partial<AppSyncAuthorizerEvent> = {}): AppSyncAuthorizerEvent => {
+export const AppSyncAuthorizerEventStub = (overrides: Partial<AppSyncAuthorizerEvent> = {}): AppSyncAuthorizerEvent => {
   return deepmerge<AppSyncAuthorizerEvent>(
     {
       authorizationToken: 'Bearer abcdef123456',
@@ -35,7 +35,7 @@ type PartialAppSyncResolverEvent<TArguments, TSource> = Merge<
   }
 >;
 
-export const appSyncResolverEventStub = <TArguments = undefined, TSource = Record<string, any> | null>(
+export const AppSyncResolverEventStub = <TArguments = undefined, TSource = Record<string, any> | null>(
   overrides: PartialAppSyncResolverEvent<TArguments, TSource> = {}
 ): AppSyncResolverEvent<TArguments, TSource> => {
   return deepmerge<AppSyncResolverEvent<TArguments, TSource>>(

@@ -1,6 +1,6 @@
 import type { ScheduledEvent } from 'aws-lambda';
-import { eventBridgeEventStub } from './event-bridge';
+import { EventBridgeEventStub } from './event-bridge';
 
-export const cloudWatchScheduledEventStub = (overrides?: Partial<ScheduledEvent>): ScheduledEvent => {
-  return eventBridgeEventStub('Scheduled Event', {}, overrides) as ScheduledEvent;
+export const CloudWatchScheduledEventStub = (overrides?: Partial<ScheduledEvent>): ScheduledEvent => {
+  return EventBridgeEventStub('Scheduled Event', {}, overrides) as ScheduledEvent;
 };

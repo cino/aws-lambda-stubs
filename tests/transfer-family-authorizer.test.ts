@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { transferFamilyAuthorizerEventStub } from '../src';
+import { TransferFamilyAuthorizerEventStub } from '../src';
 
 describe('#transfer-family-authorizer', () => {
   it('should return a valid event', () => {
-    const event = transferFamilyAuthorizerEventStub();
+    const event = TransferFamilyAuthorizerEventStub();
 
     expect(event).toEqual({
       username: 'test-user',
@@ -15,7 +15,7 @@ describe('#transfer-family-authorizer', () => {
   });
 
   it('should allow partial overrides', () => {
-    const event = transferFamilyAuthorizerEventStub({
+    const event = TransferFamilyAuthorizerEventStub({
       username: 'custom-user',
       protocol: 'FTP',
     });

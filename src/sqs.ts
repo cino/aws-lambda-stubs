@@ -11,7 +11,7 @@ interface PartialSQSRecord extends Omit<Partial<SQSRecord>, omittedKeys> {
   messageAttributes?: Partial<SQSRecord['messageAttributes']>;
 }
 
-export const sqsRecordStub = (body: object, overrides: PartialSQSRecord = {}): SQSRecord => {
+export const SQSRecordStub = (body: object, overrides: PartialSQSRecord = {}): SQSRecord => {
   const stringifiedBody = JSON.stringify(body);
   const now = DateTime.now();
 
@@ -36,7 +36,7 @@ export const sqsRecordStub = (body: object, overrides: PartialSQSRecord = {}): S
   ) as SQSRecord;
 };
 
-export const sqsEventStub = (records: SQSRecord[]): SQSEvent => {
+export const SQSEventStub = (records: SQSRecord[]): SQSEvent => {
   return {
     Records: [...records],
   };

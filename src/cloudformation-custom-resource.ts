@@ -5,7 +5,7 @@ import type {
 } from 'aws-lambda';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './common';
 
-export const cloudFormationCustomResourceCreateEventStub = (
+export const CloudFormationCustomResourceCreateEventStub = (
   overrides: Partial<CloudFormationCustomResourceCreateEvent> = {}
 ): CloudFormationCustomResourceCreateEvent => {
   return {
@@ -25,7 +25,7 @@ export const cloudFormationCustomResourceCreateEventStub = (
   };
 };
 
-export const cloudFormationCustomResourceUpdateEventStub = (
+export const CloudFormationCustomResourceUpdateEventStub = (
   overrides: Partial<CloudFormationCustomResourceUpdateEvent> = {}
 ): CloudFormationCustomResourceUpdateEvent => {
   return {
@@ -51,7 +51,7 @@ export const cloudFormationCustomResourceUpdateEventStub = (
   };
 };
 
-export const cloudFormationCustomResourceDeleteEventStub = (
+export const CloudFormationCustomResourceDeleteEventStub = (
   overrides: Partial<CloudFormationCustomResourceDeleteEvent> = {}
 ): CloudFormationCustomResourceDeleteEvent => {
   return {

@@ -2,7 +2,7 @@ import type { MSKEvent } from 'aws-lambda';
 import { DateTime } from 'luxon';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './common';
 
-export const mskEventStub = (overrides: Partial<MSKEvent> = {}): MSKEvent => {
+export const MSKEventStub = (overrides: Partial<MSKEvent> = {}): MSKEvent => {
   return {
     eventSource: 'aws:kafka',
     eventSourceArn: `arn:aws:kafka:${DEFAULT_REGION}:${DEFAULT_ACCOUNT_ID}:cluster/vpc-2priv-2pub/751d2973-a626-431c-9d4e-d7975eb44dd7-2`,

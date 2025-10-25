@@ -1,7 +1,7 @@
 import type { AutoScalingScaleInEvent } from 'aws-lambda';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_AVAILABILITY_ZONE, DEFAULT_REGION, randomInstanceId } from './common';
 
-export const autoScalingScaleInEventStub = (
+export const AutoScalingScaleInEventStub = (
   overrides: Partial<AutoScalingScaleInEvent> = {}
 ): AutoScalingScaleInEvent => {
   const autoScalingGroupName = overrides.AutoScalingGroupName || 'my-asg';
