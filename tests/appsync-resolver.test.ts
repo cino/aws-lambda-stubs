@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { appSyncAuthorizerEventStub, appSyncResolverEventStub } from '../src';
 import { appSyncIdentityStub, DEFAULT_ACCOUNT_ID } from '../src/common';
+import { isUuidV4Regex } from './helpers';
 
 describe('#appsync-resolver', () => {
   describe('#authorizer-event', () => {
@@ -12,7 +13,7 @@ describe('#appsync-resolver', () => {
         requestContext: {
           apiId: '1234567890',
           accountId: DEFAULT_ACCOUNT_ID,
-          requestId: 'req-1234567890abcdef',
+          requestId: expect.stringMatching(isUuidV4Regex),
           queryString: 'query { getUser(id: "1") { name } }',
           operationName: 'getUser',
           variables: {
@@ -40,7 +41,7 @@ describe('#appsync-resolver', () => {
         requestContext: {
           apiId: '1234567890',
           accountId: DEFAULT_ACCOUNT_ID,
-          requestId: 'req-1234567890abcdef',
+          requestId: expect.stringMatching(isUuidV4Regex),
           queryString: 'query { getUser(id: "1") { name } }',
           operationName: 'getUser',
           variables: {

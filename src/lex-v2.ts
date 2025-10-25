@@ -50,7 +50,7 @@ export const lexV2EventStub = (overrides: PartialLexV2Event = {}): LexV2Event =>
           state: 'InProgress',
         },
         sessionAttributes: {},
-        originatingRequestId: 'ad12321415asd',
+        originatingRequestId: crypto.randomUUID(),
       },
       transcriptions: [],
       requestAttributes: {},

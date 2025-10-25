@@ -26,7 +26,7 @@ export const cloudFrontRequestEventRecordStub = (
           distributionDomainName: distributionDomainName,
           distributionId: 'EDFDVBD632BHDS5',
           eventType: 'viewer-request',
-          requestId: '4TyzHTf0o1JfW3vHAAEXAMPLE==',
+          requestId: crypto.randomUUID(),
         },
         request: cloudFrontRequestStub({
           headers: {

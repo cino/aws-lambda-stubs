@@ -5,8 +5,8 @@ import type {
   AppSyncIdentityOIDC,
 } from 'aws-lambda';
 import deepmerge from 'deepmerge';
+import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './consts';
 import { overwriteMerge } from './deepmerge';
-import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './utils';
 
 type AppSyncIdentityType = 'iam' | 'cognito' | 'oidc' | 'lambda';
 type AppSyncIdentityMap = {

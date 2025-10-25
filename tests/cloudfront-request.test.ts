@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { cloudFrontRequestEventRecordStub, cloudFrontRequestEventStub } from '../src';
+import { isUuidV4Regex } from './helpers';
 
 describe('#cloudfront-request', () => {
   it('should return a valid event', () => {
@@ -13,7 +14,7 @@ describe('#cloudfront-request', () => {
               distributionDomainName: 'd111111abcdef8.cloudfront.net',
               distributionId: 'EDFDVBD632BHDS5',
               eventType: 'viewer-request',
-              requestId: '4TyzHTf0o1JfW3vHAAEXAMPLE==',
+              requestId: expect.stringMatching(isUuidV4Regex),
             },
             request: {
               clientIp: expect.any(String),
@@ -54,7 +55,7 @@ describe('#cloudfront-request', () => {
               distributionDomainName: 'override.cloudfront.net',
               distributionId: 'EDFDVBD632BHDS5',
               eventType: 'viewer-request',
-              requestId: '4TyzHTf0o1JfW3vHAAEXAMPLE==',
+              requestId: expect.stringMatching(isUuidV4Regex),
             },
             request: {
               clientIp: expect.any(String),

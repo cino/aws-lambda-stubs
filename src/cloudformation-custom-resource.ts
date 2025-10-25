@@ -13,7 +13,7 @@ export const cloudFormationCustomResourceCreateEventStub = (
     ServiceToken: `arn:aws:lambda:${DEFAULT_REGION}:${DEFAULT_ACCOUNT_ID}:function:my-function`,
     ResponseURL: 'https://cloudformation-custom-resource-response-useast1.s3.amazonaws.com/...',
     StackId: `arn:aws:cloudformation:${DEFAULT_REGION}:${DEFAULT_ACCOUNT_ID}:stack/my-stack/abcd1234-ef56-7890-abcd-1234ef567890`,
-    RequestId: 'unique-request-id',
+    RequestId: crypto.randomUUID(),
     ResourceType: 'Custom::MyCustomResource',
     LogicalResourceId: 'MyCustomResource',
     ResourceProperties: {
@@ -33,7 +33,7 @@ export const cloudFormationCustomResourceUpdateEventStub = (
     ServiceToken: `arn:aws:lambda:${DEFAULT_REGION}:${DEFAULT_ACCOUNT_ID}:function:my-function`,
     ResponseURL: 'https://cloudformation-custom-resource-response-useast1.s3.amazonaws.com/...',
     StackId: `arn:aws:cloudformation:${DEFAULT_REGION}:${DEFAULT_ACCOUNT_ID}:stack/my-stack/abcd1234-ef56-7890-abcd-1234ef567890`,
-    RequestId: 'unique-request-id',
+    RequestId: crypto.randomUUID(),
     ResourceType: 'Custom::MyCustomResource',
     LogicalResourceId: 'MyCustomResource',
     PhysicalResourceId: 'my-physical-resource-id',
@@ -59,7 +59,7 @@ export const cloudFormationCustomResourceDeleteEventStub = (
     ServiceToken: `arn:aws:lambda:${DEFAULT_REGION}:${DEFAULT_ACCOUNT_ID}:function:my-function`,
     ResponseURL: 'https://cloudformation-custom-resource-response-useast1.s3.amazonaws.com/...',
     StackId: `arn:aws:cloudformation:${DEFAULT_REGION}:${DEFAULT_ACCOUNT_ID}:stack/my-stack/abcd1234-ef56-7890-abcd-1234ef567890`,
-    RequestId: 'unique-request-id',
+    RequestId: crypto.randomUUID(),
     ResourceType: 'Custom::MyCustomResource',
     LogicalResourceId: 'MyCustomResource',
     ResourceProperties: {

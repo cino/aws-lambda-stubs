@@ -10,7 +10,7 @@ export const appSyncAuthorizerEventStub = (overrides: Partial<AppSyncAuthorizerE
       requestContext: {
         apiId: '1234567890',
         accountId: DEFAULT_ACCOUNT_ID,
-        requestId: 'req-1234567890abcdef',
+        requestId: crypto.randomUUID(),
         queryString: 'query { getUser(id: "1") { name } }',
         operationName: 'getUser',
         variables: {
