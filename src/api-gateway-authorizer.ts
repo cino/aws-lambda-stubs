@@ -24,7 +24,6 @@ export const APIGatewayTokenAuthorizerEventStub = (
     ...overrides,
   };
 };
-// TODO: fix this type.
 
 export const APIGatewayRequestAuthorizerEventStub = (
   overrides: Partial<APIGatewayRequestAuthorizerEvent> = {}
