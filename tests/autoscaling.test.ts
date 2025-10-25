@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { AutoScalingScaleInEventStub } from '../src';
-import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from '../src/common';
+import { AutoScalingScaleInEventStub, DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from '../src';
 import { instanceIdRegex } from './helpers';
 
 describe('#autoscaling', () => {

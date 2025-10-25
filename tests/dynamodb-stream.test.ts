@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { DynamoDBRecordStub, DynamoDBStreamEventStub } from '../src';
-import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from '../src/common';
+import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION, DynamoDBRecordStub, DynamoDBStreamEventStub } from '../src';
 
 describe('#dynamodb-stream', () => {
   it('should return a valid event', () => {

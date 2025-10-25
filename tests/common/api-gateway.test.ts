@@ -3,7 +3,7 @@ import {
   APIGatewayEventRequestContextV2Stub,
   APIGatewayEventRequestContextWithAuthorizerStub,
   DEFAULT_ACCOUNT_ID,
-} from '../../src/common';
+} from '../../src';
 import { ipv4Regex, isUuidV4Regex } from '../helpers';
 
 describe('#api-gateway', () => {

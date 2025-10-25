@@ -1,6 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { FireHoseTransformationEventRecordStub, FireHoseTransformationEventStub } from '../src';
-import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from '../src/common';
+import {
+  DEFAULT_ACCOUNT_ID,
+  DEFAULT_REGION,
+  FireHoseTransformationEventRecordStub,
+  FireHoseTransformationEventStub,
+} from '../src';
 
 describe('#kinesis-firehose-transformation', () => {
   it('should return a valid event', () => {

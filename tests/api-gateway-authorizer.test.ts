@@ -1,15 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import {
+  APIGatewayEventRequestContextV2Stub,
+  APIGatewayEventRequestContextWithAuthorizerStub,
   APIGatewayRequestAuthorizerEventStub,
   APIGatewayRequestAuthorizerEventV2Stub,
   APIGatewayTokenAuthorizerEventStub,
-} from '../src';
-import {
-  APIGatewayEventRequestContextV2Stub,
-  APIGatewayEventRequestContextWithAuthorizerStub,
   DEFAULT_ACCOUNT_ID,
   DEFAULT_REGION,
-} from '../src/common';
+} from '../src';
 import { ipv4Regex, isUuidV4Regex } from './helpers';
 
 describe('#api-gateway-authorizer', () => {

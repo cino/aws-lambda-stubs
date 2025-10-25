@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { randomInstanceId, randomIpAddress } from '../../src/common';
+import { randomInstanceId, randomIpAddress } from '../../src';
 import { ipv4Regex, ipv6Regex } from '../helpers';
 
 describe('#utils', () => {

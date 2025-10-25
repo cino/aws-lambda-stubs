@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { IoTPreProvisioningHookEventStub } from '../src';
-import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from '../src/common';
+import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION, IoTPreProvisioningHookEventStub } from '../src';
 
 describe('#iot', () => {
   it('should return a valid event', () => {

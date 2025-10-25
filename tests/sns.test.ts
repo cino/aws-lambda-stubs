@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { SNSEventRecordStub, SNSEventStub } from '../src';
-import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from '../src/common';
+import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION, SNSEventRecordStub, SNSEventStub } from '../src';
 
 describe('#sns', () => {
   it('should return a valid event', () => {

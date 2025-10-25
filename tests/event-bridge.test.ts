@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { EventBridgeEventStub } from '../src';
-import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from '../src/common';
+import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION, EventBridgeEventStub } from '../src';
 
 describe('#event-bridge', () => {
   it('should return a valid event', () => {

@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { SQSEventStub, SQSRecordStub } from '../src';
-import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from '../src/common';
+import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION, SQSEventStub, SQSRecordStub } from '../src';
 
 describe('#sqs', () => {
   it('should return a valid event', () => {

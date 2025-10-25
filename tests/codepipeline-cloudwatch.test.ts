@@ -3,8 +3,8 @@ import {
   CodePipelineCloudWatchActionEventStub,
   CodePipelineCloudWatchPipelineEventStub,
   CodePipelineCloudWatchStageEventStub,
+  DEFAULT_ACCOUNT_ID,
 } from '../src';
-import { DEFAULT_ACCOUNT_ID } from '../src/common';
 
 describe('#codepipeline-cloudwatch', () => {
   describe('#action-event', () => {

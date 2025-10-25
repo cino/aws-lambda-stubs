@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { CloudWatchScheduledEventStub } from '../src';
-import { DEFAULT_ACCOUNT_ID } from '../src/common';
+import { CloudWatchScheduledEventStub, DEFAULT_ACCOUNT_ID } from '../src';
 
 describe('#cloudwatch-events', () => {
   describe('#cloudWatchScheduledEventStub', () => {

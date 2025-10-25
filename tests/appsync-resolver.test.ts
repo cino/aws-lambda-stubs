@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { AppSyncAuthorizerEventStub, AppSyncResolverEventStub } from '../src';
-import { AppSyncIdentityStub, DEFAULT_ACCOUNT_ID } from '../src/common';
+import { AppSyncAuthorizerEventStub, AppSyncIdentityStub, AppSyncResolverEventStub, DEFAULT_ACCOUNT_ID } from '../src';
 import { isUuidV4Regex } from './helpers';
 
 describe('#appsync-resolver', () => {
