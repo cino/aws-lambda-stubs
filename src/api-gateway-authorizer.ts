@@ -24,11 +24,10 @@ export const APIGatewayTokenAuthorizerEventStub = (
     ...overrides,
   };
 };
-
-type PartialAPIGatewayRequestAuthorizerEvent = Merge<Partial<APIGatewayRequestAuthorizerEvent>, {}>;
+// TODO: fix this type.
 
 export const APIGatewayRequestAuthorizerEventStub = (
-  overrides: PartialAPIGatewayRequestAuthorizerEvent = {}
+  overrides: Partial<APIGatewayRequestAuthorizerEvent> = {}
 ): APIGatewayRequestAuthorizerEvent => {
   return deepmerge<APIGatewayRequestAuthorizerEvent>(
     {
