@@ -65,6 +65,7 @@ describe('#api-gateway-authorizer', () => {
               sourceIp: expect.stringMatching(ipv4Regex),
             },
             requestId: expect.stringMatching(isUuidV4Regex),
+            requestTimeEpoch: expect.any(Number),
           },
         },
       });
@@ -99,6 +100,7 @@ describe('#api-gateway-authorizer', () => {
               sourceIp: expect.stringMatching(ipv4Regex),
             },
             requestId: expect.stringMatching(isUuidV4Regex),
+            requestTimeEpoch: expect.any(Number),
           },
         },
       });
