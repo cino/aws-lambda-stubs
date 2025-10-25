@@ -1,4 +1,5 @@
 import type { FirehoseTransformationEvent, FirehoseTransformationEventRecord } from 'aws-lambda';
+import { DateTime } from 'luxon';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './common';
 
 export const fireHoseTransformationEventRecordStub = (
@@ -6,7 +7,7 @@ export const fireHoseTransformationEventRecordStub = (
 ): FirehoseTransformationEventRecord => {
   return {
     recordId: 'record-id-123',
-    approximateArrivalTimestamp: Date.now(),
+    approximateArrivalTimestamp: DateTime.now().toUnixInteger(),
     data: 'SGVsbG8sIHRoaXMgaXMgYSB0ZXN0IG1lc3NhZ2Uh', // "Hello, this is a test message!" in base64
     ...overrides,
   };

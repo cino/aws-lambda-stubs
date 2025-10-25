@@ -1,4 +1,5 @@
 import type { MSKEvent } from 'aws-lambda';
+import { DateTime } from 'luxon';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './common';
 
 export const mskEventStub = (overrides: Partial<MSKEvent> = {}): MSKEvent => {
@@ -12,7 +13,7 @@ export const mskEventStub = (overrides: Partial<MSKEvent> = {}): MSKEvent => {
           topic: 'test-topic',
           partition: 0,
           offset: 123,
-          timestamp: Date.now(),
+          timestamp: DateTime.now().toUnixInteger(),
           timestampType: 'CREATE_TIME',
           key: 'abcDEFghiJKLmnoPQRstuVWXyz1234==',
           value: 'SGVsbG8sIHRoaXMgaXMgYSB0ZXN0Lg==',

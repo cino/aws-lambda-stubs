@@ -1,4 +1,5 @@
 import type { SelfManagedKafkaEvent } from 'aws-lambda';
+import { DateTime } from 'luxon';
 import { DEFAULT_REGION } from './common';
 
 export const selfManagedKafkaStub = (overrides: Partial<SelfManagedKafkaEvent> = {}): SelfManagedKafkaEvent => {
@@ -11,7 +12,7 @@ export const selfManagedKafkaStub = (overrides: Partial<SelfManagedKafkaEvent> =
           topic: 'test-topic',
           partition: 0,
           offset: 123,
-          timestamp: Date.now(),
+          timestamp: DateTime.now().toUnixInteger(),
           timestampType: 'CREATE_TIME',
           key: 'abcDEFghiJKLmnoPQRstuVWXyz1234==',
           value: 'SGVsbG8sIHRoaXMgaXMgYSB0ZXN0Lg==',

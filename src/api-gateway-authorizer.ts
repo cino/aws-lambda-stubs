@@ -82,5 +82,3 @@ export const APIGatewayRequestAuthorizerEventV2Stub = (
     overrides as APIGatewayRequestAuthorizerEventV2
   );
 };
-
-export const CustomAuthorizerEventStub = () => {};

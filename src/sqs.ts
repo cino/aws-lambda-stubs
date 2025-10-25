@@ -1,6 +1,7 @@
 import crypto from 'node:crypto';
 import type { SQSEvent, SQSRecord } from 'aws-lambda';
 import deepmerge from 'deepmerge';
+import { DateTime } from 'luxon';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './common';
 
 type omittedKeys = 'attributes' | 'messageAttributes';
@@ -12,7 +13,7 @@ interface PartialSQSRecord extends Omit<Partial<SQSRecord>, omittedKeys> {
 
 export const sqsRecordStub = (body: object, overrides: PartialSQSRecord = {}): SQSRecord => {
   const stringifiedBody = JSON.stringify(body);
-  const now = Date.now().toString();
+  const now = DateTime.now();
 
   return deepmerge<SQSRecord>(
     {
@@ -21,9 +22,9 @@ export const sqsRecordStub = (body: object, overrides: PartialSQSRecord = {}): S
       body: stringifiedBody,
       attributes: {
         ApproximateReceiveCount: '1',
-        SentTimestamp: now,
+        SentTimestamp: now.toISO(),
         SenderId: 'sender-id',
-        ApproximateFirstReceiveTimestamp: now,
+        ApproximateFirstReceiveTimestamp: now.toISO(),
       },
       messageAttributes: {},
       md5OfBody: crypto.createHash('md5').update(stringifiedBody).digest('hex'),

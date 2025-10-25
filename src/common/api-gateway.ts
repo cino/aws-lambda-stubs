@@ -5,8 +5,9 @@ import type {
   APIGatewayEventRequestContextWithAuthorizer,
 } from 'aws-lambda';
 import deepmerge from 'deepmerge';
+import { DateTime } from 'luxon';
 import type { Merge } from 'type-fest';
-import { DEFAULT_ACCOUNT_ID } from './consts';
+import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './consts';
 import { randomIpAddress } from './random';
 
 export type PartialAPIGatewayEventRequestContext<TAuthorizer> = Merge<
@@ -32,7 +33,7 @@ export const APIGatewayEventRequestContextWithAuthorizerStub = <TAuthorizer>(
       path: '/prod/resource',
       stage: 'prod',
       requestId: crypto.randomUUID(),
-      requestTimeEpoch: 1678649038000, // TODO: dynamic
+      requestTimeEpoch: DateTime.now().toUnixInteger(),
       resourceId: 'resource-id',
       resourcePath: '/resource',
     },
@@ -54,11 +55,13 @@ export type PartialAPIGatewayEventRequestContextV2 = Merge<
 export const APIGatewayEventRequestContextV2Stub = (
   overrides: PartialAPIGatewayEventRequestContextV2 = {}
 ): APIGatewayEventRequestContextV2 => {
+  const dateTime = DateTime.now();
+
   return deepmerge(
     {
       accountId: DEFAULT_ACCOUNT_ID,
       apiId: 'example',
-      domainName: 'id.execute-api.us-east-1.amazonaws.com',
+      domainName: `id.execute-api.${DEFAULT_REGION}.amazonaws.com`,
       domainPrefix: 'id',
       http: {
         method: 'GET',
@@ -69,8 +72,8 @@ export const APIGatewayEventRequestContextV2Stub = (
       },
       requestId: crypto.randomUUID(),
       stage: 'prod',
-      time: '12/Mar/2023:19:03:58 +0000', // TODO dynamic
-      timeEpoch: 1678649038000,
+      time: dateTime.toFormat('dd/MMM/yyyy:HH:mm:ss ZZZ'),
+      timeEpoch: dateTime.toUnixInteger(),
     },
     overrides
   );
