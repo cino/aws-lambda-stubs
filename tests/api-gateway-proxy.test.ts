@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { APIGatewayProxyEventV2Stub, DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from '../src';
+import {
+  APIGatewayProxyEventV2Stub,
+  APIGatewayProxyWebsocketEventV2Stub,
+  DEFAULT_ACCOUNT_ID,
+  DEFAULT_REGION,
+} from '../src';
 import { ipv4Regex, isUuidV4Regex } from './helpers';
 
 describe('#api-gateway-proxy', () => {
@@ -72,6 +77,64 @@ describe('#api-gateway-proxy', () => {
           time: expect.stringMatching(/^\d{2}\/\w{3}\/\d{4}:\d{2}:\d{2}:\d{2} [+-]\d{4}$/),
           timeEpoch: expect.any(Number),
         },
+      });
+    });
+  });
+
+  describe('proxy-websocket-event-v2', () => {
+    it('should return a valid event', () => {
+      const event = APIGatewayProxyWebsocketEventV2Stub();
+
+      expect(event).toEqual({
+        requestContext: {
+          routeKey: '$default',
+          messageId: expect.stringMatching(isUuidV4Regex),
+          eventType: 'MESSAGE',
+          extendedRequestId: expect.stringMatching(isUuidV4Regex),
+          messageDirection: 'IN',
+          stage: 'prod',
+          connectedAt: expect.any(Number),
+          requestTime: expect.stringMatching(/^\d{2}\/\w{3}\/\d{4}:\d{2}:\d{2}:\d{2} [+-]\d{4}$/),
+          requestTimeEpoch: expect.any(Number),
+          requestId: expect.stringMatching(isUuidV4Regex),
+          domainName: `id.execute-api.${DEFAULT_REGION}.amazonaws.com`,
+          connectionId: expect.stringMatching(isUuidV4Regex),
+          apiId: 'example',
+        },
+        body: undefined,
+        isBase64Encoded: false,
+        stageVariables: {},
+      });
+    });
+
+    it('should allow overrides', () => {
+      const event = APIGatewayProxyWebsocketEventV2Stub({
+        requestContext: {
+          eventType: 'DISCONNECT',
+          stage: 'dev',
+        },
+        body: 'Test message',
+      });
+
+      expect(event).toEqual({
+        requestContext: {
+          routeKey: '$default',
+          messageId: expect.stringMatching(isUuidV4Regex),
+          eventType: 'DISCONNECT',
+          extendedRequestId: expect.stringMatching(isUuidV4Regex),
+          messageDirection: 'IN',
+          stage: 'dev',
+          connectedAt: expect.any(Number),
+          requestTime: expect.stringMatching(/^\d{2}\/\w{3}\/\d{4}:\d{2}:\d{2}:\d{2} [+-]\d{4}$/),
+          requestTimeEpoch: expect.any(Number),
+          requestId: expect.stringMatching(isUuidV4Regex),
+          domainName: `id.execute-api.${DEFAULT_REGION}.amazonaws.com`,
+          connectionId: expect.stringMatching(isUuidV4Regex),
+          apiId: 'example',
+        },
+        body: 'Test message',
+        isBase64Encoded: false,
+        stageVariables: {},
       });
     });
   });

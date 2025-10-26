@@ -1,7 +1,16 @@
-import type { APIGatewayProxyEventV2 } from 'aws-lambda';
+import type {
+  APIGatewayEventWebsocketRequestContextV2,
+  APIGatewayProxyEventV2,
+  APIGatewayProxyWebsocketEventV2,
+} from 'aws-lambda';
 import deepmerge from 'deepmerge';
+import { DateTime } from 'luxon';
 import type { Merge } from 'type-fest';
-import { APIGatewayEventRequestContextV2Stub, type PartialAPIGatewayEventRequestContextV2 } from './common';
+import {
+  APIGatewayEventRequestContextV2Stub,
+  DEFAULT_REGION,
+  type PartialAPIGatewayEventRequestContextV2,
+} from './common';
 
 // V1
 // export const APIGatewayProxyWithLambdaAuthorizerEventStub = <TAuthorizerContext>(
@@ -14,7 +23,7 @@ import { APIGatewayEventRequestContextV2Stub, type PartialAPIGatewayEventRequest
 
 // V2
 
-export type PartialAPIGatewayProxyEventV2 = Merge<
+type PartialAPIGatewayProxyEventV2 = Merge<
   Partial<APIGatewayProxyEventV2>,
   {
     requestContext?: PartialAPIGatewayEventRequestContextV2;
@@ -48,9 +57,42 @@ export const APIGatewayProxyEventV2Stub = (overrides: PartialAPIGatewayProxyEven
   );
 };
 
-// export const APIGatewayProxyWebsocketEventV2Stub = (
-//   overrides: Partial<APIGatewayProxyWebsocketEventV2>
-// ): APIGatewayProxyWebsocketEventV2 => {};
+type PartialAPIGatewayProxyWebsocketEventV2 = Merge<
+  Partial<APIGatewayProxyWebsocketEventV2>,
+  {
+    requestContext?: Partial<APIGatewayEventWebsocketRequestContextV2>;
+  }
+>;
+
+export const APIGatewayProxyWebsocketEventV2Stub = (
+  overrides: PartialAPIGatewayProxyWebsocketEventV2 = {}
+): APIGatewayProxyWebsocketEventV2 => {
+  const now = DateTime.now();
+
+  return deepmerge<APIGatewayProxyWebsocketEventV2>(
+    {
+      requestContext: {
+        routeKey: '$default',
+        messageId: crypto.randomUUID(),
+        eventType: 'MESSAGE',
+        extendedRequestId: crypto.randomUUID(),
+        messageDirection: 'IN',
+        stage: 'prod',
+        connectedAt: now.toUnixInteger(),
+        requestTime: now.toFormat('dd/MMM/yyyy:HH:mm:ss ZZZ'),
+        requestTimeEpoch: now.toUnixInteger(),
+        requestId: crypto.randomUUID(),
+        domainName: `id.execute-api.${DEFAULT_REGION}.amazonaws.com`,
+        connectionId: crypto.randomUUID(),
+        apiId: 'example',
+      },
+      body: undefined,
+      isBase64Encoded: false,
+      stageVariables: {},
+    },
+    overrides as APIGatewayProxyWebsocketEventV2
+  );
+};
 
 // export const APIGatewayProxyEventV2WithJWTAuthorizerStub = (
 //   overrides: Partial<APIGatewayProxyEventV2WithJWTAuthorizer>
