@@ -1,6 +1,7 @@
 export * from './alb';
 export * from './amplify-resolver';
 export * from './api-gateway-authorizer';
+export * from './api-gateway-proxy';
 export * from './appsync-resolver';
 export * from './autoscaling';
 export * from './cdk-custom-resource';
