@@ -89,7 +89,7 @@ export const APIGatewayProxyWebsocketEventV2Stub = (
         connectionId: crypto.randomUUID(),
         apiId: 'example',
       },
-      body: undefined,
+      body: '',
       isBase64Encoded: false,
       stageVariables: {},
     },

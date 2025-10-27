@@ -1,0 +1,13 @@
+pre-commit:
+  parallel: true
+  jobs:
+    - name: biome linting
+      run: npm run lint
+
+    - name: typecheck
+      run: npm run typecheck
+
+commit-msg:
+  commands:
+    "lint commit message":
+      run: npx commitlint --edit {1}

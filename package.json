@@ -1,8 +1,19 @@
 {
   "name": "aws-lambda-stubs",
-  "version": "0.0.7",
-  "main": "./src/index.ts",
-  "types": "./src/index.ts",
+  "version": "0.0.8",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "engines": {
+    "node": ">=20"
+  },
   "author": "Ricardo Cino <ricardo@cino.io>",
   "description": "Providing stubs for all AWS Lambda invocation types for easy unit testing",
   "keywords": [
@@ -10,12 +21,13 @@
     "lambda",
     "stubs",
     "typescript",
+    "type-safe",
     "stubs"
   ],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cino/aws-lambda-stubs.git"
+    "url": "git+https://github.com/cino/aws-lambda-stubs.git"
   },
   "bugs": {
     "url": "https://github.com/cino/aws-lambda-stubs/issues"
@@ -24,28 +36,26 @@
   "private": false,
   "peerDependencies": {
     "@types/aws-lambda": "^8.10.156",
-    "luxon": "^3.7.2",
     "deepmerge": "^4.3.1",
+    "luxon": "^3.7.2",
     "type-fest": "^5.1.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.3.0",
+    "@biomejs/biome": "2.3.1",
+    "@commitlint/cli": "^20.1.0",
+    "@commitlint/config-conventional": "^20.0.0",
     "@tsconfig/node24": "^24.0.1",
     "@types/luxon": "^3.7.1",
     "@types/node": "^24.9.1",
     "@vitest/coverage-v8": "^4.0.2",
-    "husky": "^9.1.7",
-    "lint-staged": "^16.2.4",
+    "lefthook": "^2.0.1",
     "typescript": "5.9.3",
     "vitest": "^4.0.2"
   },
   "scripts": {
-    "lint": "biome lint",
-    "prepare": "husky",
+    "lint": "biome lint src tests",
     "test": "vitest",
-    "typecheck": "tsc --noEmit -p tsconfig.json"
-  },
-  "lint-staged": {
-    "*.{js,ts,json}": "biome check --write --no-errors-on-unmatched"
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "build": "tsc -p tsconfig.build.json"
   }
 }

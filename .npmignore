@@ -1,11 +1,40 @@
-.github
-.husky
-.vscode
+#Node
+node_modules
+
+#IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Package management
+package-lock.json
 .nvmrc
 tsconfig.tsbuildinfo
+tsconfig.build.tsbuildinfo
 biome.json
+lefthook.yml
+commitlint.config.js
+
+# Debug
+npm-debug.log*
+
+# Testing
+coverage/
+jest.config.js
+
+# Test files
+tests/
+coverage/
+*.test.js
+*.test.ts
+
+# Miscellaneous
+.github
+.husky
 examples
 tests
-node_modules
 *.md
 !README.md

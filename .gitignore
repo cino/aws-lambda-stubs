@@ -8,8 +8,10 @@ node_modules
 .DS_Store
 
 # TS build files
-tsconfig.tsbuildinfo
-.tsbuildinfo
+*.tsbuildinfo
 
 # Coverage
 coverage
+
+# build
+dist

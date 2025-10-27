@@ -61,8 +61,8 @@ describe('#s3', () => {
       }),
     ]);
 
-    expect(event.Records[0].awsRegion).toBe('us-west-2');
-    expect(event.Records[0].s3.bucket.ownerIdentity.principalId).toBe('ANOTHEREXAMPLE');
+    expect(event.Records[0]?.awsRegion).toBe('us-west-2');
+    expect(event.Records[0]?.s3.bucket.ownerIdentity.principalId).toBe('ANOTHEREXAMPLE');
   });
 
   it('should ensure the name and arn are in sync when bucket-name is overridden', () => {
@@ -76,6 +76,6 @@ describe('#s3', () => {
       }),
     ]);
 
-    expect(event.Records[0].s3.bucket.arn).toBe('arn:aws:s3:::my-bucket-name');
+    expect(event.Records[0]?.s3.bucket.arn).toBe('arn:aws:s3:::my-bucket-name');
   });
 });

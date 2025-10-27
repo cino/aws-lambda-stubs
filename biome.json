@@ -85,7 +85,8 @@
       "!**/site",
       "!**/.aws-sam",
       "!**/*.generated.js",
-      "!**/*.generated.d.ts"
+      "!**/*.generated.d.ts",
+      "!dist/**/*.ts"
     ]
   }
 }

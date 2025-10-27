@@ -102,7 +102,7 @@ describe('#api-gateway-proxy', () => {
           connectionId: expect.stringMatching(isUuidV4Regex),
           apiId: 'example',
         },
-        body: undefined,
+        body: '',
         isBase64Encoded: false,
         stageVariables: {},
       });
