@@ -84,9 +84,6 @@ jobs:
 
       - name: Setup node
         uses: actions/setup-node@v6
-        with:
-          node-version: lts/*
-          cache: npm
 
       - name: Print versions
         run: |
