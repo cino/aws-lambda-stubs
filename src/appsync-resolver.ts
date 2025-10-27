@@ -1,10 +1,10 @@
 import type { AppSyncAuthorizerEvent, AppSyncResolverEvent } from 'aws-lambda';
-import deepmerge from 'deepmerge';
 import type { Merge } from 'type-fest';
 import { DEFAULT_ACCOUNT_ID } from './common';
+import { deepMerge } from './utils/deepmerge';
 
 export const AppSyncAuthorizerEventStub = (overrides: Partial<AppSyncAuthorizerEvent> = {}): AppSyncAuthorizerEvent => {
-  return deepmerge<AppSyncAuthorizerEvent>(
+  return deepMerge<AppSyncAuthorizerEvent>(
     {
       authorizationToken: 'Bearer abcdef123456',
       requestContext: {
@@ -39,7 +39,7 @@ type PartialAppSyncResolverEvent<TArguments, TSource> = Merge<
 export const AppSyncResolverEventStub = <TArguments = undefined, TSource = Record<string, any> | null>(
   overrides: PartialAppSyncResolverEvent<TArguments, TSource> = {}
 ): AppSyncResolverEvent<TArguments, TSource> => {
-  return deepmerge<AppSyncResolverEvent<TArguments, TSource>>(
+  return deepMerge<AppSyncResolverEvent<TArguments, TSource>>(
     {
       arguments: {} as TArguments,
       identity: undefined,

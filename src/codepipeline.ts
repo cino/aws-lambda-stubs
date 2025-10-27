@@ -1,7 +1,7 @@
 import type { CodePipelineEvent } from 'aws-lambda';
-import deepmerge from 'deepmerge';
 import type { Merge } from 'type-fest';
 import { DEFAULT_ACCOUNT_ID } from './common';
+import { deepMerge } from './utils/deepmerge';
 
 type PartialCodePipelineEvent = {
   'CodePipeline.job'?: Merge<
@@ -13,7 +13,7 @@ type PartialCodePipelineEvent = {
 };
 
 export const CodePipelineEventStub = (overrides: PartialCodePipelineEvent = {}): CodePipelineEvent => {
-  return deepmerge(
+  return deepMerge(
     {
       'CodePipeline.job': {
         id: 'unique-job-id',
@@ -59,6 +59,6 @@ export const CodePipelineEventStub = (overrides: PartialCodePipelineEvent = {}):
         },
       },
     },
-    overrides
+    overrides as Partial<CodePipelineEvent>
   ) as CodePipelineEvent;
 };

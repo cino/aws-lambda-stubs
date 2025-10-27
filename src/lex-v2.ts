@@ -1,6 +1,6 @@
 import type { LexV2Bot, LexV2Event, LexV2SessionState } from 'aws-lambda';
-import deepmerge from 'deepmerge';
 import type { Merge } from 'type-fest';
+import { deepMerge } from './utils/deepmerge';
 
 type PartialLexV2Event = Merge<
   Partial<LexV2Event>,
@@ -11,7 +11,7 @@ type PartialLexV2Event = Merge<
 >;
 
 export const LexV2EventStub = (overrides: PartialLexV2Event = {}): LexV2Event => {
-  return deepmerge<LexV2Event>(
+  return deepMerge<LexV2Event>(
     {
       messageVersion: '1.0',
       invocationSource: 'DialogCodeHook',

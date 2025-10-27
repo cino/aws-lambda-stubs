@@ -1,7 +1,7 @@
 import type { S3Event, S3EventRecord } from 'aws-lambda';
-import deepmerge from 'deepmerge';
 import type { Merge } from 'type-fest';
 import { DEFAULT_REGION, randomIpAddress } from './common';
+import { deepMerge } from './utils/deepmerge';
 
 type PartialS3EventRecord = Merge<
   Partial<S3EventRecord>,
@@ -19,7 +19,7 @@ type PartialS3EventRecord = Merge<
 export const S3EventRecordStub = (overrides: PartialS3EventRecord = {}): S3EventRecord => {
   const bucketName = overrides.s3?.bucket?.name || 'example-bucket';
 
-  return deepmerge(
+  return deepMerge(
     {
       eventVersion: '2.1',
       eventSource: 'aws:s3',
@@ -55,7 +55,7 @@ export const S3EventRecordStub = (overrides: PartialS3EventRecord = {}): S3Event
       },
       glacierEventData: undefined,
     },
-    overrides
+    overrides as Partial<S3EventRecord>
   ) as S3EventRecord;
 };
 

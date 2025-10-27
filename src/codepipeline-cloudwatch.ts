@@ -3,9 +3,9 @@ import type {
   CodePipelineCloudWatchPipelineEvent,
   CodePipelineCloudWatchStageEvent,
 } from 'aws-lambda';
-import deepmerge from 'deepmerge';
 import type { Merge } from 'type-fest';
 import { EventBridgeEventStub } from './event-bridge';
+import { deepMerge } from './utils/deepmerge';
 
 type PartialCodePipelineCloudWatchActionEvent = Merge<
   Partial<CodePipelineCloudWatchActionEvent>,
@@ -22,7 +22,7 @@ type PartialCodePipelineCloudWatchActionEvent = Merge<
 export const CodePipelineCloudWatchActionEventStub = (
   overrides: PartialCodePipelineCloudWatchActionEvent = {}
 ): CodePipelineCloudWatchActionEvent => {
-  return deepmerge(
+  return deepMerge(
     EventBridgeEventStub<CodePipelineCloudWatchActionEvent['detail']>('CodePipeline Action Execution State Change', {
       pipeline: 'my-pipeline',
       version: 1,
@@ -37,8 +37,8 @@ export const CodePipelineCloudWatchActionEventStub = (
         version: 1,
       },
     }),
-    overrides
-  );
+    overrides as Partial<CodePipelineCloudWatchActionEvent>
+  ) as CodePipelineCloudWatchActionEvent;
 };
 
 type PartialCodePipelineCloudWatchPipelineEvent = Merge<
@@ -51,7 +51,7 @@ type PartialCodePipelineCloudWatchPipelineEvent = Merge<
 export const CodePipelineCloudWatchPipelineEventStub = (
   overrides: PartialCodePipelineCloudWatchPipelineEvent = {}
 ): CodePipelineCloudWatchPipelineEvent => {
-  return deepmerge(
+  return deepMerge(
     EventBridgeEventStub<CodePipelineCloudWatchPipelineEvent['detail']>(
       'CodePipeline Pipeline Execution State Change',
       {
@@ -61,8 +61,8 @@ export const CodePipelineCloudWatchPipelineEventStub = (
         'execution-id': '12345678-1234-1234-1234-123456789012',
       }
     ),
-    overrides
-  );
+    overrides as Partial<CodePipelineCloudWatchPipelineEvent>
+  ) as CodePipelineCloudWatchPipelineEvent;
 };
 
 type PartialCodePipelineCloudWatchStageEvent = Merge<
@@ -75,7 +75,7 @@ type PartialCodePipelineCloudWatchStageEvent = Merge<
 export const CodePipelineCloudWatchStageEventStub = (
   overrides: PartialCodePipelineCloudWatchStageEvent = {}
 ): CodePipelineCloudWatchStageEvent => {
-  return deepmerge(
+  return deepMerge(
     EventBridgeEventStub<CodePipelineCloudWatchStageEvent['detail']>('CodePipeline Stage Execution State Change', {
       pipeline: 'my-pipeline',
       version: 1,
@@ -83,6 +83,6 @@ export const CodePipelineCloudWatchStageEventStub = (
       stage: 'BuildStage',
       state: 'SUCCEEDED',
     }),
-    overrides
-  );
+    overrides as Partial<CodePipelineCloudWatchStageEvent>
+  ) as CodePipelineCloudWatchStageEvent;
 };

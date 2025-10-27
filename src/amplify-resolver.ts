@@ -1,7 +1,7 @@
 import type { AmplifyGraphQlResolverEvent } from 'aws-lambda';
-import deepmerge from 'deepmerge';
 import type { Merge } from 'type-fest';
 import { AppSyncIdentityStub } from './common';
+import { deepMerge } from './utils/deepmerge';
 
 type PartialAmplifyGraphQlResolverEvent<
   // biome-ignore lint/suspicious/noExplicitAny: any in AmplifyGraphQlResolverEvent type
@@ -23,7 +23,7 @@ export const amplifyGraphqlResolverEventStub = <
 >(
   overrides: PartialAmplifyGraphQlResolverEvent = {}
 ): AmplifyGraphQlResolverEvent<TArguments, TSource> => {
-  return deepmerge(
+  return deepMerge(
     {
       typeName: 'Query',
       fieldName: 'getUser',
@@ -44,6 +44,6 @@ export const amplifyGraphqlResolverEventStub = <
       },
       prev: null,
     },
-    overrides
+    overrides as Partial<AmplifyGraphQlResolverEvent<TArguments, TSource>>
   );
 };

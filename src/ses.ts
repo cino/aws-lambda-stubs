@@ -12,9 +12,9 @@ import type {
   SESReceiptStopAction,
   SESReceiptWorkMailAction,
 } from 'aws-lambda';
-import deepmerge from 'deepmerge';
 import type { Merge } from 'type-fest';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './common';
+import { deepMerge } from './utils/deepmerge';
 
 type PartialSESMail = Merge<
   Partial<SESMail>,
@@ -52,7 +52,7 @@ type PartialSESEventRecord = Merge<
 >;
 
 export const SESEventRecordStub = (overrides: PartialSESEventRecord = {}): SESEventRecord => {
-  return deepmerge(
+  return deepMerge<SESEventRecord>(
     {
       eventVersion: '1.0',
       eventSource: 'aws:ses',
@@ -102,7 +102,7 @@ export const SESEventRecordStub = (overrides: PartialSESEventRecord = {}): SESEv
         },
       },
     },
-    overrides
+    overrides as Partial<SESEventRecord>
   ) as SESEventRecord;
 };
 

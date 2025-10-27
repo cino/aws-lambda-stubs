@@ -4,9 +4,8 @@ import type {
   AppSyncIdentityLambda,
   AppSyncIdentityOIDC,
 } from 'aws-lambda';
-import deepmerge from 'deepmerge';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './consts';
-import { overwriteMerge } from './deepmerge';
+import { deepMerge } from '../utils/deepmerge';
 
 type AppSyncIdentityType = 'iam' | 'cognito' | 'oidc' | 'lambda';
 type AppSyncIdentityMap = {
@@ -42,7 +41,7 @@ export function AppSyncIdentityStub(
         ...overrides,
       };
     case 'cognito':
-      return deepmerge(
+      return deepMerge(
         {
           sub: 'abcdef123456',
           issuer: `https://cognito-idp.${DEFAULT_REGION}.amazonaws.com/${DEFAULT_REGION}_example`,
@@ -57,10 +56,9 @@ export function AppSyncIdentityStub(
           groups: ['admin', 'users'],
         },
         overrides,
-        { arrayMerge: overwriteMerge }
       );
     case 'oidc':
-      return deepmerge(
+      return deepMerge(
         {
           claims: {
             email: 'john.doe@example.com',

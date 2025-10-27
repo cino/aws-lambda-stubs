@@ -1,5 +1,5 @@
 import type { CloudFrontRequest } from 'aws-lambda';
-import { randomIpAddress } from '.';
+import { randomIpAddress } from '../utils';
 
 export const cloudFrontRequestStub = (overrides: Partial<CloudFrontRequest> = {}): CloudFrontRequest => {
   return {

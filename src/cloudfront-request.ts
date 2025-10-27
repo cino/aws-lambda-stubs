@@ -1,6 +1,6 @@
 import type { CloudFrontRequest, CloudFrontRequestEvent, CloudFrontRequestEventRecord } from 'aws-lambda';
-import deepmerge from 'deepmerge';
 import { cloudFrontRequestStub } from './common';
+import { deepMerge } from './utils/deepmerge';
 
 interface PartialCloudFrontRequestEventRecord {
   cf?: {
@@ -19,7 +19,7 @@ export const CloudFrontRequestEventRecordStub = (
 ): CloudFrontRequestEventRecord => {
   const distributionDomainName = overrides.cf?.config?.distributionDomainName || 'd111111abcdef8.cloudfront.net';
 
-  return deepmerge(
+  return deepMerge(
     {
       cf: {
         config: {
@@ -40,8 +40,8 @@ export const CloudFrontRequestEventRecordStub = (
         }),
       },
     },
-    overrides
-  ) as CloudFrontRequestEventRecord;
+    overrides as Partial<CloudFrontRequestEventRecord>
+  );
 };
 
 export const CloudFrontRequestEventStub = (records: CloudFrontRequestEventRecord[]): CloudFrontRequestEvent => {

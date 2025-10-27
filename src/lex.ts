@@ -1,6 +1,6 @@
 import type { LexEvent, LexEventSlots, LexSlotDetails } from 'aws-lambda';
-import deepmerge from 'deepmerge';
 import type { Merge } from 'type-fest';
+import { deepMerge } from './utils/deepmerge';
 
 type PartialLexEvent = Merge<
   Partial<LexEvent>,
@@ -20,7 +20,7 @@ type PartialLexEvent = Merge<
 >;
 
 export const LexEventStub = (overrides: PartialLexEvent = {}): LexEvent => {
-  return deepmerge<LexEvent>(
+  return deepMerge<LexEvent>(
     {
       currentIntent: {
         name: 'OrderFlowers',

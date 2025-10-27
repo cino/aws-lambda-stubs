@@ -3,7 +3,6 @@ import type {
   APIGatewayRequestAuthorizerEventV2,
   APIGatewayTokenAuthorizerEvent,
 } from 'aws-lambda';
-import deepmerge from 'deepmerge';
 import type { Merge } from 'type-fest';
 import {
   APIGatewayEventRequestContextV2Stub,
@@ -12,6 +11,7 @@ import {
   DEFAULT_REGION,
   type PartialAPIGatewayEventRequestContextV2,
 } from './common';
+import { deepMerge } from './utils/deepmerge';
 
 export const APIGatewayTokenAuthorizerEventStub = (
   overrides: Partial<APIGatewayTokenAuthorizerEvent> = {}
@@ -28,7 +28,7 @@ export const APIGatewayTokenAuthorizerEventStub = (
 export const APIGatewayRequestAuthorizerEventStub = (
   overrides: Partial<APIGatewayRequestAuthorizerEvent> = {}
 ): APIGatewayRequestAuthorizerEvent => {
-  return deepmerge<APIGatewayRequestAuthorizerEvent>(
+  return deepMerge<APIGatewayRequestAuthorizerEvent>(
     {
       type: 'REQUEST',
       methodArn: `arn:aws:execute-api:${DEFAULT_REGION}:${DEFAULT_ACCOUNT_ID}:example/prod/GET/resource`,
@@ -46,7 +46,7 @@ export const APIGatewayRequestAuthorizerEventStub = (
       stageVariables: {},
       requestContext: APIGatewayEventRequestContextWithAuthorizerStub(),
     },
-    overrides as APIGatewayRequestAuthorizerEvent
+    overrides as Partial<APIGatewayRequestAuthorizerEvent>
   );
 };
 
@@ -60,7 +60,7 @@ type PartialAPIGatewayRequestAuthorizerEventV2 = Merge<
 export const APIGatewayRequestAuthorizerEventV2Stub = (
   overrides: PartialAPIGatewayRequestAuthorizerEventV2 = {}
 ): APIGatewayRequestAuthorizerEventV2 => {
-  return deepmerge(
+  return deepMerge(
     {
       version: '2.0',
       type: 'REQUEST',
@@ -79,6 +79,6 @@ export const APIGatewayRequestAuthorizerEventV2Stub = (
       pathParameters: {},
       stageVariables: {},
     },
-    overrides as APIGatewayRequestAuthorizerEventV2
+    overrides as Partial<APIGatewayRequestAuthorizerEventV2>
   );
 };

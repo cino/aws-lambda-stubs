@@ -1,14 +1,14 @@
 import type { CloudWatchLogsDecodedData, CloudWatchLogsEvent, CloudWatchLogsLogEvent } from 'aws-lambda';
-import deepmerge from 'deepmerge';
 import { DateTime } from 'luxon';
 import { DEFAULT_ACCOUNT_ID } from './common';
+import { deepMerge } from './utils/deepmerge';
 
 export const CloudWatchLogsEventStub = (overrides: Partial<CloudWatchLogsDecodedData> = {}): CloudWatchLogsEvent => {
   return {
     awslogs: {
       data: Buffer.from(
         JSON.stringify(
-          deepmerge(
+          deepMerge(
             {
               owner: DEFAULT_ACCOUNT_ID,
               logGroup: '/aws/lambda/example-log-group',

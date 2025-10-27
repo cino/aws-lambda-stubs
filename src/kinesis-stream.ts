@@ -4,9 +4,9 @@ import type {
   KinesisStreamRecordPayload,
   KinesisStreamTumblingWindowEvent,
 } from 'aws-lambda';
-import deepmerge from 'deepmerge';
 import type { Merge } from 'type-fest';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './common';
+import { deepMerge } from './utils/deepmerge';
 
 type PartialKinesisStreamRecord = Merge<
   Partial<KinesisStreamRecord>,
@@ -16,7 +16,7 @@ type PartialKinesisStreamRecord = Merge<
 >;
 
 export const KinesisStreamRecordStub = (overrides: PartialKinesisStreamRecord = {}): KinesisStreamRecord => {
-  return deepmerge(
+  return deepMerge(
     {
       awsRegion: DEFAULT_REGION,
       eventID: 'shardId-000000000006:49590338271490256608559692540925702759324208523137515618',
@@ -34,7 +34,7 @@ export const KinesisStreamRecordStub = (overrides: PartialKinesisStreamRecord = 
         approximateArrivalTimestamp: Date.now(),
       },
     },
-    overrides
+    overrides as Partial<KinesisStreamRecord>
   ) as KinesisStreamRecord;
 };
 

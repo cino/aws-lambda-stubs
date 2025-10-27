@@ -1,7 +1,7 @@
 import type { ConnectContactFlowEvent } from 'aws-lambda';
-import deepmerge from 'deepmerge';
 import type { Merge } from 'type-fest';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './common';
+import { deepMerge } from './utils/deepmerge';
 
 export type PartialConectContactFlowEvent = Merge<
   Partial<ConnectContactFlowEvent>,
@@ -16,7 +16,7 @@ export type PartialConectContactFlowEvent = Merge<
 >;
 
 export const ConnectContactFlowStub = (overrides: PartialConectContactFlowEvent = {}): ConnectContactFlowEvent => {
-  return deepmerge<ConnectContactFlowEvent>(
+  return deepMerge<ConnectContactFlowEvent>(
     {
       Details: {
         ContactData: {
@@ -49,6 +49,6 @@ export const ConnectContactFlowStub = (overrides: PartialConectContactFlowEvent 
       },
       Name: 'ContactFlowEvent',
     },
-    overrides as ConnectContactFlowEvent
+    overrides as Partial<ConnectContactFlowEvent>
   );
 };

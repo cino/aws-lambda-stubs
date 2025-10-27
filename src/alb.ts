@@ -1,9 +1,9 @@
 import type { ALBEvent } from 'aws-lambda';
-import deepmerge from 'deepmerge';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './common';
+import { deepMerge } from './utils/deepmerge';
 
 export const ALBEventStub = (overrides: Partial<ALBEvent> = {}): ALBEvent => {
-  return deepmerge(
+  return deepMerge(
     {
       requestContext: {
         elb: {
@@ -18,6 +18,6 @@ export const ALBEventStub = (overrides: Partial<ALBEvent> = {}): ALBEvent => {
       body: null,
       isBase64Encoded: false,
     },
-    overrides
-  ) as ALBEvent;
+    overrides as Partial<ALBEvent>
+  );
 };

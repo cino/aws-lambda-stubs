@@ -1,7 +1,7 @@
 import type { SNSEvent, SNSEventRecord, SNSMessage } from 'aws-lambda';
-import deepmerge from 'deepmerge';
 import type { Merge } from 'type-fest';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './common';
+import { deepMerge } from './utils/deepmerge';
 
 type PartialSNSRecord = Merge<
   Partial<SNSEventRecord>,
@@ -11,7 +11,7 @@ type PartialSNSRecord = Merge<
 >;
 
 export const SNSEventRecordStub = (overrides: PartialSNSRecord = {}): SNSEventRecord => {
-  return deepmerge(
+  return deepMerge(
     {
       EventVersion: '1.0',
       EventSubscriptionArn: `arn:aws:sns:${DEFAULT_REGION}:${DEFAULT_ACCOUNT_ID}:MyTopic:2bcfbf39-05c3-41de-beaa-fcfcc21c8f55`,
@@ -30,7 +30,7 @@ export const SNSEventRecordStub = (overrides: PartialSNSRecord = {}): SNSEventRe
         Subject: 'TestInvoke',
       },
     },
-    overrides
+    overrides as Partial<SNSEventRecord>
   ) as SNSEventRecord;
 };
 

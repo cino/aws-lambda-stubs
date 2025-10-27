@@ -5,7 +5,6 @@ import type {
   APIGatewayProxyEventV2WithJWTAuthorizer,
   APIGatewayProxyWebsocketEventV2,
 } from 'aws-lambda';
-import deepmerge from 'deepmerge';
 import { DateTime } from 'luxon';
 import type { Merge } from 'type-fest';
 import {
@@ -14,6 +13,7 @@ import {
   DEFAULT_REGION,
   type PartialAPIGatewayEventRequestContextV2,
 } from './common';
+import { deepMerge } from './utils/deepmerge';
 
 // V1
 // export const APIGatewayProxyWithLambdaAuthorizerEventStub = <TAuthorizerContext>(
@@ -40,7 +40,7 @@ type PartialAPIGatewayProxyEventV2 = Merge<
 export const APIGatewayProxyEventV2Stub = (overrides: PartialAPIGatewayProxyEventV2 = {}): APIGatewayProxyEventV2 => {
   const path = overrides.rawPath || '/prod/resource';
 
-  return deepmerge<APIGatewayProxyEventV2>(
+  return deepMerge<APIGatewayProxyEventV2>(
     {
       version: '2.0',
       routeKey: '$default',
@@ -56,7 +56,7 @@ export const APIGatewayProxyEventV2Stub = (overrides: PartialAPIGatewayProxyEven
       }),
       isBase64Encoded: false,
     },
-    overrides as APIGatewayProxyEventV2
+    overrides as Partial<APIGatewayProxyEventV2>
   );
 };
 
@@ -72,7 +72,7 @@ export const APIGatewayProxyWebsocketEventV2Stub = (
 ): APIGatewayProxyWebsocketEventV2 => {
   const now = DateTime.now();
 
-  return deepmerge<APIGatewayProxyWebsocketEventV2>(
+  return deepMerge<APIGatewayProxyWebsocketEventV2>(
     {
       requestContext: {
         routeKey: '$default',
@@ -93,7 +93,7 @@ export const APIGatewayProxyWebsocketEventV2Stub = (
       isBase64Encoded: false,
       stageVariables: {},
     },
-    overrides as APIGatewayProxyWebsocketEventV2
+    overrides as Partial<APIGatewayProxyWebsocketEventV2>
   );
 };
 
@@ -112,12 +112,12 @@ export const APIGatewayProxyEventV2WithJWTAuthorizerStub = (
       ...overrides.requestContext,
       http: {
         path: overrides.rawPath,
-        ...overrides.requestContext?.http
+        ...overrides.requestContext?.http,
       },
     };
   }
 
-  return deepmerge<APIGatewayProxyEventV2WithJWTAuthorizer>(
+  return deepMerge<APIGatewayProxyEventV2WithJWTAuthorizer>(
     {
       version: '2.0',
       routeKey: '$default',
@@ -139,7 +139,7 @@ export const APIGatewayProxyEventV2WithJWTAuthorizerStub = (
         integrationLatency: 100,
       }),
     },
-    overrides as APIGatewayProxyEventV2WithJWTAuthorizer
+    overrides as Partial<APIGatewayProxyEventV2WithJWTAuthorizer>
   );
 };
 
@@ -148,7 +148,7 @@ export const APIGatewayProxyEventV2WithJWTAuthorizerStub = (
 //   authorizerContext: TAuthorizerContext,
 //   overrides: Partial<APIGatewayProxyEventV2WithLambdaAuthorizer<TAuthorizerContext>>
 // ): APIGatewayProxyEventV2WithLambdaAuthorizer<TAuthorizerContext> => {
-//   return deepmerge<APIGatewayProxyEventV2WithLambdaAuthorizer<TAuthorizerContext>>(
+//   return deepMerge<APIGatewayProxyEventV2WithLambdaAuthorizer<TAuthorizerContext>>(
 //     APIGatewayEventRequestContextV2WithAuthorizerStub<
 //       APIGatewayEventRequestContextLambdaAuthorizer<TAuthorizerContext>
 //     >({

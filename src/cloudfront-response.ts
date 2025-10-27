@@ -4,8 +4,8 @@ import type {
   CloudFrontResponseEvent,
   CloudFrontResponseEventRecord,
 } from 'aws-lambda';
-import deepmerge from 'deepmerge';
-import { randomIpAddress } from './common';
+import { randomIpAddress } from './utils';
+import { deepMerge } from './utils/deepmerge';
 
 export interface PartialCloudFrontResponseEventRecord {
   cf?: {
@@ -25,7 +25,7 @@ export const CloudFrontResponseEventRecordStub = (
 ): CloudFrontResponseEventRecord => {
   const distributionDomainName = overrides.cf?.config?.distributionDomainName || 'd111111abcdef8.cloudfront.net';
 
-  return deepmerge(
+  return deepMerge(
     {
       cf: {
         config: {
@@ -62,8 +62,8 @@ export const CloudFrontResponseEventRecordStub = (
         },
       },
     },
-    overrides
-  ) as CloudFrontResponseEventRecord;
+    overrides as Partial<CloudFrontResponseEventRecord>
+  );
 };
 
 export const CloudFrontResponseEventStub = (records: CloudFrontResponseEventRecord[]): CloudFrontResponseEvent => {

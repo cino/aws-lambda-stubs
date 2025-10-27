@@ -1,8 +1,8 @@
 import type { GuardDutyScanResultNotificationEvent, GuardDutyScanResultNotificationEventDetail } from 'aws-lambda';
-import deepmerge from 'deepmerge';
 import type { Merge } from 'type-fest';
 import type { PartialEventBridgeEvent } from './common';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './common';
+import { deepMerge } from './utils/deepmerge';
 
 type PartialGuardDutyScanResultNotificationEvent = Merge<
   PartialEventBridgeEvent,
@@ -20,7 +20,7 @@ type PartialGuardDutyScanResultNotificationEvent = Merge<
 export const GuardDutyScanResultNotificationEventStub = (
   overrides: PartialGuardDutyScanResultNotificationEvent = {}
 ): GuardDutyScanResultNotificationEvent => {
-  return deepmerge(
+  return deepMerge(
     {
       version: '1',
       id: 'abcd1234-ef56-7890-ab12-34567890cdef',
@@ -49,6 +49,6 @@ export const GuardDutyScanResultNotificationEventStub = (
         },
       },
     },
-    overrides
+    overrides as Partial<GuardDutyScanResultNotificationEvent>
   ) as GuardDutyScanResultNotificationEvent;
 };
