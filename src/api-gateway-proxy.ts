@@ -1,8 +1,10 @@
 import type {
   APIGatewayEventRequestContextJWTAuthorizer,
+  APIGatewayEventRequestContextLambdaAuthorizer,
   APIGatewayEventWebsocketRequestContextV2,
   APIGatewayProxyEventV2,
   APIGatewayProxyEventV2WithJWTAuthorizer,
+  APIGatewayProxyEventV2WithLambdaAuthorizer,
   APIGatewayProxyWebsocketEventV2,
 } from 'aws-lambda';
 import { DateTime } from 'luxon';
@@ -143,20 +145,44 @@ export const APIGatewayProxyEventV2WithJWTAuthorizerStub = (
   );
 };
 
-// TODO: FIX.
-// export const APIGatewayProxyEventV2WithLambdaAuthorizerStub = <TAuthorizerContext = object>(
-//   authorizerContext: TAuthorizerContext,
-//   overrides: Partial<APIGatewayProxyEventV2WithLambdaAuthorizer<TAuthorizerContext>>
-// ): APIGatewayProxyEventV2WithLambdaAuthorizer<TAuthorizerContext> => {
-//   return deepMerge<APIGatewayProxyEventV2WithLambdaAuthorizer<TAuthorizerContext>>(
-//     APIGatewayEventRequestContextV2WithAuthorizerStub<
-//       APIGatewayEventRequestContextLambdaAuthorizer<TAuthorizerContext>
-//     >({
-//       lambda: undefined as unknown as TAuthorizerContext,
-//     }),
-//     overrides
-//   );
-// };
+type PartialAPIGatewayProxyEventV2WithLambdaAuthorizer<TAuthorizerContext> = Merge<
+  Partial<APIGatewayProxyEventV2WithLambdaAuthorizer<TAuthorizerContext>>,
+  {
+    requestContext?: PartialAPIGatewayEventRequestContextV2;
+  }
+>;
+
+export const APIGatewayProxyEventV2WithLambdaAuthorizerStub = <TAuthorizerContext = object>(
+  authorizerContext: TAuthorizerContext,
+  overrides: PartialAPIGatewayProxyEventV2WithLambdaAuthorizer<TAuthorizerContext> = {}
+): APIGatewayProxyEventV2WithLambdaAuthorizer<TAuthorizerContext> => {
+  if (overrides.rawPath) {
+    overrides.requestContext = {
+      ...overrides.requestContext,
+      http: {
+        path: overrides.rawPath,
+        ...overrides.requestContext?.http,
+      },
+    };
+  }
+
+  return deepMerge<APIGatewayProxyEventV2WithLambdaAuthorizer<TAuthorizerContext>>(
+    {
+      version: '2.0',
+      routeKey: '$default',
+      rawPath: '/prod/resource',
+      rawQueryString: '',
+      cookies: [],
+      headers: {},
+      queryStringParameters: {},
+      requestContext: APIGatewayEventRequestContextV2WithAuthorizerStub<
+        APIGatewayEventRequestContextLambdaAuthorizer<TAuthorizerContext>
+      >({ lambda: authorizerContext }),
+      isBase64Encoded: false,
+    },
+    overrides as Partial<APIGatewayProxyEventV2WithLambdaAuthorizer<TAuthorizerContext>>
+  );
+};
 
 // export const APIGatewayProxyEventV2WithIAMAuthorizerStub = (
 //   overrides: Partial<APIGatewayProxyEventV2WithIAMAuthorizer>
