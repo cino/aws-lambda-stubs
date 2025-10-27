@@ -1,8 +1,10 @@
 import type {
+  APIGatewayEventRequestContextIAMAuthorizer,
   APIGatewayEventRequestContextJWTAuthorizer,
   APIGatewayEventRequestContextLambdaAuthorizer,
   APIGatewayEventWebsocketRequestContextV2,
   APIGatewayProxyEventV2,
+  APIGatewayProxyEventV2WithIAMAuthorizer,
   APIGatewayProxyEventV2WithJWTAuthorizer,
   APIGatewayProxyEventV2WithLambdaAuthorizer,
   APIGatewayProxyWebsocketEventV2,
@@ -184,6 +186,41 @@ export const APIGatewayProxyEventV2WithLambdaAuthorizerStub = <TAuthorizerContex
   );
 };
 
-// export const APIGatewayProxyEventV2WithIAMAuthorizerStub = (
-//   overrides: Partial<APIGatewayProxyEventV2WithIAMAuthorizer>
-// ): APIGatewayProxyEventV2WithIAMAuthorizer => {};
+type PartialAPIGatewayProxyEventV2WithIAMAuthorizer = Merge<
+  Partial<APIGatewayProxyEventV2WithIAMAuthorizer>,
+  {
+    requestContext?: PartialAPIGatewayEventRequestContextV2;
+  }
+>;
+
+export const APIGatewayProxyEventV2WithIAMAuthorizerStub = (
+  authorizerContext: APIGatewayEventRequestContextIAMAuthorizer['iam'],
+  overrides: PartialAPIGatewayProxyEventV2WithIAMAuthorizer = {},
+): APIGatewayProxyEventV2WithIAMAuthorizer => {
+  if (overrides.rawPath) {
+    overrides.requestContext = {
+      ...overrides.requestContext,
+      http: {
+        path: overrides.rawPath,
+        ...overrides.requestContext?.http,
+      },
+    };
+  }
+
+  return deepMerge<APIGatewayProxyEventV2WithIAMAuthorizer>(
+    {
+      version: '2.0',
+      routeKey: '$default',
+      rawPath: '/prod/resource',
+      rawQueryString: '',
+      cookies: [],
+      headers: {},
+      queryStringParameters: {},
+      requestContext: APIGatewayEventRequestContextV2WithAuthorizerStub<APIGatewayEventRequestContextIAMAuthorizer>({
+        iam: authorizerContext,
+      }),
+      isBase64Encoded: false,
+    },
+    overrides as Partial<APIGatewayProxyEventV2WithIAMAuthorizer>
+  );
+};
