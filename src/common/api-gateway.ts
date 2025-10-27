@@ -79,6 +79,15 @@ export const APIGatewayEventRequestContextV2Stub = (
   );
 };
 
+export const APIGatewayEventRequestContextV2WithAuthorizerStub = <TAuthorizer>(
+  authorizer: TAuthorizer,
+  overrides: PartialAPIGatewayEventRequestContextV2 = {}
+): APIGatewayEventRequestContextV2 & {
+  authorizer: TAuthorizer;
+} => {
+  return deepmerge(APIGatewayEventRequestContextV2Stub(overrides), { authorizer });
+};
+
 // TODO: Gateway Identity stubs (...overloading again)
 export const APIGatewayEventIdentityStub = (
   overrides: Partial<APIGatewayEventIdentity> = {}

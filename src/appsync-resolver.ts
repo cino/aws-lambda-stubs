@@ -35,6 +35,7 @@ type PartialAppSyncResolverEvent<TArguments, TSource> = Merge<
   }
 >;
 
+// biome-ignore lint/suspicious/noExplicitAny: Any in upstream type
 export const AppSyncResolverEventStub = <TArguments = undefined, TSource = Record<string, any> | null>(
   overrides: PartialAppSyncResolverEvent<TArguments, TSource> = {}
 ): AppSyncResolverEvent<TArguments, TSource> => {
