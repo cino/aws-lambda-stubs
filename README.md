@@ -37,24 +37,24 @@ The content of mockEvent will be:
 
 ```json
 {
-	"Records": [
-		{
-			"messageId": "1",
-			"receiptHandle": "MessageReceiptHandle",
-			"body": "{\"key\":\"value\"}",
-			"attributes": {
-				"ApproximateReceiveCount": "1",
-				"SentTimestamp": "1523232000000",
-				"SenderId": "123456789012",
-				"ApproximateFirstReceiveTimestamp": "1523232000001"
-			},
-			"messageAttributes": {},
-			"md5OfBody": "a7353f7cddce808de0032747a0b7be50",
-			"eventSource": "aws:sqs",
-			"eventSourceARN": "arn:aws:sqs:us-east-1:012345678901:queue-name",
-			"awsRegion": "us-east-1"
-		}
-	]
+  "Records": [
+    {
+      "messageId": "1",
+      "receiptHandle": "MessageReceiptHandle",
+      "body": "{\"key\":\"value\"}",
+      "attributes": {
+        "ApproximateReceiveCount": "1",
+        "SentTimestamp": "1523232000000",
+        "SenderId": "123456789012",
+        "ApproximateFirstReceiveTimestamp": "1523232000001"
+      },
+      "messageAttributes": {},
+      "md5OfBody": "a7353f7cddce808de0032747a0b7be50",
+      "eventSource": "aws:sqs",
+      "eventSourceARN": "arn:aws:sqs:us-east-1:012345678901:queue-name",
+      "awsRegion": "us-east-1"
+    }
+  ]
 }
 ```
 
