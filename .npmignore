@@ -10,6 +10,7 @@ node_modules
 Thumbs.db
 
 # Package management
+src/**/*.ts
 package-lock.json
 .nvmrc
 tsconfig.tsbuildinfo
@@ -17,6 +18,9 @@ tsconfig.build.tsbuildinfo
 biome.json
 lefthook.yml
 commitlint.config.js
+vite.config.ts
+tsconfig.json
+tsconfig.build.json
 
 # Debug
 npm-debug.log*
