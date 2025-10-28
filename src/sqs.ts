@@ -14,6 +14,8 @@ interface PartialSQSRecord extends Omit<Partial<SQSRecord>, omittedKeys> {
 export const SQSRecordStub = (body: object, overrides: PartialSQSRecord = {}): SQSRecord => {
   const stringifiedBody = JSON.stringify(body);
   const now = DateTime.now();
+  const region = overrides.awsRegion ?? DEFAULT_REGION;
+
 
   return deepMerge<SQSRecord>(
     {
@@ -29,8 +31,8 @@ export const SQSRecordStub = (body: object, overrides: PartialSQSRecord = {}): S
       messageAttributes: {},
       md5OfBody: crypto.createHash('md5').update(stringifiedBody).digest('hex'),
       eventSource: 'aws:sqs',
-      eventSourceARN: `arn:aws:sqs:${DEFAULT_REGION}:${DEFAULT_ACCOUNT_ID}:queue-name`,
-      awsRegion: DEFAULT_REGION,
+      eventSourceARN: `arn:aws:sqs:${region}:${DEFAULT_ACCOUNT_ID}:queue-name`,
+      awsRegion: region,
     },
     overrides as Partial<SQSRecord>
   ) as SQSRecord;

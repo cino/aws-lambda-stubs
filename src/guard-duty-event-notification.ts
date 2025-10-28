@@ -20,17 +20,20 @@ type PartialGuardDutyScanResultNotificationEvent = Merge<
 export const GuardDutyScanResultNotificationEventStub = (
   overrides: PartialGuardDutyScanResultNotificationEvent = {}
 ): GuardDutyScanResultNotificationEvent => {
+  const region = overrides.region ?? DEFAULT_REGION;
+  const account = overrides.account ?? DEFAULT_ACCOUNT_ID;
+
   return deepMerge(
     {
       version: '1',
       id: 'abcd1234-ef56-7890-ab12-34567890cdef',
       'detail-type': 'GuardDuty Malware Protection Object Scan Result',
       source: 'aws.guardduty',
-      account: DEFAULT_ACCOUNT_ID,
+      account,
       time: new Date().toISOString(),
-      region: DEFAULT_REGION,
+      region,
       resources: [
-        `arn:aws:guardduty:${DEFAULT_REGION}:${DEFAULT_ACCOUNT_ID}:detector/12abc34d567e8f9012gh345i678j90kl/scans/scan-id-1234abcd`,
+        `arn:aws:guardduty:${region}:${account}:detector/12abc34d567e8f9012gh345i678j90kl/scans/scan-id-1234abcd`,
       ],
       detail: {
         schemaVersion: '1.0',

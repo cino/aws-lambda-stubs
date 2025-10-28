@@ -38,6 +38,7 @@ describe('#kinesis', () => {
       const event = KinesisStreamEventStub([
         KinesisStreamRecordStub({
           eventID: 'custom-event-id',
+          awsRegion: 'us-west-1',
           kinesis: {
             partitionKey: 'custom-partition-key',
           },
@@ -47,11 +48,11 @@ describe('#kinesis', () => {
       expect(event).toEqual({
         Records: [
           {
-            awsRegion: 'us-east-1',
+            awsRegion: 'us-west-1',
             eventID: 'custom-event-id',
             eventName: 'aws:kinesis:record',
             eventSource: 'aws:kinesis',
-            eventSourceARN: `arn:aws:kinesis:${DEFAULT_REGION}:${DEFAULT_ACCOUNT_ID}:stream/lambda-stream`,
+            eventSourceARN: `arn:aws:kinesis:us-west-1:${DEFAULT_ACCOUNT_ID}:stream/lambda-stream`,
             eventVersion: '1.0',
             invokeIdentityArn: `arn:aws:iam::${DEFAULT_ACCOUNT_ID}:role/lambda-role`,
             kinesis: {

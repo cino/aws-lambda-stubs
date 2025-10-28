@@ -37,4 +37,24 @@ describe('#event-bridge', () => {
       detail: { key: 'value' },
     });
   });
+
+  it('should allow overwriting region and account in overrides', () => {
+    const event = EventBridgeEventStub(
+      'TestDetailType',
+      { key: 'value' },
+      { region: 'eu-central-1', account: '112233445566' }
+    );
+
+    expect(event).toEqual({
+      version: '0',
+      id: '12345678-1234-1234-1234-123456789012',
+      'detail-type': 'TestDetailType',
+      source: 'test',
+      account: '112233445566',
+      time: expect.any(String),
+      region: 'eu-central-1',
+      resources: [],
+      detail: { key: 'value' },
+    });
+  });
 });

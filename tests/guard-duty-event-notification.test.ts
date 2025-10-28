@@ -37,6 +37,8 @@ describe('#guard-duty-event-notification', () => {
 
   it('should allow overrides', () => {
     const event = GuardDutyScanResultNotificationEventStub({
+      account: '098765432109',
+      region: 'us-west-2',
       detail: {
         scanStatus: 'FAILED',
         scanResultDetails: {
@@ -55,11 +57,11 @@ describe('#guard-duty-event-notification', () => {
       id: 'abcd1234-ef56-7890-ab12-34567890cdef',
       'detail-type': 'GuardDuty Malware Protection Object Scan Result',
       source: 'aws.guardduty',
-      account: DEFAULT_ACCOUNT_ID,
+      account: '098765432109',
       time: expect.any(String),
-      region: DEFAULT_REGION,
+      region: 'us-west-2',
       resources: [
-        `arn:aws:guardduty:${DEFAULT_REGION}:${DEFAULT_ACCOUNT_ID}:detector/12abc34d567e8f9012gh345i678j90kl/scans/scan-id-1234abcd`,
+        'arn:aws:guardduty:us-west-2:098765432109:detector/12abc34d567e8f9012gh345i678j90kl/scans/scan-id-1234abcd',
       ],
       detail: {
         schemaVersion: '1.0',

@@ -16,13 +16,15 @@ type PartialKinesisStreamRecord = Merge<
 >;
 
 export const KinesisStreamRecordStub = (overrides: PartialKinesisStreamRecord = {}): KinesisStreamRecord => {
+  const region = overrides.awsRegion ?? DEFAULT_REGION;
+
   return deepMerge(
     {
-      awsRegion: DEFAULT_REGION,
+      awsRegion: region,
       eventID: 'shardId-000000000006:49590338271490256608559692540925702759324208523137515618',
       eventName: 'aws:kinesis:record',
       eventSource: 'aws:kinesis',
-      eventSourceARN: `arn:aws:kinesis:${DEFAULT_REGION}:${DEFAULT_ACCOUNT_ID}:stream/lambda-stream`,
+      eventSourceARN: `arn:aws:kinesis:${region}:${DEFAULT_ACCOUNT_ID}:stream/lambda-stream`,
       eventVersion: '1.0',
       invokeIdentityArn: `arn:aws:iam::${DEFAULT_ACCOUNT_ID}:role/lambda-role`,
 

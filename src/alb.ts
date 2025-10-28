@@ -11,7 +11,7 @@ export const ALBEventStub = (overrides: Partial<ALBEvent> = {}): ALBEvent => {
         },
       },
       httpMethod: 'GET',
-      path: '/my/path',
+      path: '/prod/resource',
       headers: {
         'Content-Type': 'application/json',
       },

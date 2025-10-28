@@ -4,8 +4,8 @@ import type {
   AppSyncIdentityLambda,
   AppSyncIdentityOIDC,
 } from 'aws-lambda';
-import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './consts';
 import { deepMerge } from '../utils/deepmerge';
+import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './consts';
 
 type AppSyncIdentityType = 'iam' | 'cognito' | 'oidc' | 'lambda';
 type AppSyncIdentityMap = {
@@ -55,7 +55,7 @@ export function AppSyncIdentityStub(
           defaultAuthStrategy: 'ALLOW',
           groups: ['admin', 'users'],
         },
-        overrides,
+        overrides
       );
     case 'oidc':
       return deepMerge(

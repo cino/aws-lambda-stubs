@@ -33,7 +33,7 @@ export const APIGatewayRequestAuthorizerEventStub = (
       type: 'REQUEST',
       methodArn: `arn:aws:execute-api:${DEFAULT_REGION}:${DEFAULT_ACCOUNT_ID}:example/prod/GET/resource`,
       resource: '/resource',
-      path: '/resource',
+      path: '/prod/resource',
       httpMethod: 'GET',
       headers: {
         'User-Agent': 'Custom User Agent String',
