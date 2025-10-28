@@ -8,6 +8,7 @@ export * from './cdk-custom-resource';
 export * from './cloudformation-custom-resource';
 export * from './cloudfront-request';
 export * from './cloudfront-response';
+export * from './cloudwatch-alarm';
 export * from './cloudwatch-events';
 export * from './cloudwatch-logs';
 export * from './codebuild-cloudwatch-state';
