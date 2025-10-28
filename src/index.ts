@@ -10,6 +10,7 @@ export * from './cloudfront-request';
 export * from './cloudfront-response';
 export * from './cloudwatch-events';
 export * from './cloudwatch-logs';
+export * from './codebuild-cloudwatch-state';
 export * from './codecommit';
 export * from './codepipeline';
 export * from './codepipeline-cloudwatch';

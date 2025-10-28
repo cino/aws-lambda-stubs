@@ -5,7 +5,7 @@ export const EventBridgeEventStub = <TDetail extends object>(
   detailType: string,
   detail: TDetail,
   overrides: Partial<EventBridgeEvent<typeof detailType, typeof detail>> = {}
-): EventBridgeEvent<typeof detailType, typeof detail> => {
+): EventBridgeEvent<string, typeof detail> => {
   return {
     version: '0',
     id: '12345678-1234-1234-1234-123456789012',
