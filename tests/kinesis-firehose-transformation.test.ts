@@ -30,12 +30,12 @@ describe('#kinesis-firehose-transformation', () => {
         recordId: 'custom-record-id',
         data: 'Q3VzdG9tIGRhdGE=',
       }),
-    ]);
+    ], { region: 'us-west-2' });
 
     expect(event).toEqual({
       invocationId: 'invocation-id-123',
-      deliveryStreamArn: `arn:aws:firehose:${DEFAULT_REGION}:${DEFAULT_ACCOUNT_ID}:deliverystream/stream-name`,
-      region: DEFAULT_REGION,
+      deliveryStreamArn: `arn:aws:firehose:us-west-2:${DEFAULT_ACCOUNT_ID}:deliverystream/stream-name`,
+      region: 'us-west-2',
       records: [
         {
           recordId: 'custom-record-id',

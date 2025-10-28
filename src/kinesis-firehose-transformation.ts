@@ -14,12 +14,18 @@ export const FireHoseTransformationEventRecordStub = (
 };
 
 export const FireHoseTransformationEventStub = (
-  records: FirehoseTransformationEventRecord[]
+  records: FirehoseTransformationEventRecord[],
+  overrides: Partial<Omit<FirehoseTransformationEvent, 'records'>> = {}
 ): FirehoseTransformationEvent => {
+  const region = overrides.region ?? DEFAULT_REGION;
+
   return {
     invocationId: 'invocation-id-123',
-    deliveryStreamArn: `arn:aws:firehose:${DEFAULT_REGION}:${DEFAULT_ACCOUNT_ID}:deliverystream/stream-name`,
-    region: DEFAULT_REGION,
+    deliveryStreamArn: `arn:aws:firehose:${region}:${DEFAULT_ACCOUNT_ID}:deliverystream/stream-name`,
+    region,
+    ...overrides,
+
+    // Making sure records is the last to be overridden
     records,
   };
 };
