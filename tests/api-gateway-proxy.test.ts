@@ -5,12 +5,127 @@ import {
   APIGatewayProxyEventV2WithJWTAuthorizerStub,
   APIGatewayProxyEventV2WithLambdaAuthorizerStub,
   APIGatewayProxyWebsocketEventV2Stub,
+  APIGatewayProxyWithCognitoAuthorizerEventStub,
   DEFAULT_ACCOUNT_ID,
   DEFAULT_REGION,
 } from '../src';
 import { ipv4Regex, isUuidV4Regex } from './helpers';
 
 describe('#api-gateway-proxy', () => {
+  describe('proxy-event-v1-cognito', () => {
+    it('should return a valid event', () => {
+      const event = APIGatewayProxyWithCognitoAuthorizerEventStub();
+
+      expect(event).toEqual({
+        body: null,
+        headers: {},
+        isBase64Encoded: false,
+        path: '/prod/resource',
+        pathParameters: null,
+        queryStringParameters: null,
+        multiValueQueryStringParameters: null,
+        httpMethod: 'GET',
+        multiValueHeaders: {},
+        stageVariables: null,
+        requestContext: {
+          accountId: DEFAULT_ACCOUNT_ID,
+          apiId: 'example',
+          authorizer: {
+            claims: {
+              sub: '1234567890',
+              email: 'john.doe@example.com',
+            },
+          },
+          identity: {
+            accessKey: null,
+            accountId: null,
+            apiKey: null,
+            apiKeyId: null,
+            caller: null,
+            clientCert: null,
+            cognitoAuthenticationProvider: '',
+            cognitoAuthenticationType: '',
+            cognitoIdentityId: null,
+            cognitoIdentityPoolId: null,
+            principalOrgId: null,
+            sourceIp: expect.stringMatching(ipv4Regex),
+            user: null,
+            userAgent: null,
+            userArn: null,
+            // https://github.com/DefinitelyTyped/DefinitelyTyped/pull/73964
+            // vpcId: null,
+            // vpceId: null,
+          },
+          httpMethod: 'GET',
+          path: '/prod/resource',
+          protocol: 'HTTP/1.1',
+          requestId: expect.stringMatching(isUuidV4Regex),
+          requestTimeEpoch: expect.any(Number),
+          resourceId: 'resource-id',
+          resourcePath: '/resource',
+          stage: 'prod',
+        },
+        resource: '/resource',
+      });
+    });
+
+    it('should allow overrides', () => {
+      const event = APIGatewayProxyWithCognitoAuthorizerEventStub({ httpMethod: 'POST', path: '/custom/path' });
+
+      expect(event).toEqual({
+        body: null,
+        headers: {},
+        isBase64Encoded: false,
+        path: '/custom/path',
+        pathParameters: null,
+        queryStringParameters: null,
+        multiValueQueryStringParameters: null,
+        httpMethod: 'POST',
+        multiValueHeaders: {},
+        stageVariables: null,
+        requestContext: {
+          accountId: DEFAULT_ACCOUNT_ID,
+          apiId: 'example',
+          authorizer: {
+            claims: {
+              sub: '1234567890',
+              email: 'john.doe@example.com',
+            },
+          },
+          identity: {
+            accessKey: null,
+            accountId: null,
+            apiKey: null,
+            apiKeyId: null,
+            caller: null,
+            clientCert: null,
+            cognitoAuthenticationProvider: '',
+            cognitoAuthenticationType: '',
+            cognitoIdentityId: null,
+            cognitoIdentityPoolId: null,
+            principalOrgId: null,
+            sourceIp: expect.stringMatching(ipv4Regex),
+            user: null,
+            userAgent: null,
+            userArn: null,
+            // https://github.com/DefinitelyTyped/DefinitelyTyped/pull/73964
+            // vpcId: null,
+            // vpceId: null,
+          },
+          httpMethod: 'GET',
+          path: '/custom/path',
+          protocol: 'HTTP/1.1',
+          requestId: expect.stringMatching(isUuidV4Regex),
+          requestTimeEpoch: expect.any(Number),
+          resourceId: 'resource-id',
+          resourcePath: '/resource',
+          stage: 'prod',
+        },
+        resource: '/resource',
+      });
+    });
+  });
+
   describe('proxy-event-v2', () => {
     it('should return a valid event', () => {
       const event = APIGatewayProxyEventV2Stub();
@@ -86,7 +201,7 @@ describe('#api-gateway-proxy', () => {
     });
   });
 
-  describe('proxy-websocket-event-v2', () => {
+  describe('proxy-event-v2-websocket-', () => {
     it('should return a valid event', () => {
       const event = APIGatewayProxyWebsocketEventV2Stub();
 

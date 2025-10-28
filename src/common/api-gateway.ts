@@ -13,7 +13,7 @@ import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './consts';
 export type PartialAPIGatewayEventRequestContext<TAuthorizer> = Merge<
   Partial<APIGatewayEventRequestContextWithAuthorizer<TAuthorizer>>,
   {
-    authorizer: APIGatewayEventRequestContext['authorizer'];
+    authorizer?: APIGatewayEventRequestContext['authorizer'];
     identity?: Partial<APIGatewayEventIdentity>;
   }
 >;

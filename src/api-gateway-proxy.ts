@@ -3,19 +3,24 @@ import type {
   APIGatewayEventRequestContextJWTAuthorizer,
   APIGatewayEventRequestContextLambdaAuthorizer,
   APIGatewayEventWebsocketRequestContextV2,
+  APIGatewayProxyCognitoAuthorizer,
   APIGatewayProxyEventV2,
   APIGatewayProxyEventV2WithIAMAuthorizer,
   APIGatewayProxyEventV2WithJWTAuthorizer,
   APIGatewayProxyEventV2WithLambdaAuthorizer,
   APIGatewayProxyWebsocketEventV2,
+  APIGatewayProxyWithCognitoAuthorizerEvent,
 } from 'aws-lambda';
 import { DateTime } from 'luxon';
 import type { Merge } from 'type-fest';
 import {
   APIGatewayEventRequestContextV2Stub,
   APIGatewayEventRequestContextV2WithAuthorizerStub,
+  APIGatewayEventRequestContextWithAuthorizerStub,
   DEFAULT_REGION,
+  type PartialAPIGatewayEventRequestContext,
   type PartialAPIGatewayEventRequestContextV2,
+  randomIpAddress,
 } from './common';
 import { deepMerge } from './utils/deepmerge';
 
@@ -24,9 +29,55 @@ import { deepMerge } from './utils/deepmerge';
 //   overrides: Partial<APIGatewayProxyWithLambdaAuthorizerEvent<TAuthorizerContext>>
 // ): APIGatewayProxyWithLambdaAuthorizerEvent<TAuthorizerContext> => {};
 
-// export const APIGatewayProxyWithCognitoAuthorizerEventStub = (
-//   overrides: Partial<APIGatewayProxyWithCognitoAuthorizerEvent>
-// ): APIGatewayProxyWithCognitoAuthorizerEvent => {};
+type PartialAPIGatewayProxyWithCognitoAuthorizerEvent = Merge<
+  Partial<APIGatewayProxyWithCognitoAuthorizerEvent>,
+  {
+    requestContext?: PartialAPIGatewayEventRequestContext<APIGatewayProxyCognitoAuthorizer>;
+  }
+>;
+
+export const APIGatewayProxyWithCognitoAuthorizerEventStub = (
+  overrides: PartialAPIGatewayProxyWithCognitoAuthorizerEvent = {}
+): APIGatewayProxyWithCognitoAuthorizerEvent => {
+  if (overrides.path) {
+    overrides.requestContext = {
+      path: overrides.path,
+      ...overrides.requestContext,
+    };
+  }
+
+  return deepMerge<APIGatewayProxyWithCognitoAuthorizerEvent>(
+    {
+      body: null,
+      headers: {},
+      multiValueHeaders: {},
+      httpMethod: 'GET',
+      isBase64Encoded: false,
+      path: '/prod/resource',
+      pathParameters: null,
+      queryStringParameters: null,
+      multiValueQueryStringParameters: null,
+      stageVariables: null,
+      requestContext: APIGatewayEventRequestContextWithAuthorizerStub({
+        authorizer: {
+          claims: {
+            sub: '1234567890',
+            email: 'john.doe@example.com',
+          },
+        },
+        identity: {
+          cognitoAuthenticationProvider: '',
+          cognitoAuthenticationType: '',
+          cognitoIdentityId: null,
+          cognitoIdentityPoolId: null,
+          sourceIp: randomIpAddress(),
+        },
+      }),
+      resource: '/resource',
+    },
+    overrides as Partial<APIGatewayProxyWithCognitoAuthorizerEvent>
+  );
+};
 
 // V2
 
@@ -195,7 +246,7 @@ type PartialAPIGatewayProxyEventV2WithIAMAuthorizer = Merge<
 
 export const APIGatewayProxyEventV2WithIAMAuthorizerStub = (
   authorizerContext: APIGatewayEventRequestContextIAMAuthorizer['iam'],
-  overrides: PartialAPIGatewayProxyEventV2WithIAMAuthorizer = {},
+  overrides: PartialAPIGatewayProxyEventV2WithIAMAuthorizer = {}
 ): APIGatewayProxyEventV2WithIAMAuthorizer => {
   if (overrides.rawPath) {
     overrides.requestContext = {
