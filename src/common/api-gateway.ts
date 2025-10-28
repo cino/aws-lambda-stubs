@@ -1,6 +1,5 @@
 import type {
   APIGatewayEventIdentity,
-  APIGatewayEventRequestContext,
   APIGatewayEventRequestContextV2,
   APIGatewayEventRequestContextWithAuthorizer,
 } from 'aws-lambda';
@@ -13,7 +12,7 @@ import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './consts';
 export type PartialAPIGatewayEventRequestContext<TAuthorizer> = Merge<
   Partial<APIGatewayEventRequestContextWithAuthorizer<TAuthorizer>>,
   {
-    authorizer?: APIGatewayEventRequestContext['authorizer'];
+    authorizer?: TAuthorizer | undefined;
     identity?: Partial<APIGatewayEventIdentity>;
   }
 >;
@@ -29,7 +28,7 @@ export const APIGatewayEventRequestContextWithAuthorizerStub = <TAuthorizer>(
       apiId: 'example',
       protocol: 'HTTP/1.1',
       httpMethod: 'GET',
-      identity: APIGatewayEventIdentityStub(), // TODO: default identity stub
+      identity: APIGatewayEventIdentityStub(),
       path: '/prod/resource',
       stage: 'prod',
       requestId: crypto.randomUUID(),

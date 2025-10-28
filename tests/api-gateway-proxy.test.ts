@@ -6,12 +6,117 @@ import {
   APIGatewayProxyEventV2WithLambdaAuthorizerStub,
   APIGatewayProxyWebsocketEventV2Stub,
   APIGatewayProxyWithCognitoAuthorizerEventStub,
+  APIGatewayProxyWithLambdaAuthorizerEventStub,
   DEFAULT_ACCOUNT_ID,
   DEFAULT_REGION,
 } from '../src';
 import { ipv4Regex, isUuidV4Regex } from './helpers';
 
 describe('#api-gateway-proxy', () => {
+  describe('proxy-event-v1-lambda', () => {
+    it('should return a valid event', () => {
+      const event = APIGatewayProxyWithLambdaAuthorizerEventStub();
+
+      expect(event).toEqual({
+        body: null,
+        headers: {},
+        isBase64Encoded: false,
+        path: '/prod/resource',
+        pathParameters: null,
+        queryStringParameters: null,
+        multiValueQueryStringParameters: null,
+        httpMethod: 'GET',
+        multiValueHeaders: {},
+        stageVariables: null,
+        requestContext: {
+          accountId: DEFAULT_ACCOUNT_ID,
+          apiId: 'example',
+          authorizer: {
+            principalId: '1234567890',
+            integrationLatency: 100,
+          },
+          identity: {
+            accessKey: null,
+            accountId: null,
+            apiKey: null,
+            apiKeyId: null,
+            caller: null,
+            clientCert: null,
+            cognitoAuthenticationProvider: null,
+            cognitoAuthenticationType: null,
+            cognitoIdentityId: null,
+            cognitoIdentityPoolId: null,
+            principalOrgId: null,
+            sourceIp: expect.stringMatching(ipv4Regex),
+            user: null,
+            userAgent: null,
+            userArn: null,
+          },
+          httpMethod: 'GET',
+          path: '/prod/resource',
+          protocol: 'HTTP/1.1',
+          requestId: expect.stringMatching(isUuidV4Regex),
+          requestTimeEpoch: expect.any(Number),
+          resourceId: 'resource-id',
+          resourcePath: '/resource',
+          stage: 'prod',
+        },
+        resource: '/resource',
+      });
+    });
+
+    it('should allow overrides', () => {
+      const event = APIGatewayProxyWithLambdaAuthorizerEventStub({ httpMethod: 'POST', path: '/custom/path' });
+
+      expect(event).toEqual({
+        body: null,
+        headers: {},
+        isBase64Encoded: false,
+        path: '/custom/path',
+        pathParameters: null,
+        queryStringParameters: null,
+        multiValueQueryStringParameters: null,
+        httpMethod: 'POST',
+        multiValueHeaders: {},
+        stageVariables: null,
+        requestContext: {
+          accountId: DEFAULT_ACCOUNT_ID,
+          apiId: 'example',
+          authorizer: {
+            principalId: '1234567890',
+            integrationLatency: 100,
+          },
+          identity: {
+            accessKey: null,
+            accountId: null,
+            apiKey: null,
+            apiKeyId: null,
+            caller: null,
+            clientCert: null,
+            cognitoAuthenticationProvider: null,
+            cognitoAuthenticationType: null,
+            cognitoIdentityId: null,
+            cognitoIdentityPoolId: null,
+            principalOrgId: null,
+            sourceIp: expect.stringMatching(ipv4Regex),
+            user: null,
+            userAgent: null,
+            userArn: null,
+          },
+          httpMethod: 'POST',
+          path: '/custom/path',
+          protocol: 'HTTP/1.1',
+          requestId: expect.stringMatching(isUuidV4Regex),
+          requestTimeEpoch: expect.any(Number),
+          resourceId: 'resource-id',
+          resourcePath: '/resource',
+          stage: 'prod',
+        },
+        resource: '/resource',
+      });
+    });
+  });
+
   describe('proxy-event-v1-cognito', () => {
     it('should return a valid event', () => {
       const event = APIGatewayProxyWithCognitoAuthorizerEventStub();
@@ -112,7 +217,7 @@ describe('#api-gateway-proxy', () => {
             // vpcId: null,
             // vpceId: null,
           },
-          httpMethod: 'GET',
+          httpMethod: 'POST',
           path: '/custom/path',
           protocol: 'HTTP/1.1',
           requestId: expect.stringMatching(isUuidV4Regex),

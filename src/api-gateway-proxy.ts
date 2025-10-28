@@ -1,4 +1,5 @@
 import type {
+  APIGatewayEventLambdaAuthorizerContext,
   APIGatewayEventRequestContextIAMAuthorizer,
   APIGatewayEventRequestContextJWTAuthorizer,
   APIGatewayEventRequestContextLambdaAuthorizer,
@@ -10,6 +11,7 @@ import type {
   APIGatewayProxyEventV2WithLambdaAuthorizer,
   APIGatewayProxyWebsocketEventV2,
   APIGatewayProxyWithCognitoAuthorizerEvent,
+  APIGatewayProxyWithLambdaAuthorizerEvent,
 } from 'aws-lambda';
 import { DateTime } from 'luxon';
 import type { Merge } from 'type-fest';
@@ -25,9 +27,56 @@ import {
 import { deepMerge } from './utils/deepmerge';
 
 // V1
-// export const APIGatewayProxyWithLambdaAuthorizerEventStub = <TAuthorizerContext>(
-//   overrides: Partial<APIGatewayProxyWithLambdaAuthorizerEvent<TAuthorizerContext>>
-// ): APIGatewayProxyWithLambdaAuthorizerEvent<TAuthorizerContext> => {};
+
+type PartialAPIGatewayProxyWithLambdaAuthorizerEvent<TAuthorizerContext> = Merge<
+  Partial<APIGatewayProxyWithLambdaAuthorizerEvent<TAuthorizerContext>>,
+  {
+    requestContext?: PartialAPIGatewayEventRequestContext<TAuthorizerContext>;
+  }
+>;
+
+export const APIGatewayProxyWithLambdaAuthorizerEventStub = <
+  TAuthorizerContext extends APIGatewayEventLambdaAuthorizerContext<TAuthorizerContext>,
+>(
+  overrides: PartialAPIGatewayProxyWithLambdaAuthorizerEvent<TAuthorizerContext> = {}
+): APIGatewayProxyWithLambdaAuthorizerEvent<TAuthorizerContext> => {
+  if (overrides.path) {
+    overrides.requestContext = {
+      path: overrides.path,
+      ...overrides.requestContext,
+    };
+  }
+
+  if (overrides.httpMethod) {
+    overrides.requestContext = {
+      httpMethod: overrides.httpMethod,
+      ...overrides.requestContext,
+    };
+  }
+
+  return deepMerge<APIGatewayProxyWithLambdaAuthorizerEvent<TAuthorizerContext>>(
+    {
+      body: null,
+      headers: {},
+      multiValueHeaders: {},
+      httpMethod: 'GET',
+      isBase64Encoded: false,
+      path: '/prod/resource',
+      pathParameters: null,
+      queryStringParameters: null,
+      multiValueQueryStringParameters: null,
+      stageVariables: null,
+      requestContext: APIGatewayEventRequestContextWithAuthorizerStub<TAuthorizerContext>({
+        authorizer: {
+          principalId: '1234567890',
+          integrationLatency: 100,
+        } as TAuthorizerContext,
+      }),
+      resource: '/resource',
+    },
+    overrides as Partial<APIGatewayProxyWithLambdaAuthorizerEvent<TAuthorizerContext>>
+  );
+};
 
 type PartialAPIGatewayProxyWithCognitoAuthorizerEvent = Merge<
   Partial<APIGatewayProxyWithCognitoAuthorizerEvent>,
@@ -42,6 +91,13 @@ export const APIGatewayProxyWithCognitoAuthorizerEventStub = (
   if (overrides.path) {
     overrides.requestContext = {
       path: overrides.path,
+      ...overrides.requestContext,
+    };
+  }
+
+  if (overrides.httpMethod) {
+    overrides.requestContext = {
+      httpMethod: overrides.httpMethod,
       ...overrides.requestContext,
     };
   }
