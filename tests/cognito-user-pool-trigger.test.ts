@@ -6,6 +6,9 @@ import {
   PostConfirmationConfirmForgotPasswordStub,
   PostConfirmationConfirmSignUpTriggerEventStub,
   PreAuthenticationTriggerEventStub,
+  PreSignUpAdminCreateUserTriggerEventStub,
+  PreSignUpEmailTriggerEventStub,
+  PreSignUpExternalProviderTriggerEventStub,
   VerifyAuthChallengeResponseTriggerEventStub,
 } from '../src';
 
@@ -195,6 +198,98 @@ describe('#cognito-user-pool-trigger', () => {
       });
 
       expect(event.request.userNotFound).toBe(true);
+    });
+  });
+
+  describe('#pre-sign-up-email-trigger-event-stub', () => {
+    it('should return a valid event', () => {
+      const event = PreSignUpEmailTriggerEventStub();
+
+      expect(event.request).toEqual({
+        userAttributes: {
+          email: 'example@example.com',
+          phone_number: '+1234567890',
+        },
+      });
+      expect(event.response).toEqual({
+        autoConfirmUser: false,
+        autoVerifyEmail: false,
+        autoVerifyPhone: false,
+      });
+    });
+
+    it('should allow overrides', () => {
+      const event = PreSignUpEmailTriggerEventStub({
+        response: {
+          autoConfirmUser: true,
+          autoVerifyEmail: true,
+        },
+      });
+
+      expect(event.response.autoConfirmUser).toBe(true);
+      expect(event.response.autoVerifyEmail).toBe(true);
+      expect(event.response.autoVerifyPhone).toBe(false);
+    });
+  });
+
+  describe('#pre-sign-up-external-provider-trigger-event-stub', () => {
+    it('should return a valid event', () => {
+      const event = PreSignUpExternalProviderTriggerEventStub();
+
+      expect(event.request).toEqual({
+        userAttributes: {
+          email: 'example@example.com',
+          phone_number: '+1234567890',
+        },
+      });
+      expect(event.response).toEqual({
+        autoConfirmUser: false,
+        autoVerifyEmail: true,
+        autoVerifyPhone: false,
+      });
+    });
+
+    it('should allow overrides', () => {
+      const event = PreSignUpExternalProviderTriggerEventStub({
+        response: {
+          autoConfirmUser: true,
+          autoVerifyEmail: true,
+        },
+      });
+
+      expect(event.response.autoConfirmUser).toBe(true);
+      expect(event.response.autoVerifyEmail).toBe(true);
+    });
+  });
+
+  describe('#pre-sign-up-admin-create-user-trigger-event-stub', () => {
+    it('should return a valid event', () => {
+      const event = PreSignUpAdminCreateUserTriggerEventStub();
+
+      expect(event.request).toEqual({
+        userAttributes: {
+          email: 'example@example.com',
+          phone_number: '+1234567890',
+        },
+      });
+      expect(event.response).toEqual({
+        autoConfirmUser: true,
+        autoVerifyEmail: true,
+        autoVerifyPhone: true,
+      });
+    });
+
+    it('should allow overrides', () => {
+      const event = PreSignUpAdminCreateUserTriggerEventStub({
+        response: {
+          autoConfirmUser: false,
+          autoVerifyPhone: false,
+        },
+      });
+
+      expect(event.response.autoConfirmUser).toBe(false);
+      expect(event.response.autoVerifyEmail).toBe(true);
+      expect(event.response.autoVerifyPhone).toBe(false);
     });
   });
 
