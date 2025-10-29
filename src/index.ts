@@ -15,6 +15,7 @@ export * from './codebuild-cloudwatch-state';
 export * from './codecommit';
 export * from './codepipeline';
 export * from './codepipeline-cloudwatch';
+export * from './cognito-user-pool-trigger';
 export * from './common';
 export * from './connect-contact-flow';
 export * from './dynamodb-stream';
