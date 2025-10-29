@@ -99,7 +99,6 @@ export const APIGatewayEventRequestContextV2WithAuthorizerStub = <TAuthorizer>(
   );
 };
 
-// TODO: Gateway Identity stubs (...overloading again)
 export const APIGatewayEventIdentityStub = (
   overrides: Partial<APIGatewayEventIdentity> = {}
 ): APIGatewayEventIdentity => {
@@ -119,9 +118,8 @@ export const APIGatewayEventIdentityStub = (
     user: null,
     userAgent: null,
     userArn: null,
-    // https://github.com/DefinitelyTyped/DefinitelyTyped/pull/73964
-    // vpcId: null,
-    // vpceId: null,
+    vpcId: null,
+    vpceId: null,
     ...overrides,
   };
 };

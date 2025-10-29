@@ -35,7 +35,7 @@
   "homepage": "https://github.com/cino/aws-lambda-stubs#readme",
   "private": false,
   "peerDependencies": {
-    "@types/aws-lambda": "^8.10.156",
+    "@types/aws-lambda": "^8.10.157",
     "luxon": "^3.7.2",
     "type-fest": "^5.1.0"
   },
