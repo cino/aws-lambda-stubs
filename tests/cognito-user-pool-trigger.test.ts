@@ -21,6 +21,7 @@ import {
   PreTokenGenerationNewPasswordChallengeV2TriggerEventStub,
   PreTokenGenerationRefreshTokensTriggerEvent,
   PreTokenGenerationRefreshTokensV2TriggerEventStub,
+  UserMigrationAuthenticationTriggerEventStub,
   VerifyAuthChallengeResponseTriggerEventStub,
 } from '../src';
 
@@ -522,6 +523,36 @@ describe('#cognito-user-pool-trigger', () => {
           },
         });
       });
+    });
+  });
+
+  describe('#user-migration-trigger-event-stub', () => {
+    it('should return a valid authentication event', () => {
+      const event = UserMigrationAuthenticationTriggerEventStub();
+
+      expect(event.request).toEqual({
+        password: 'ExamplePassword123!',
+      });
+      expect(event.response).toEqual({
+        userAttributes: {
+          email: 'example@example.com',
+          given_name: 'John',
+          family_name: 'Doe',
+        },
+        finalUserStatus: 'CONFIRMED',
+        messageAction: 'SUPPRESS',
+        desiredDeliveryMediums: ['EMAIL'],
+      });
+    });
+
+    it('should allow overrides', () => {
+      const event = UserMigrationAuthenticationTriggerEventStub({
+        response: {
+          finalUserStatus: 'RESET_REQUIRED',
+        },
+      });
+
+      expect(event.response.finalUserStatus).toBe('RESET_REQUIRED');
     });
   });
 
