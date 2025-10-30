@@ -19,7 +19,7 @@ export const BaseCognitoTriggerEvent = <T extends string>(
     },
     request: {},
     response: {},
-    
+
     ...overrides,
   };
 };

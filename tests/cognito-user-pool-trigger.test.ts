@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   CreateAuthChallengeTriggerEventStub,
+  DEFAULT_ACCOUNT_ID,
   DefineAuthChallengeTriggerEventStub,
   PostAuthenticationTriggerEventStub,
   PostConfirmationConfirmForgotPasswordStub,
@@ -9,6 +10,11 @@ import {
   PreSignUpAdminCreateUserTriggerEventStub,
   PreSignUpEmailTriggerEventStub,
   PreSignUpExternalProviderTriggerEventStub,
+  PreTokenGenerationAuthenticateDeviceTriggerEvent,
+  PreTokenGenerationAuthenticationTriggerEventStub,
+  PreTokenGenerationHostedAuthTriggerEventStub,
+  PreTokenGenerationNewPasswordChallengeTriggerEvent,
+  PreTokenGenerationRefreshTokensTriggerEvent,
   VerifyAuthChallengeResponseTriggerEventStub,
 } from '../src';
 
@@ -290,6 +296,95 @@ describe('#cognito-user-pool-trigger', () => {
       expect(event.response.autoConfirmUser).toBe(false);
       expect(event.response.autoVerifyEmail).toBe(true);
       expect(event.response.autoVerifyPhone).toBe(false);
+    });
+  });
+
+  describe('#pre-token-generation', () => {
+    describe('#v1', () => {
+      describe.each([
+        { function: PreTokenGenerationHostedAuthTriggerEventStub },
+        { function: PreTokenGenerationAuthenticationTriggerEventStub },
+        { function: PreTokenGenerationNewPasswordChallengeTriggerEvent },
+        { function: PreTokenGenerationAuthenticateDeviceTriggerEvent },
+        { function: PreTokenGenerationRefreshTokensTriggerEvent },
+      ])('$function.name', ({ function: triggerStub }) => {
+        it('should return a valid event', () => {
+          const event = triggerStub();
+
+          expect(event.request).toEqual({
+            userAttributes: {
+              email: 'example@example.com',
+              phone_number: '+1234567890',
+            },
+            groupConfiguration: {
+              groupsToOverride: ['Users'],
+              iamRolesToOverride: [`arn:aws:iam::${DEFAULT_ACCOUNT_ID}:role/Cognito_DefaultRole`],
+              preferredRole: `arn:aws:iam::${DEFAULT_ACCOUNT_ID}:role/Cognito_PreferredRole`,
+            },
+          });
+          expect(event.response).toEqual({
+            claimsOverrideDetails: {
+              claimsToAddOrOverride: {
+                custom: 'customValue',
+              },
+              claimsToSuppress: ['email_verified'],
+              groupOverrideDetails: {
+                groupsToOverride: ['Admins'],
+                iamRolesToOverride: [`arn:aws:iam::${DEFAULT_ACCOUNT_ID}:role/Cognito_AdminRole`],
+                preferredRole: `arn:aws:iam::${DEFAULT_ACCOUNT_ID}:role/Cognito_PreferredAdminRole`,
+              },
+            },
+          });
+        });
+
+        it('should allow overrides', () => {
+          const event = triggerStub({
+            request: {
+              userAttributes: {
+                email: 'override@example.com',
+                phone_number: '+1987654321',
+              },
+            },
+            region: 'us-west-2',
+          });
+
+          expect(event).toEqual({
+            region: 'us-west-2',
+            version: '1',
+            userPoolId: 'us-west-2_Example',
+            triggerSource: event.triggerSource,
+            userName: 'example-user',
+            callerContext: {
+              awsSdkVersion: 'aws-sdk-unknown-version',
+              clientId: 'example-client-id',
+            },
+            request: {
+              userAttributes: {
+                email: 'override@example.com',
+                phone_number: '+1987654321',
+              },
+              groupConfiguration: {
+                groupsToOverride: ['Users'],
+                iamRolesToOverride: [`arn:aws:iam::${DEFAULT_ACCOUNT_ID}:role/Cognito_DefaultRole`],
+                preferredRole: `arn:aws:iam::${DEFAULT_ACCOUNT_ID}:role/Cognito_PreferredRole`,
+              },
+            },
+            response: {
+              claimsOverrideDetails: {
+                claimsToAddOrOverride: {
+                  custom: 'customValue',
+                },
+                claimsToSuppress: ['email_verified'],
+                groupOverrideDetails: {
+                  groupsToOverride: ['Admins'],
+                  iamRolesToOverride: [`arn:aws:iam::${DEFAULT_ACCOUNT_ID}:role/Cognito_AdminRole`],
+                  preferredRole: `arn:aws:iam::${DEFAULT_ACCOUNT_ID}:role/Cognito_PreferredAdminRole`,
+                },
+              },
+            },
+          });
+        });
+      });
     });
   });
 
