@@ -11,10 +11,15 @@ import {
   PreSignUpEmailTriggerEventStub,
   PreSignUpExternalProviderTriggerEventStub,
   PreTokenGenerationAuthenticateDeviceTriggerEvent,
+  PreTokenGenerationAuthenticateDeviceV2TriggerEventStub,
   PreTokenGenerationAuthenticationTriggerEventStub,
+  PreTokenGenerationAuthenticationV2TriggerEventStub,
   PreTokenGenerationHostedAuthTriggerEventStub,
+  PreTokenGenerationHostedAuthV2TriggerEventStub,
   PreTokenGenerationNewPasswordChallengeTriggerEvent,
+  PreTokenGenerationNewPasswordChallengeV2TriggerEventStub,
   PreTokenGenerationRefreshTokensTriggerEvent,
+  PreTokenGenerationRefreshTokensV2TriggerEventStub,
   VerifyAuthChallengeResponseTriggerEventStub,
 } from '../src';
 
@@ -381,6 +386,74 @@ describe('#cognito-user-pool-trigger', () => {
                   preferredRole: `arn:aws:iam::${DEFAULT_ACCOUNT_ID}:role/Cognito_PreferredAdminRole`,
                 },
               },
+            },
+          });
+        });
+      });
+    });
+
+    describe('#v2', () => {
+      describe.each([
+        { function: PreTokenGenerationHostedAuthV2TriggerEventStub },
+        { function: PreTokenGenerationAuthenticationV2TriggerEventStub },
+        { function: PreTokenGenerationNewPasswordChallengeV2TriggerEventStub },
+        { function: PreTokenGenerationAuthenticateDeviceV2TriggerEventStub },
+        { function: PreTokenGenerationRefreshTokensV2TriggerEventStub },
+      ])('$function.name', ({ function: triggerStub }) => {
+        it('should return a valid event', () => {
+          const event = triggerStub();
+
+          expect(event.request).toEqual({
+            userAttributes: {
+              email: 'example@example.com',
+            },
+            groupConfiguration: {
+              groupsToOverride: ['Users'],
+              iamRolesToOverride: [`arn:aws:iam::${DEFAULT_ACCOUNT_ID}:role/Cognito_DefaultRole`],
+              preferredRole: `arn:aws:iam::${DEFAULT_ACCOUNT_ID}:role/Cognito_PreferredRole`,
+            },
+          });
+
+          expect(event.response).toEqual({
+            claimsAndScopeOverrideDetails: {},
+          });
+        });
+
+        it('should allow overrides', () => {
+          const event = triggerStub({
+            version: '2',
+            request: {
+              userAttributes: {
+                email: 'override@example.com',
+                phone_number: '+1987654321',
+              },
+            },
+            region: 'us-west-2',
+          });
+
+          expect(event).toEqual({
+            version: '2',
+            region: 'us-west-2',
+            userPoolId: 'us-west-2_Example',
+            triggerSource: event.triggerSource,
+            userName: 'example-user',
+            callerContext: {
+              awsSdkVersion: 'aws-sdk-unknown-version',
+              clientId: 'example-client-id',
+            },
+            request: {
+              userAttributes: {
+                email: 'override@example.com',
+                phone_number: '+1987654321',
+              },
+              groupConfiguration: {
+                groupsToOverride: ['Users'],
+                iamRolesToOverride: [`arn:aws:iam::${DEFAULT_ACCOUNT_ID}:role/Cognito_DefaultRole`],
+                preferredRole: `arn:aws:iam::${DEFAULT_ACCOUNT_ID}:role/Cognito_PreferredRole`,
+              },
+            },
+            response: {
+              claimsAndScopeOverrideDetails: {},
             },
           });
         });
