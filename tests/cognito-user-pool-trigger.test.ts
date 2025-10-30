@@ -22,6 +22,7 @@ import {
   PreTokenGenerationRefreshTokensV2TriggerEventStub,
   VerifyAuthChallengeResponseTriggerEventStub,
 } from '../src';
+import { PreTokenGenerationClientCredentialsV3TriggerEventStub } from '../src/cognito-user-pool-trigger/pre-token-generation-v3';
 
 describe('#cognito-user-pool-trigger', () => {
   describe('#create-auth-challenge-trigger-event-stub', () => {
@@ -456,6 +457,69 @@ describe('#cognito-user-pool-trigger', () => {
               claimsAndScopeOverrideDetails: {},
             },
           });
+        });
+      });
+    });
+
+    describe('v3', () => {
+      it('PreTokenGenerationClientCredentialsV3TriggerEventStub should return a valid event', () => {
+        const event = PreTokenGenerationClientCredentialsV3TriggerEventStub();
+
+        expect(event.request).toEqual({
+          userAttributes: {
+            email: 'example@example.com',
+          },
+          groupConfiguration: {
+            groupsToOverride: ['Users'],
+            iamRolesToOverride: [`arn:aws:iam::${DEFAULT_ACCOUNT_ID}:role/Cognito_DefaultRole`],
+            preferredRole: `arn:aws:iam::${DEFAULT_ACCOUNT_ID}:role/Cognito_PreferredRole`,
+          },
+        });
+
+        expect(event.response).toEqual({
+          claimsAndScopeOverrideDetails: {},
+        });
+      });
+
+      it('should allow overrides', () => {
+        const event = PreTokenGenerationClientCredentialsV3TriggerEventStub({
+          response: {
+            claimsAndScopeOverrideDetails: {
+              accessTokenGeneration: {
+                scopesToAdd: ['custom/scope'],
+              },
+            },
+          },
+          region: 'us-west-2',
+        });
+
+        expect(event).toEqual({
+          version: '3',
+          region: 'us-west-2',
+          userPoolId: 'us-west-2_Example',
+          triggerSource: 'TokenGeneration_ClientCredentials',
+          userName: 'example-user',
+          callerContext: {
+            awsSdkVersion: 'aws-sdk-unknown-version',
+            clientId: 'example-client-id',
+          },
+          request: {
+            userAttributes: {
+              email: 'example@example.com',
+            },
+            groupConfiguration: {
+              groupsToOverride: ['Users'],
+              iamRolesToOverride: [`arn:aws:iam::${DEFAULT_ACCOUNT_ID}:role/Cognito_DefaultRole`],
+              preferredRole: `arn:aws:iam::${DEFAULT_ACCOUNT_ID}:role/Cognito_PreferredRole`,
+            },
+          },
+          response: {
+            claimsAndScopeOverrideDetails: {
+              accessTokenGeneration: {
+                scopesToAdd: ['custom/scope'],
+              },
+            },
+          },
         });
       });
     });
