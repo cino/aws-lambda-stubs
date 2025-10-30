@@ -1,6 +1,6 @@
 export * from './create-auth-challenge';
 // export * from './custom-email-sender';
-// export * from './custom-message';
+export * from './custom-message';
 // export * from './custom-sms-sender';
 export * from './define-auth-challenge';
 export * from './post-authentication';

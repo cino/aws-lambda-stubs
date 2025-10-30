@@ -1,6 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import {
   CreateAuthChallengeTriggerEventStub,
+  CustomMessageAdminCreateUserTriggerEventStub,
+  CustomMessageAuthenticationTriggerEventStub,
+  CustomMessageForgotPasswordTriggerEventStub,
+  CustomMessageResendCodeTriggerEventStub,
+  CustomMessageSignUpTriggerEventStub,
+  CustomMessageUpdateUserAttributeTriggerEventStub,
+  CustomMessageVerifyUserAttributeTriggerEventStub,
   DEFAULT_ACCOUNT_ID,
   DefineAuthChallengeTriggerEventStub,
   PostAuthenticationTriggerEventStub,
@@ -66,6 +73,105 @@ describe('#cognito-user-pool-trigger', () => {
 
       expect(event.request.challengeName).toBe('ANOTHER_CHALLENGE');
       expect(event.response.challengeMetadata).toBe('custom-metadata');
+    });
+  });
+
+  describe('#custom-message-trigger-event-stub', () => {
+    describe('#admin-create-user', () => {
+      it('should return a valid event', () => {
+        const event = CustomMessageAdminCreateUserTriggerEventStub();
+
+        expect(event.request).toEqual({
+          userAttributes: {
+            email: 'example@example.com',
+          },
+          codeParameter: '{####}',
+          linkParameter: 'https://example.com/verify?code={####}',
+          usernameParameter: 'newuser',
+        });
+        expect(event.response).toEqual({
+          smsMessage: null,
+          emailMessage: 'Email message content',
+          emailSubject: 'Email subject content',
+        });
+      });
+
+      it('should allow overrides', () => {
+        const event = CustomMessageAdminCreateUserTriggerEventStub({
+          request: {
+            userAttributes: {
+              email: 'override@example.com',
+              phone_number: '+1987654321',
+            },
+          },
+          response: {
+            emailSubject: 'Overridden subject',
+          },
+        });
+
+        expect(event.request).toEqual({
+          userAttributes: {
+            email: 'override@example.com',
+            phone_number: '+1987654321',
+          },
+          codeParameter: '{####}',
+          linkParameter: 'https://example.com/verify?code={####}',
+          usernameParameter: 'newuser',
+        });
+        expect(event.response).toEqual({
+          smsMessage: null,
+          emailMessage: 'Email message content',
+          emailSubject: 'Overridden subject',
+        });
+      });
+    });
+
+    describe.each([
+      { function: CustomMessageAuthenticationTriggerEventStub },
+      { function: CustomMessageForgotPasswordTriggerEventStub },
+      { function: CustomMessageResendCodeTriggerEventStub },
+      { function: CustomMessageSignUpTriggerEventStub },
+      { function: CustomMessageUpdateUserAttributeTriggerEventStub },
+      { function: CustomMessageVerifyUserAttributeTriggerEventStub },
+    ])('$function.name', ({ function: triggerStub }) => {
+      it('should return a valid event', () => {
+        const event = triggerStub();
+
+        expect(event.request).toEqual({
+          userAttributes: {
+            email: 'example@example.com',
+          },
+          codeParameter: '{####}',
+          linkParameter: 'https://example.com/verify?code={####}',
+          usernameParameter: null,
+        });
+        expect(event.response).toEqual({
+          smsMessage: null,
+          emailMessage: 'Email message content',
+          emailSubject: 'Email subject content',
+        });
+      });
+
+      it('should allow overrides', () => {
+        const event = triggerStub({
+          request: {
+            userAttributes: {
+              email: 'override@example.com',
+              phone_number: '+1987654321',
+            },
+          },
+        });
+
+        expect(event.request).toEqual({
+          userAttributes: {
+            email: 'override@example.com',
+            phone_number: '+1987654321',
+          },
+          codeParameter: '{####}',
+          linkParameter: 'https://example.com/verify?code={####}',
+          usernameParameter: null,
+        });
+      });
     });
   });
 
