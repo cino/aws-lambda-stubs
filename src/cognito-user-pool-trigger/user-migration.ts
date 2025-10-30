@@ -38,7 +38,7 @@ export const UserMigrationAuthenticationTriggerEventStub = (
 };
 
 export const UserMigrationForgotPasswordTriggerEventStub = (
-  overrides: Partial<BaseUserMigrationTriggerEvent<'UserMigration_ForgotPassword'>> = {}
+  overrides: PartialBaseUserMigrationTriggerEvent<'UserMigration_ForgotPassword'> = {}
 ): BaseUserMigrationTriggerEvent<'UserMigration_ForgotPassword'> => {
   return BaseCognitoTriggerEvent(
     'UserMigration_ForgotPassword',
