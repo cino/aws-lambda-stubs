@@ -4,8 +4,7 @@ import type {
   CloudFrontResponseEvent,
   CloudFrontResponseEventRecord,
 } from 'aws-lambda';
-import { randomIpAddress } from './utils';
-import { deepMerge } from './utils/deepmerge';
+import { deepMerge, randomIpAddress } from './utils';
 
 export interface PartialCloudFrontResponseEventRecord {
   cf?: {

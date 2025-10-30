@@ -1,7 +1,7 @@
 import type { CodePipelineEvent } from 'aws-lambda';
 import type { Merge } from 'type-fest';
 import { DEFAULT_ACCOUNT_ID } from './common';
-import { deepMerge } from './utils/deepmerge';
+import { deepMerge } from './utils';
 
 type PartialCodePipelineEvent = {
   'CodePipeline.job'?: Merge<

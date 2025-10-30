@@ -9,6 +9,6 @@ export * from './pre-authentication';
 export * from './pre-signup';
 export * from './pre-token-generation';
 export * from './pre-token-generation-v2';
-// export * from './pre-token-generation-v3';
+export * from './pre-token-generation-v3';
 // export * from './user-migration';
 export * from './verify-auth-challenge-response';

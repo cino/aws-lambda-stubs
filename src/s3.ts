@@ -1,7 +1,7 @@
 import type { S3Event, S3EventRecord } from 'aws-lambda';
 import type { Merge } from 'type-fest';
 import { DEFAULT_REGION, randomIpAddress } from './common';
-import { deepMerge } from './utils/deepmerge';
+import { deepMerge } from './utils';
 
 type PartialS3EventRecord = Merge<
   Partial<S3EventRecord>,

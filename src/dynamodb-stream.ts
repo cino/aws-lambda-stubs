@@ -1,6 +1,6 @@
 import type { DynamoDBRecord, DynamoDBStreamEvent } from 'aws-lambda';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './common';
-import { deepMerge } from './utils/deepmerge';
+import { deepMerge } from './utils';
 
 export const DynamoDBRecordStub = (overrides: Partial<DynamoDBRecord> = {}): DynamoDBRecord => {
   return deepMerge(

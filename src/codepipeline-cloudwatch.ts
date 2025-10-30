@@ -5,7 +5,7 @@ import type {
 } from 'aws-lambda';
 import type { Merge } from 'type-fest';
 import { EventBridgeEventStub } from './event-bridge';
-import { deepMerge } from './utils/deepmerge';
+import { deepMerge } from './utils';
 
 type PartialCodePipelineCloudWatchActionEvent = Merge<
   Partial<CodePipelineCloudWatchActionEvent>,

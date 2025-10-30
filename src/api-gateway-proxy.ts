@@ -24,7 +24,7 @@ import {
   type PartialAPIGatewayEventRequestContextV2,
   randomIpAddress,
 } from './common';
-import { deepMerge } from './utils/deepmerge';
+import { deepMerge } from './utils';
 
 // V1
 

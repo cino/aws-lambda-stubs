@@ -4,7 +4,7 @@ import type {
   AppSyncIdentityLambda,
   AppSyncIdentityOIDC,
 } from 'aws-lambda';
-import { deepMerge } from '../utils/deepmerge';
+import { deepMerge } from '../utils';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './consts';
 
 type AppSyncIdentityType = 'iam' | 'cognito' | 'oidc' | 'lambda';

@@ -1,7 +1,7 @@
 import type { SNSEvent, SNSEventRecord, SNSMessage } from 'aws-lambda';
 import type { Merge } from 'type-fest';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './common';
-import { deepMerge } from './utils/deepmerge';
+import { deepMerge } from './utils';
 
 type PartialSNSRecord = Merge<
   Partial<SNSEventRecord>,

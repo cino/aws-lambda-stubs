@@ -2,7 +2,7 @@ import type { GuardDutyScanResultNotificationEvent, GuardDutyScanResultNotificat
 import type { Merge } from 'type-fest';
 import type { PartialEventBridgeEvent } from './common';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './common';
-import { deepMerge } from './utils/deepmerge';
+import { deepMerge } from './utils';
 
 type PartialGuardDutyScanResultNotificationEvent = Merge<
   PartialEventBridgeEvent,

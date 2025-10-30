@@ -6,7 +6,7 @@ import type {
 } from 'aws-lambda';
 import type { Merge } from 'type-fest';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './common';
-import { deepMerge } from './utils/deepmerge';
+import { deepMerge } from './utils';
 
 type PartialKinesisStreamRecord = Merge<
   Partial<KinesisStreamRecord>,

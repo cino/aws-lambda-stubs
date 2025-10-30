@@ -11,7 +11,7 @@ import {
   DEFAULT_REGION,
   type PartialAPIGatewayEventRequestContextV2,
 } from './common';
-import { deepMerge } from './utils/deepmerge';
+import { deepMerge } from './utils';
 
 export const APIGatewayTokenAuthorizerEventStub = (
   overrides: Partial<APIGatewayTokenAuthorizerEvent> = {}

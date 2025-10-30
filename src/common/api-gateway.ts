@@ -5,8 +5,7 @@ import type {
 } from 'aws-lambda';
 import { DateTime } from 'luxon';
 import type { Merge } from 'type-fest';
-import { randomIpAddress } from '../utils';
-import { deepMerge } from '../utils/deepmerge';
+import { deepMerge, randomIpAddress } from '../utils';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './consts';
 
 export type PartialAPIGatewayEventRequestContext<TAuthorizer> = Merge<

@@ -14,6 +14,7 @@ import {
   PreTokenGenerationAuthenticateDeviceV2TriggerEventStub,
   PreTokenGenerationAuthenticationTriggerEventStub,
   PreTokenGenerationAuthenticationV2TriggerEventStub,
+  PreTokenGenerationClientCredentialsV3TriggerEventStub,
   PreTokenGenerationHostedAuthTriggerEventStub,
   PreTokenGenerationHostedAuthV2TriggerEventStub,
   PreTokenGenerationNewPasswordChallengeTriggerEvent,
@@ -22,7 +23,6 @@ import {
   PreTokenGenerationRefreshTokensV2TriggerEventStub,
   VerifyAuthChallengeResponseTriggerEventStub,
 } from '../src';
-import { PreTokenGenerationClientCredentialsV3TriggerEventStub } from '../src/cognito-user-pool-trigger/pre-token-generation-v3';
 
 describe('#cognito-user-pool-trigger', () => {
   describe('#create-auth-challenge-trigger-event-stub', () => {

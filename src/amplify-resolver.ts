@@ -1,7 +1,7 @@
 import type { AmplifyGraphQlResolverEvent } from 'aws-lambda';
 import type { Merge } from 'type-fest';
 import { AppSyncIdentityStub } from './common';
-import { deepMerge } from './utils/deepmerge';
+import { deepMerge } from './utils';
 
 type PartialAmplifyGraphQlResolverEvent<
   // biome-ignore lint/suspicious/noExplicitAny: any in AmplifyGraphQlResolverEvent type

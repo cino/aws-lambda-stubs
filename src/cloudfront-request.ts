@@ -1,6 +1,6 @@
 import type { CloudFrontRequest, CloudFrontRequestEvent, CloudFrontRequestEventRecord } from 'aws-lambda';
 import { cloudFrontRequestStub } from './common';
-import { deepMerge } from './utils/deepmerge';
+import { deepMerge } from './utils';
 
 interface PartialCloudFrontRequestEventRecord {
   cf?: {

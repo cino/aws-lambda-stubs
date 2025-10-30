@@ -1,6 +1,6 @@
 import type { LexEvent, LexEventSlots, LexSlotDetails } from 'aws-lambda';
 import type { Merge } from 'type-fest';
-import { deepMerge } from './utils/deepmerge';
+import { deepMerge } from './utils';
 
 type PartialLexEvent = Merge<
   Partial<LexEvent>,

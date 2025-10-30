@@ -1,6 +1,6 @@
 import type { LexV2Bot, LexV2Event, LexV2SessionState } from 'aws-lambda';
 import type { Merge } from 'type-fest';
-import { deepMerge } from './utils/deepmerge';
+import { deepMerge } from './utils';
 
 type PartialLexV2Event = Merge<
   Partial<LexV2Event>,

@@ -2,7 +2,7 @@ import crypto from 'node:crypto';
 import type { SQSEvent, SQSRecord } from 'aws-lambda';
 import { DateTime } from 'luxon';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './common';
-import { deepMerge } from './utils/deepmerge';
+import { deepMerge } from './utils';
 
 type omittedKeys = 'attributes' | 'messageAttributes';
 
