@@ -8,6 +8,13 @@ import {
   CustomMessageSignUpTriggerEventStub,
   CustomMessageUpdateUserAttributeTriggerEventStub,
   CustomMessageVerifyUserAttributeTriggerEventStub,
+  CustomSMSSenderAdminCreateUserTriggerEventStub,
+  CustomSMSSenderAuthenticationUserTriggerEventStub,
+  CustomSMSSenderForgotPasswordTriggerEventStub,
+  CustomSMSSenderResendCodeTriggerEventStub,
+  CustomSMSSenderSignUpTriggerEventStub,
+  CustomSMSSenderUpdateUserAttributeTriggerEventStub,
+  CustomSMSSenderVerifyUserAttributeTriggerEventStub,
   DEFAULT_ACCOUNT_ID,
   DefineAuthChallengeTriggerEventStub,
   PostAuthenticationTriggerEventStub,
@@ -170,6 +177,66 @@ describe('#cognito-user-pool-trigger', () => {
           codeParameter: '{####}',
           linkParameter: 'https://example.com/verify?code={####}',
           usernameParameter: null,
+        });
+      });
+    });
+  });
+
+  describe('#custom-sms-sender-trigger-event-stub', () => {
+    describe.each([
+      { function: CustomSMSSenderSignUpTriggerEventStub },
+      { function: CustomSMSSenderResendCodeTriggerEventStub },
+      { function: CustomSMSSenderForgotPasswordTriggerEventStub },
+      { function: CustomSMSSenderVerifyUserAttributeTriggerEventStub },
+      { function: CustomSMSSenderUpdateUserAttributeTriggerEventStub },
+      { function: CustomSMSSenderAdminCreateUserTriggerEventStub },
+      { function: CustomSMSSenderAuthenticationUserTriggerEventStub },
+    ])('$function.name', ({ function: triggerStub }) => {
+      it('should return a valid event', () => {
+        const event = triggerStub();
+
+        expect(event.request).toEqual({
+          type: 'Default',
+          code: '123456',
+          userAttributes: {
+            email: 'user@example.com',
+            phone_number: '+1234567890',
+          },
+        });
+      });
+
+      it('should allow overrides', () => {
+        const event = triggerStub({
+          region: 'us-west-2',
+          request: {
+            code: '654321',
+            userAttributes: {
+              email: 'override@example.com',
+              phone_number: '+1987654321',
+            },
+          },
+          response: {},
+        });
+
+        expect(event).toEqual({
+          region: 'us-west-2',
+          version: '1',
+          userPoolId: 'us-west-2_Example',
+          triggerSource: event.triggerSource,
+          userName: 'example-user',
+          callerContext: {
+            awsSdkVersion: 'aws-sdk-unknown-version',
+            clientId: 'example-client-id',
+          },
+          request: {
+            type: 'Default',
+            code: '654321',
+            userAttributes: {
+              email: 'override@example.com',
+              phone_number: '+1987654321',
+            },
+          },
+          response: {},
         });
       });
     });
