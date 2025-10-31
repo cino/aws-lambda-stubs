@@ -44,6 +44,7 @@ import {
   PreTokenGenerationRefreshTokensTriggerEvent,
   PreTokenGenerationRefreshTokensV2TriggerEventStub,
   UserMigrationAuthenticationTriggerEventStub,
+  UserMigrationForgotPasswordTriggerEventStub,
   VerifyAuthChallengeResponseTriggerEventStub,
 } from '../src';
 import { ipRegex } from './helpers';
@@ -827,32 +828,72 @@ describe('#cognito-user-pool-trigger', () => {
   });
 
   describe('#user-migration-trigger-event-stub', () => {
-    it('should return a valid authentication event', () => {
-      const event = UserMigrationAuthenticationTriggerEventStub();
+    describe('#user-migration-authentication-trigger-event-stub', () => {
+      it('should return a valid authentication event', () => {
+        const event = UserMigrationAuthenticationTriggerEventStub();
 
-      expect(event.request).toEqual({
-        password: 'ExamplePassword123!',
+        expect(event.request).toEqual({
+          password: 'ExamplePassword123!',
+        });
+        expect(event.response).toEqual({
+          userAttributes: {
+            email: 'example@example.com',
+            given_name: 'John',
+            family_name: 'Doe',
+          },
+          finalUserStatus: 'CONFIRMED',
+          messageAction: 'SUPPRESS',
+          desiredDeliveryMediums: ['EMAIL'],
+        });
       });
-      expect(event.response).toEqual({
-        userAttributes: {
-          email: 'example@example.com',
-          given_name: 'John',
-          family_name: 'Doe',
-        },
-        finalUserStatus: 'CONFIRMED',
-        messageAction: 'SUPPRESS',
-        desiredDeliveryMediums: ['EMAIL'],
+
+      it('should allow overrides', () => {
+        const event = UserMigrationAuthenticationTriggerEventStub({
+          response: {
+            finalUserStatus: 'RESET_REQUIRED',
+          },
+        });
+
+        expect(event.response.finalUserStatus).toBe('RESET_REQUIRED');
       });
     });
 
-    it('should allow overrides', () => {
-      const event = UserMigrationAuthenticationTriggerEventStub({
-        response: {
-          finalUserStatus: 'RESET_REQUIRED',
-        },
+    describe('#user-migration-forgot-password-trigger-event-stub', () => {
+      it('should return a valid forgot password event', () => {
+        const event = UserMigrationForgotPasswordTriggerEventStub();
+
+        expect(event.request).toEqual({
+          password: 'NewExamplePassword123!',
+        });
+        expect(event.response).toEqual({
+          userAttributes: {
+            email: 'example@example.com',
+            given_name: 'John',
+            family_name: 'Doe',
+          },
+          desiredDeliveryMediums: ['EMAIL'],
+        });
       });
 
-      expect(event.response.finalUserStatus).toBe('RESET_REQUIRED');
+      it('should allow overrides', () => {
+        const event = UserMigrationForgotPasswordTriggerEventStub({
+          response: {
+            userAttributes: {
+              email: 'override@example.com',
+              given_name: 'Override',
+              family_name: 'User',
+            },
+            desiredDeliveryMediums: ['SMS'],
+          },
+        });
+
+        expect(event.response.userAttributes).toEqual({
+          email: 'override@example.com',
+          given_name: 'Override',
+          family_name: 'User',
+        });
+        expect(event.response.desiredDeliveryMediums).toEqual(['SMS']);
+      });
     });
   });
 
