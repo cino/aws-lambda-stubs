@@ -1,6 +1,14 @@
 import { describe, expect, it } from 'vitest';
 import {
   CreateAuthChallengeTriggerEventStub,
+  CustomEmailSenderAccountTakeOverNotificationTriggerEventStub,
+  CustomEmailSenderAdminCreateUserTriggerEventStub,
+  CustomEmailSenderAuthenticationUserTriggerEventStub,
+  CustomEmailSenderForgotPasswordTriggerEventStub,
+  CustomEmailSenderResendCodeTriggerEventStub,
+  CustomEmailSenderSignUpTriggerEventStub,
+  CustomEmailSenderUpdateUserAttributeTriggerEventStub,
+  CustomEmailSenderVerifyUserAttributeTriggerEventStub,
   CustomMessageAdminCreateUserTriggerEventStub,
   CustomMessageAuthenticationTriggerEventStub,
   CustomMessageForgotPasswordTriggerEventStub,
@@ -38,6 +46,7 @@ import {
   UserMigrationAuthenticationTriggerEventStub,
   VerifyAuthChallengeResponseTriggerEventStub,
 } from '../src';
+import { ipRegex } from './helpers';
 
 describe('#cognito-user-pool-trigger', () => {
   describe('#create-auth-challenge-trigger-event-stub', () => {
@@ -234,6 +243,124 @@ describe('#cognito-user-pool-trigger', () => {
             userAttributes: {
               email: 'override@example.com',
               phone_number: '+1987654321',
+            },
+          },
+          response: {},
+        });
+      });
+    });
+  });
+
+  describe('#custom-email-sender-trigger-event-stub', () => {
+    describe.each([
+      { function: CustomEmailSenderSignUpTriggerEventStub },
+      { function: CustomEmailSenderResendCodeTriggerEventStub },
+      { function: CustomEmailSenderForgotPasswordTriggerEventStub },
+      { function: CustomEmailSenderUpdateUserAttributeTriggerEventStub },
+      { function: CustomEmailSenderVerifyUserAttributeTriggerEventStub },
+      { function: CustomEmailSenderAdminCreateUserTriggerEventStub },
+      { function: CustomEmailSenderAuthenticationUserTriggerEventStub },
+    ])('$function.name', ({ function: triggerStub }) => {
+      it('should return a valid event', () => {
+        const event = triggerStub();
+
+        expect(event.request).toEqual({
+          type: 'Default',
+          code: '123456',
+          userAttributes: {
+            email: 'user@example.com',
+            phone_number: '+1234567890',
+          },
+        });
+      });
+
+      it('should allow overrides', () => {
+        const event = triggerStub({
+          region: 'us-west-2',
+          request: {
+            code: '654321',
+            userAttributes: {
+              email: 'override@example.com',
+              phone_number: '+1987654321',
+            },
+          },
+          response: {},
+        });
+
+        expect(event).toEqual({
+          region: 'us-west-2',
+          version: '1',
+          userPoolId: 'us-west-2_Example',
+          triggerSource: event.triggerSource,
+          userName: 'example-user',
+          callerContext: {
+            awsSdkVersion: 'aws-sdk-unknown-version',
+            clientId: 'example-client-id',
+          },
+          request: {
+            type: 'Default',
+            code: '654321',
+            userAttributes: {
+              email: 'override@example.com',
+              phone_number: '+1987654321',
+            },
+          },
+          response: {},
+        });
+      });
+    });
+
+    describe('#CustomEmailSenderAccoutTakeoverTriggerEventStub', () => {
+      it('should return a valid event', () => {
+        const event = CustomEmailSenderAccountTakeOverNotificationTriggerEventStub();
+
+        expect(event.request).toEqual({
+          type: 'Default',
+          code: '123456',
+          userAttributes: {
+            EVENT_ID: 'evt-12345678-90ab-cdef-1234-567890abcdef',
+            USER_NAME: 'testuser@example.com',
+            IP_ADDRESS: expect.stringMatching(ipRegex),
+            ACCOUNT_TAKE_OVER_ACTION: 'BLOCK',
+            ONE_CLICK_LINK_VALID: 'https://example.com/validate/token123',
+            ONE_CLICK_LINK_INVALID: 'https://example.com/invalid/token123',
+            LOGIN_TIME: '2023-12-01T10:30:00Z',
+            FEEDBACK_TOKEN: 'feedback-token-abc123xyz789',
+          },
+        });
+      });
+
+      it('should allow overrides', () => {
+        const event = CustomEmailSenderAccountTakeOverNotificationTriggerEventStub({
+          region: 'us-west-2',
+          request: {
+            code: '654321',
+          },
+          response: {},
+        });
+
+        expect(event).toEqual({
+          region: 'us-west-2',
+          version: '1',
+          userPoolId: 'us-west-2_Example',
+          triggerSource: event.triggerSource,
+          userName: 'example-user',
+          callerContext: {
+            awsSdkVersion: 'aws-sdk-unknown-version',
+            clientId: 'example-client-id',
+          },
+          request: {
+            type: 'Default',
+            code: '654321',
+            userAttributes: {
+              EVENT_ID: 'evt-12345678-90ab-cdef-1234-567890abcdef',
+              USER_NAME: 'testuser@example.com',
+              IP_ADDRESS: expect.stringMatching(ipRegex),
+              ACCOUNT_TAKE_OVER_ACTION: 'BLOCK',
+              ONE_CLICK_LINK_VALID: 'https://example.com/validate/token123',
+              ONE_CLICK_LINK_INVALID: 'https://example.com/invalid/token123',
+              LOGIN_TIME: '2023-12-01T10:30:00Z',
+              FEEDBACK_TOKEN: 'feedback-token-abc123xyz789',
             },
           },
           response: {},

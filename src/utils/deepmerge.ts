@@ -1,7 +1,3 @@
-// import type { ArrayMergeOptions } from 'deepMerge';
-
-// export const overwriteMerge = (_destinationArray: [], sourceArray: [], _options: ArrayMergeOptions) => sourceArray;
-
 interface deepMergeOptions {
   overwriteKeys?: string[];
 }
