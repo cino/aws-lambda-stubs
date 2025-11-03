@@ -1,8 +1,5 @@
 # AWS Lambda Stubs
 
-> [!NOTE]
->  ⚠️  This is still a work in progress. Using it is at your own risk, anything can still change in implementation.
-
 Gone are the days you need to write stubs to unit test your AWS Lambda functions locally. This repository provides simple stubs for AWS Lambda services, allowing you to focus on writing and testing your Lambda functions without the overhead of continuously writing the same boilerplate stubs.
 
 This is highly inspired by [@types/aws-lambda](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/aws-lambda) that already provides the type definitions for AWS Lambda events and context.
@@ -28,7 +25,11 @@ import { handler } from "../src/sqs";
 
 describe("sqs handler", () => {
   it("should log the received event", async () => {
-    const mockEvent = SQSEventStub([{ key: "value" }]);
+    const mockEvent = SQSEventStub([
+			{
+				body: { message: "Hello, World!" },
+			}
+		]);
 
     expect(handler(mockEvent)).toEqual({});
   });
