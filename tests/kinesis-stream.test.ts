@@ -3,14 +3,13 @@ import {
   DEFAULT_ACCOUNT_ID,
   DEFAULT_REGION,
   KinesisStreamEventStub,
-  KinesisStreamRecordStub,
   KinesisStreamTumblingWindowEventStub,
 } from '../src';
 
 describe('#kinesis', () => {
   describe('#stream', () => {
     it('should return a valid event', () => {
-      const event = KinesisStreamEventStub([KinesisStreamRecordStub()]);
+      const event = KinesisStreamEventStub();
 
       expect(event).toEqual({
         Records: [
@@ -36,13 +35,13 @@ describe('#kinesis', () => {
 
     it('should allow overrides', () => {
       const event = KinesisStreamEventStub([
-        KinesisStreamRecordStub({
+        {
           eventID: 'custom-event-id',
           awsRegion: 'us-west-1',
           kinesis: {
             partitionKey: 'custom-partition-key',
           },
-        }),
+        },
       ]);
 
       expect(event).toEqual({
@@ -70,7 +69,7 @@ describe('#kinesis', () => {
 
   describe('#stream-tumbling-window', () => {
     it('should have tests', () => {
-      const event = KinesisStreamTumblingWindowEventStub([KinesisStreamRecordStub()]);
+      const event = KinesisStreamTumblingWindowEventStub();
 
       expect(event).toEqual({
         Records: [
@@ -101,7 +100,7 @@ describe('#kinesis', () => {
     });
 
     it('should allow overrides', () => {
-      const event = KinesisStreamTumblingWindowEventStub([KinesisStreamRecordStub()], {
+      const event = KinesisStreamTumblingWindowEventStub([{}], {
         isFinalInvokeForWindow: true,
         isWindowTerminatedEarly: true,
       });

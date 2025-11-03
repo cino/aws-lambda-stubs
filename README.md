@@ -22,13 +22,13 @@ npm install --save-dev aws-lambda-stubs
 Here's a simple example of how to use the stubs in your unit tests, given that `handler` is a Lambda function you want to test:
 
 ```typescript
-import { SQSEventStub, SQSRecordStub } from "aws-lambda-stubs";
+import { SQSEventStub } from "aws-lambda-stubs";
 import { describe, expect, it } from "vitest";
 import { handler } from "../src/sqs";
 
 describe("sqs handler", () => {
   it("should log the received event", async () => {
-    const mockEvent = SQSEventStub([SQSRecordStub({ key: "value" })]);
+    const mockEvent = SQSEventStub([{ key: "value" }]);
 
     expect(handler(mockEvent)).toEqual({});
   });

@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { S3EventRecordStub, S3EventStub } from '../src';
+import { S3EventStub } from '../src';
 import { ipRegex } from './helpers';
 
 describe('#s3', () => {
   it('should return a valid event', () => {
-    const event = S3EventStub([S3EventRecordStub()]);
+    const event = S3EventStub();
 
     expect(event).toEqual({
       Records: [
@@ -49,7 +49,7 @@ describe('#s3', () => {
 
   it('should allow partial overrides', () => {
     const event = S3EventStub([
-      S3EventRecordStub({
+      {
         awsRegion: 'us-west-2',
         s3: {
           bucket: {
@@ -58,7 +58,7 @@ describe('#s3', () => {
             },
           },
         },
-      }),
+      },
     ]);
 
     expect(event.Records[0]?.awsRegion).toBe('us-west-2');
@@ -67,13 +67,13 @@ describe('#s3', () => {
 
   it('should ensure the name and arn are in sync when bucket-name is overridden', () => {
     const event = S3EventStub([
-      S3EventRecordStub({
+      {
         s3: {
           bucket: {
             name: 'my-bucket-name',
           },
         },
-      }),
+      },
     ]);
 
     expect(event.Records[0]?.s3.bucket.arn).toBe('arn:aws:s3:::my-bucket-name');

@@ -10,7 +10,7 @@ type PartialSNSRecord = Merge<
   }
 >;
 
-export const SNSEventRecordStub = (overrides: PartialSNSRecord = {}): SNSEventRecord => {
+const SNSEventRecordStub = (overrides: PartialSNSRecord = {}): SNSEventRecord => {
   return deepMerge(
     {
       EventVersion: '1.0',
@@ -34,8 +34,8 @@ export const SNSEventRecordStub = (overrides: PartialSNSRecord = {}): SNSEventRe
   ) as SNSEventRecord;
 };
 
-export const SNSEventStub = (records: SNSEventRecord[]): SNSEvent => {
+export const SNSEventStub = (records: PartialSNSRecord[] = [{}]): SNSEvent => {
   return {
-    Records: records,
+    Records: records.map((record) => SNSEventRecordStub(record)),
   };
 };

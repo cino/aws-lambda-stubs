@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { CloudFrontResponseEventRecordStub, CloudFrontResponseEventStub } from '../src';
+import { CloudFrontResponseEventStub } from '../src';
 
 describe('#cloudfront-response', () => {
   it('should return a valid event', () => {
-    const event = CloudFrontResponseEventStub([CloudFrontResponseEventRecordStub()]);
+    const event = CloudFrontResponseEventStub();
 
     expect(event).toEqual({
       Records: [
@@ -49,13 +49,13 @@ describe('#cloudfront-response', () => {
 
   it('should allow overrides', () => {
     const event = CloudFrontResponseEventStub([
-      CloudFrontResponseEventRecordStub({
+      {
         cf: {
           config: {
             distributionDomainName: 'override.cloudfront.net',
           },
         },
-      }),
+      },
     ]);
 
     expect(event).toEqual({

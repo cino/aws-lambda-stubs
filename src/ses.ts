@@ -51,7 +51,7 @@ type PartialSESEventRecord = Merge<
   }
 >;
 
-export const SESEventRecordStub = (overrides: PartialSESEventRecord = {}): SESEventRecord => {
+const SESEventRecordStub = (overrides: PartialSESEventRecord = {}): SESEventRecord => {
   return deepMerge<SESEventRecord>(
     {
       eventVersion: '1.0',
@@ -106,8 +106,8 @@ export const SESEventRecordStub = (overrides: PartialSESEventRecord = {}): SESEv
   ) as SESEventRecord;
 };
 
-export const SESEventStub = (records: SESEventRecord[]): SESEvent => {
+export const SESEventStub = (records: PartialSESEventRecord[] = [{}]): SESEvent => {
   return {
-    Records: records,
+    Records: records.map((record) => SESEventRecordStub(record)),
   };
 };

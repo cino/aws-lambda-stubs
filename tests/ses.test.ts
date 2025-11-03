@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION, SESEventRecordStub, SESEventStub } from '../src';
+import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION, SESEventStub } from '../src';
 
 describe('#ses', () => {
   it('should return a valid event', () => {
-    const event = SESEventStub([SESEventRecordStub()]);
+    const event = SESEventStub();
 
     expect(event).toEqual({
       Records: [
@@ -62,13 +62,13 @@ describe('#ses', () => {
 
   it('should allow partial overrides', () => {
     const event = SESEventStub([
-      SESEventRecordStub({
+      {
         ses: {
           receipt: {
             virusVerdict: { status: 'FAIL' },
           },
         },
-      }),
+      },
     ]);
 
     expect(event).toEqual({

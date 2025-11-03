@@ -1,14 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import {
-  DEFAULT_ACCOUNT_ID,
-  DEFAULT_REGION,
-  FireHoseTransformationEventRecordStub,
-  FireHoseTransformationEventStub,
-} from '../src';
+import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION, FireHoseTransformationEventStub } from '../src';
 
 describe('#kinesis-firehose-transformation', () => {
   it('should return a valid event', () => {
-    const event = FireHoseTransformationEventStub([FireHoseTransformationEventRecordStub()]);
+    const event = FireHoseTransformationEventStub();
 
     expect(event).toEqual({
       invocationId: 'invocation-id-123',
@@ -25,12 +20,15 @@ describe('#kinesis-firehose-transformation', () => {
   });
 
   it('should allow overrides', () => {
-    const event = FireHoseTransformationEventStub([
-      FireHoseTransformationEventRecordStub({
-        recordId: 'custom-record-id',
-        data: 'Q3VzdG9tIGRhdGE=',
-      }),
-    ], { region: 'us-west-2' });
+    const event = FireHoseTransformationEventStub(
+      [
+        {
+          recordId: 'custom-record-id',
+          data: 'Q3VzdG9tIGRhdGE=',
+        },
+      ],
+      { region: 'us-west-2' }
+    );
 
     expect(event).toEqual({
       invocationId: 'invocation-id-123',

@@ -16,7 +16,7 @@ type PartialS3EventRecord = Merge<
   }
 >;
 
-export const S3EventRecordStub = (overrides: PartialS3EventRecord = {}): S3EventRecord => {
+const S3EventRecordStub = (overrides: PartialS3EventRecord = {}): S3EventRecord => {
   const bucketName = overrides.s3?.bucket?.name || 'example-bucket';
 
   return deepMerge(
@@ -59,8 +59,8 @@ export const S3EventRecordStub = (overrides: PartialS3EventRecord = {}): S3Event
   ) as S3EventRecord;
 };
 
-export const S3EventStub = (records: S3EventRecord[]): S3Event => {
+export const S3EventStub = (records: PartialS3EventRecord[] = [{}]): S3Event => {
   return {
-    Records: [...records],
+    Records: records.map((record) => S3EventRecordStub(record)),
   };
 };

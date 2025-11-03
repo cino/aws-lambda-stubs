@@ -19,7 +19,7 @@ export interface PartialCloudFrontResponseEventRecord {
   response?: Partial<CloudFrontResponse>;
 }
 
-export const CloudFrontResponseEventRecordStub = (
+const CloudFrontResponseEventRecordStub = (
   overrides: PartialCloudFrontResponseEventRecord = {}
 ): CloudFrontResponseEventRecord => {
   const distributionDomainName = overrides.cf?.config?.distributionDomainName || 'd111111abcdef8.cloudfront.net';
@@ -65,8 +65,10 @@ export const CloudFrontResponseEventRecordStub = (
   );
 };
 
-export const CloudFrontResponseEventStub = (records: CloudFrontResponseEventRecord[]): CloudFrontResponseEvent => {
+export const CloudFrontResponseEventStub = (
+  records: PartialCloudFrontResponseEventRecord[] = [{}]
+): CloudFrontResponseEvent => {
   return {
-    Records: records,
+    Records: records.map((record) => CloudFrontResponseEventRecordStub(record)),
   };
 };

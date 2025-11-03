@@ -4,18 +4,21 @@ import { DateTime } from 'luxon';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './common';
 import { deepMerge } from './utils';
 
-type omittedKeys = 'attributes' | 'messageAttributes';
+type omittedKeys = 'attributes' | 'messageAttributes' | 'body';
 
 interface PartialSQSRecord extends Omit<Partial<SQSRecord>, omittedKeys> {
   attributes?: Partial<SQSRecord['attributes']>;
   messageAttributes?: Partial<SQSRecord['messageAttributes']>;
+  body?: Record<string, unknown>;
 }
 
-export const SQSRecordStub = (body: object, overrides: PartialSQSRecord = {}): SQSRecord => {
-  const stringifiedBody = JSON.stringify(body);
-  const now = DateTime.now();
+const SQSRecordStub = (overrides: PartialSQSRecord = {}): SQSRecord => {
   const region = overrides.awsRegion ?? DEFAULT_REGION;
+  const now = DateTime.now();
 
+  const body = overrides.body || { key: 'value' };
+  const stringifiedBody = JSON.stringify(body);
+  delete overrides.body;
 
   return deepMerge<SQSRecord>(
     {
@@ -34,12 +37,12 @@ export const SQSRecordStub = (body: object, overrides: PartialSQSRecord = {}): S
       eventSourceARN: `arn:aws:sqs:${region}:${DEFAULT_ACCOUNT_ID}:queue-name`,
       awsRegion: region,
     },
-    overrides as Partial<SQSRecord>
+    overrides as unknown as Partial<SQSRecord>
   ) as SQSRecord;
 };
 
-export const SQSEventStub = (records: SQSRecord[]): SQSEvent => {
+export const SQSEventStub = (records: PartialSQSRecord[] = [{}]): SQSEvent => {
   return {
-    Records: [...records],
+    Records: records.map((record) => SQSRecordStub(record)),
   };
 };

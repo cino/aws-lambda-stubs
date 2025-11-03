@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION, DynamoDBRecordStub, DynamoDBStreamEventStub } from '../src';
+import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION, DynamoDBStreamEventStub } from '../src';
 
 describe('#dynamodb-stream', () => {
   it('should return a valid event', () => {
-    const event = DynamoDBStreamEventStub([DynamoDBRecordStub()]);
+    const event = DynamoDBStreamEventStub();
 
     expect(event).toEqual({
       Records: [
@@ -20,7 +20,7 @@ describe('#dynamodb-stream', () => {
   });
 
   it('should allow overrides', () => {
-    const event = DynamoDBStreamEventStub([DynamoDBRecordStub({ eventName: 'MODIFY' })]);
+    const event = DynamoDBStreamEventStub([{ eventName: 'MODIFY' }]);
 
     expect(event).toEqual({
       Records: [
