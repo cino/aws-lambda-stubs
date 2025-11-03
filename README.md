@@ -26,10 +26,10 @@ import { handler } from "../src/sqs";
 describe("sqs handler", () => {
   it("should log the received event", async () => {
     const mockEvent = SQSEventStub([
-			{
-				body: { message: "Hello, World!" },
-			}
-		]);
+      {
+        body: { message: "Hello, World!" },
+      }
+    ]);
 
     expect(handler(mockEvent)).toEqual({});
   });
