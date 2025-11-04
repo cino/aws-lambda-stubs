@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { AppSyncIdentityStub, DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from '../../src';
+import { ipRegex } from '../helpers';
 
 describe('#appsync', () => {
   describe('appSyncIdentityStub', () => {
@@ -11,7 +12,7 @@ describe('#appsync', () => {
           accountId: DEFAULT_ACCOUNT_ID,
           cognitoIdentityPoolId: `${DEFAULT_REGION}:abcd1234-efgh-5678-ijkl-9012mnop3456`,
           cognitoIdentityId: `${DEFAULT_REGION}:abcdef12-3456-7890-abcd-ef1234567890`,
-          sourceIp: ['203.0.113.1', '198.51.100.1'],
+          sourceIp: [expect.stringMatching(ipRegex), expect.stringMatching(ipRegex)],
           username: 'jane_doe',
           userArn: `arn:aws:iam::${DEFAULT_ACCOUNT_ID}:user/jane_doe`,
           cognitoIdentityAuthType: 'AWS_IAM',
@@ -23,14 +24,14 @@ describe('#appsync', () => {
         const identity = AppSyncIdentityStub('iam', {
           username: 'override_jane_doe',
           userArn: `arn:aws:iam::${DEFAULT_ACCOUNT_ID}:user/override_jane_doe`,
-          sourceIp: ['192.168.1.1'],
+          sourceIp: [expect.stringMatching(ipRegex)],
         });
 
         expect(identity).toEqual({
           accountId: DEFAULT_ACCOUNT_ID,
           cognitoIdentityPoolId: `${DEFAULT_REGION}:abcd1234-efgh-5678-ijkl-9012mnop3456`,
           cognitoIdentityId: `${DEFAULT_REGION}:abcdef12-3456-7890-abcd-ef1234567890`,
-          sourceIp: ['192.168.1.1'],
+          sourceIp: [expect.stringMatching(ipRegex)],
           username: 'override_jane_doe',
           userArn: `arn:aws:iam::${DEFAULT_ACCOUNT_ID}:user/override_jane_doe`,
           cognitoIdentityAuthType: 'AWS_IAM',
@@ -52,7 +53,7 @@ describe('#appsync', () => {
             name: 'John Doe',
             phone_number: '+1234567890',
           },
-          sourceIp: ['192.0.2.1', '198.51.100.2'],
+          sourceIp: [expect.stringMatching(ipRegex), expect.stringMatching(ipRegex)],
           defaultAuthStrategy: 'ALLOW',
           groups: ['admin', 'users'],
         });
@@ -68,7 +69,7 @@ describe('#appsync', () => {
             name: 'Override John Doe',
             phone_number: '+1987654321',
           },
-          sourceIp: ['203.0.113.1', '192.0.2.2'],
+          sourceIp: [expect.stringMatching(ipRegex), expect.stringMatching(ipRegex)],
           defaultAuthStrategy: 'DENY',
           groups: ['override_admin', 'override_users'],
         });
@@ -82,7 +83,7 @@ describe('#appsync', () => {
             name: 'Override John Doe',
             phone_number: '+1987654321',
           },
-          sourceIp: ['203.0.113.1', '192.0.2.2'],
+          sourceIp: [expect.stringMatching(ipRegex), expect.stringMatching(ipRegex)],
           defaultAuthStrategy: 'DENY',
           groups: ['override_admin', 'override_users'],
         });

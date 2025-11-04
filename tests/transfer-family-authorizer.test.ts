@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { TransferFamilyAuthorizerEventStub } from '../src';
+import { ipRegex } from './helpers';
 
 describe('#transfer-family-authorizer', () => {
   it('should return a valid event', () => {
@@ -9,7 +10,7 @@ describe('#transfer-family-authorizer', () => {
       username: 'test-user',
       password: 'test-password',
       protocol: 'SFTP',
-      sourceIp: '192.168.1.1',
+      sourceIp: expect.stringMatching(ipRegex),
       serverId: 's-1234567890abcdef0',
     });
   });
@@ -24,7 +25,7 @@ describe('#transfer-family-authorizer', () => {
       username: 'custom-user',
       password: 'test-password',
       protocol: 'FTP',
-      sourceIp: '192.168.1.1',
+      sourceIp: expect.stringMatching(ipRegex),
       serverId: 's-1234567890abcdef0',
     });
   });

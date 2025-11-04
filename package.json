@@ -53,6 +53,7 @@
   },
   "scripts": {
     "lint": "biome lint src tests",
+    "lint:commit-msg": "commitlint --edit $1",
     "test": "vitest",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "build": "tsc -p tsconfig.build.json"

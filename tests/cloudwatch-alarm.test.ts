@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { CloudWatchAlarmEventStub, DEFAULT_ACCOUNT_ID } from '../src';
+import { instanceIdRegex } from './helpers';
 
 describe('#cloudwatch-alarm', () => {
   describe('#cloudWatchAlarmEventStub', () => {
@@ -36,7 +37,7 @@ describe('#cloudwatch-alarm', () => {
                     namespace: 'AWS/Logs',
                     name: 'CallCount',
                     dimensions: {
-                      InstanceId: 'i-12345678',
+                      InstanceId: expect.stringMatching(instanceIdRegex),
                     },
                   },
                   period: 60,
@@ -91,7 +92,7 @@ describe('#cloudwatch-alarm', () => {
                     namespace: 'AWS/Logs',
                     name: 'CallCount',
                     dimensions: {
-                      InstanceId: 'i-12345678',
+                      InstanceId: expect.stringMatching(instanceIdRegex),
                     },
                   },
                   period: 60,

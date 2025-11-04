@@ -1,4 +1,5 @@
 import type { TransferFamilyAuthorizerEvent } from 'aws-lambda';
+import { randomIpAddress } from './utils';
 
 export const TransferFamilyAuthorizerEventStub = (
   overrides: Partial<TransferFamilyAuthorizerEvent> = {}
@@ -7,7 +8,7 @@ export const TransferFamilyAuthorizerEventStub = (
     username: 'test-user',
     password: 'test-password',
     protocol: 'SFTP',
-    sourceIp: '192.168.1.1',
+    sourceIp: randomIpAddress(),
     serverId: 's-1234567890abcdef0',
 
     ...overrides,

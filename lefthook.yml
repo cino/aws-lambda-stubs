@@ -10,4 +10,4 @@ pre-commit:
 commit-msg:
   commands:
     "lint commit message":
-      run: npx commitlint --edit {1}
+      run: npm run lint:commit-msg

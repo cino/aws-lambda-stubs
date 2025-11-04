@@ -1,7 +1,7 @@
 import type { CloudWatchAlarmEvent } from 'aws-lambda';
 import type { Merge } from 'type-fest';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './common';
-import { deepMerge } from './utils';
+import { deepMerge, randomInstanceId } from './utils';
 
 type PartialCloudWatchAlarmEvent = Merge<
   Partial<CloudWatchAlarmEvent>,
@@ -51,7 +51,7 @@ export const CloudWatchAlarmEventStub = (overrides: PartialCloudWatchAlarmEvent 
                   namespace: 'AWS/Logs',
                   name: 'CallCount',
                   dimensions: {
-                    InstanceId: 'i-12345678',
+                    InstanceId: randomInstanceId(),
                   },
                 },
                 period: 60,
