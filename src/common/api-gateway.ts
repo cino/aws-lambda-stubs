@@ -15,13 +15,13 @@ export type PartialAPIGatewayEventRequestContext<TAuthorizer> = Merge<
   }
 >;
 
-export const eventParsedDateTime = (date: Date): string => {
+export const ApiGatewayParsedDateTime = (date: Date): string => {
   const day = String(date.getDate()).padStart(2, '0');
   const month = date.toLocaleString('en-US', { month: 'short' });
   const year = date.getFullYear();
-  const hour = String(date.getHours());
-  const minute = String(date.getMinutes());
-  const second = String(date.getSeconds());
+  const hour = String(date.getHours()).padStart(2, '0');
+  const minute = String(date.getMinutes()).padStart(2, '0');
+  const second = String(date.getSeconds()).padStart(2, '0');
 
   const offset = -date.getTimezoneOffset(); // Reverse the sign
 
@@ -90,7 +90,7 @@ export const APIGatewayEventRequestContextV2Stub = (
       requestId: crypto.randomUUID(),
       routeKey: '$default',
       stage: 'prod',
-      time: eventParsedDateTime(new Date()),
+      time: ApiGatewayParsedDateTime(new Date()),
       timeEpoch: currentEpochTime(),
     },
     overrides as Partial<APIGatewayEventRequestContextV2>
