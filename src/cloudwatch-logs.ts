@@ -1,9 +1,10 @@
 import type { CloudWatchLogsDecodedData, CloudWatchLogsEvent, CloudWatchLogsLogEvent } from 'aws-lambda';
-import { DateTime } from 'luxon';
 import { DEFAULT_ACCOUNT_ID } from './common';
-import { deepMerge } from './utils';
+import { currentEpochTime, deepMerge } from './utils';
 
 export const CloudWatchLogsEventStub = (overrides: Partial<CloudWatchLogsDecodedData> = {}): CloudWatchLogsEvent => {
+  const currentEpoch = currentEpochTime();
+
   return {
     awslogs: {
       data: Buffer.from(
@@ -18,12 +19,12 @@ export const CloudWatchLogsEventStub = (overrides: Partial<CloudWatchLogsDecoded
               logEvents: [
                 {
                   id: 'eventId1',
-                  timestamp: DateTime.now().toUnixInteger(),
+                  timestamp: currentEpoch,
                   message: 'This is a sample log message 1',
                 },
                 {
                   id: 'eventId2',
-                  timestamp: DateTime.now().toUnixInteger(),
+                  timestamp: currentEpoch,
                   message: 'This is a sample log message 2',
                 },
               ],
@@ -39,7 +40,7 @@ export const CloudWatchLogsEventStub = (overrides: Partial<CloudWatchLogsDecoded
 export const CloudWatchLogsLogEventStub = (overrides: Partial<CloudWatchLogsLogEvent> = {}): CloudWatchLogsLogEvent => {
   return {
     id: 'eventId1',
-    timestamp: DateTime.now().toUnixInteger(),
+    timestamp: currentEpochTime(),
     message: 'This is a sample log message',
 
     ...overrides,

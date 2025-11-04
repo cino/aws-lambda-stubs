@@ -13,18 +13,18 @@ import type {
   APIGatewayProxyWithCognitoAuthorizerEvent,
   APIGatewayProxyWithLambdaAuthorizerEvent,
 } from 'aws-lambda';
-import { DateTime } from 'luxon';
 import type { Merge } from 'type-fest';
 import {
   APIGatewayEventRequestContextV2Stub,
   APIGatewayEventRequestContextV2WithAuthorizerStub,
   APIGatewayEventRequestContextWithAuthorizerStub,
   DEFAULT_REGION,
+  eventParsedDateTime,
   type PartialAPIGatewayEventRequestContext,
   type PartialAPIGatewayEventRequestContextV2,
   randomIpAddress,
 } from './common';
-import { deepMerge } from './utils';
+import { currentEpochTime, deepMerge } from './utils';
 
 // V1
 
@@ -181,7 +181,7 @@ type PartialAPIGatewayProxyWebsocketEventV2 = Merge<
 export const APIGatewayProxyWebsocketEventV2Stub = (
   overrides: PartialAPIGatewayProxyWebsocketEventV2 = {}
 ): APIGatewayProxyWebsocketEventV2 => {
-  const now = DateTime.now();
+  const currentEpoch = currentEpochTime();
 
   return deepMerge<APIGatewayProxyWebsocketEventV2>(
     {
@@ -192,9 +192,9 @@ export const APIGatewayProxyWebsocketEventV2Stub = (
         extendedRequestId: crypto.randomUUID(),
         messageDirection: 'IN',
         stage: 'prod',
-        connectedAt: now.toUnixInteger(),
-        requestTime: now.toFormat('dd/MMM/yyyy:HH:mm:ss ZZZ'),
-        requestTimeEpoch: now.toUnixInteger(),
+        connectedAt: currentEpoch,
+        requestTime: eventParsedDateTime(new Date()),
+        requestTimeEpoch: currentEpoch,
         requestId: crypto.randomUUID(),
         domainName: `id.execute-api.${DEFAULT_REGION}.amazonaws.com`,
         connectionId: crypto.randomUUID(),

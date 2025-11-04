@@ -1,13 +1,13 @@
 import type { FirehoseTransformationEvent, FirehoseTransformationEventRecord } from 'aws-lambda';
-import { DateTime } from 'luxon';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './common';
+import { currentEpochTime } from './utils';
 
 const FireHoseTransformationEventRecordStub = (
   overrides: Partial<FirehoseTransformationEventRecord> = {}
 ): FirehoseTransformationEventRecord => {
   return {
     recordId: 'record-id-123',
-    approximateArrivalTimestamp: DateTime.now().toUnixInteger(),
+    approximateArrivalTimestamp: currentEpochTime(),
     data: 'SGVsbG8sIHRoaXMgaXMgYSB0ZXN0IG1lc3NhZ2Uh', // "Hello, this is a test message!" in base64
     ...overrides,
   };

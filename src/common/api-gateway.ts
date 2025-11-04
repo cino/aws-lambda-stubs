@@ -3,9 +3,8 @@ import type {
   APIGatewayEventRequestContextV2,
   APIGatewayEventRequestContextWithAuthorizer,
 } from 'aws-lambda';
-import { DateTime } from 'luxon';
 import type { Merge } from 'type-fest';
-import { deepMerge, randomIpAddress } from '../utils';
+import { currentEpochTime, deepMerge, randomIpAddress } from '../utils';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './consts';
 
 export type PartialAPIGatewayEventRequestContext<TAuthorizer> = Merge<
@@ -15,6 +14,26 @@ export type PartialAPIGatewayEventRequestContext<TAuthorizer> = Merge<
     identity?: Partial<APIGatewayEventIdentity>;
   }
 >;
+
+export const eventParsedDateTime = (date: Date): string => {
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = date.toLocaleString('en-US', { month: 'short' });
+  const year = date.getFullYear();
+  const hour = String(date.getHours());
+  const minute = String(date.getMinutes());
+  const second = String(date.getSeconds());
+
+  const offset = -date.getTimezoneOffset(); // Reverse the sign
+
+  const sign = offset >= 0 ? '+' : '-';
+  const absOffset = Math.abs(offset);
+  const hours = String(Math.floor(absOffset / 60)).padStart(2, '0');
+  const minutes = String(absOffset % 60).padStart(2, '0');
+
+  const formattedTz = `${sign}${hours}${minutes}`;
+
+  return `${day}/${month}/${year}:${hour}:${minute}:${second} ${formattedTz}`;
+};
 
 export const APIGatewayEventRequestContextWithAuthorizerStub = <TAuthorizer>(
   overrides: PartialAPIGatewayEventRequestContext<TAuthorizer> = {
@@ -31,7 +50,7 @@ export const APIGatewayEventRequestContextWithAuthorizerStub = <TAuthorizer>(
       path: '/prod/resource',
       stage: 'prod',
       requestId: crypto.randomUUID(),
-      requestTimeEpoch: DateTime.now().toUnixInteger(),
+      requestTimeEpoch: currentEpochTime(),
       resourceId: 'resource-id',
       resourcePath: '/resource',
       authorizer: undefined as TAuthorizer, // Will be overridden by deepMerge
@@ -54,7 +73,6 @@ export type PartialAPIGatewayEventRequestContextV2 = Merge<
 export const APIGatewayEventRequestContextV2Stub = (
   overrides: PartialAPIGatewayEventRequestContextV2 = {}
 ): APIGatewayEventRequestContextV2 => {
-  const dateTime = DateTime.now();
 
   return deepMerge(
     {
@@ -72,8 +90,8 @@ export const APIGatewayEventRequestContextV2Stub = (
       requestId: crypto.randomUUID(),
       routeKey: '$default',
       stage: 'prod',
-      time: dateTime.toFormat('dd/MMM/yyyy:HH:mm:ss ZZZ'),
-      timeEpoch: dateTime.toUnixInteger(),
+      time: eventParsedDateTime(new Date()),
+      timeEpoch: currentEpochTime(),
     },
     overrides as Partial<APIGatewayEventRequestContextV2>
   );
@@ -92,7 +110,7 @@ export const APIGatewayEventRequestContextV2WithAuthorizerStub = <TAuthorizer>(
   >(
     {
       ...APIGatewayEventRequestContextV2Stub(overrides),
-      authorizer: undefined as TAuthorizer, // will be overwrtitten by deepMerge
+      authorizer: undefined as TAuthorizer, // will be overwritten by deepMerge
     },
     { authorizer }
   );
