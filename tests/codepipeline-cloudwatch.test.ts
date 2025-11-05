@@ -5,6 +5,7 @@ import {
   CodePipelineCloudWatchStageEventStub,
   DEFAULT_ACCOUNT_ID,
 } from '../src';
+import { isoDateRegex, uuidv1Regex } from './helpers';
 
 describe('#codepipeline-cloudwatch', () => {
   describe('#action-event', () => {
@@ -12,12 +13,12 @@ describe('#codepipeline-cloudwatch', () => {
       const event = CodePipelineCloudWatchActionEventStub();
 
       expect(event).toEqual({
-        version: '0',
-        id: '12345678-1234-1234-1234-123456789012',
+        version: '1',
+        id: expect.stringMatching(uuidv1Regex),
         'detail-type': 'CodePipeline Action Execution State Change',
         source: 'test',
         account: DEFAULT_ACCOUNT_ID,
-        time: expect.any(String),
+        time: expect.stringMatching(isoDateRegex),
         region: 'us-east-1',
         resources: [],
         detail: {
@@ -46,12 +47,12 @@ describe('#codepipeline-cloudwatch', () => {
       });
 
       expect(event).toEqual({
-        version: '0',
-        id: '12345678-1234-1234-1234-123456789012',
+        version: '1',
+        id: expect.stringMatching(uuidv1Regex),
         'detail-type': 'CodePipeline Action Execution State Change',
         source: 'test',
         account: DEFAULT_ACCOUNT_ID,
-        time: expect.any(String),
+        time: expect.stringMatching(isoDateRegex),
         region: 'us-east-1',
         resources: [],
         detail: {
@@ -77,12 +78,12 @@ describe('#codepipeline-cloudwatch', () => {
       const event = CodePipelineCloudWatchPipelineEventStub();
 
       expect(event).toEqual({
-        version: '0',
-        id: '12345678-1234-1234-1234-123456789012',
+        version: '1',
+        id: expect.stringMatching(uuidv1Regex),
         'detail-type': 'CodePipeline Pipeline Execution State Change',
         source: 'test',
         account: DEFAULT_ACCOUNT_ID,
-        time: expect.any(String),
+        time: expect.stringMatching(isoDateRegex),
         region: 'us-east-1',
         resources: [],
         detail: {
@@ -102,12 +103,12 @@ describe('#codepipeline-cloudwatch', () => {
       });
 
       expect(event).toEqual({
-        version: '0',
-        id: '12345678-1234-1234-1234-123456789012',
+        version: '1',
+        id: expect.stringMatching(uuidv1Regex),
         'detail-type': 'CodePipeline Pipeline Execution State Change',
         source: 'test',
         account: DEFAULT_ACCOUNT_ID,
-        time: expect.any(String),
+        time: expect.stringMatching(isoDateRegex),
         region: 'us-east-1',
         resources: [],
         detail: {
@@ -125,12 +126,12 @@ describe('#codepipeline-cloudwatch', () => {
       const event = CodePipelineCloudWatchStageEventStub();
 
       expect(event).toEqual({
-        version: '0',
-        id: '12345678-1234-1234-1234-123456789012',
+        version: '1',
+        id: expect.stringMatching(uuidv1Regex),
         'detail-type': 'CodePipeline Stage Execution State Change',
         source: 'test',
         account: DEFAULT_ACCOUNT_ID,
-        time: expect.any(String),
+        time: expect.stringMatching(isoDateRegex),
         region: 'us-east-1',
         resources: [],
         detail: {
@@ -152,12 +153,12 @@ describe('#codepipeline-cloudwatch', () => {
       });
 
       expect(event).toEqual({
-        version: '0',
-        id: '12345678-1234-1234-1234-123456789012',
+        version: '1',
+        id: expect.stringMatching(uuidv1Regex),
         'detail-type': 'CodePipeline Stage Execution State Change',
         source: 'test',
         account: DEFAULT_ACCOUNT_ID,
-        time: expect.any(String),
+        time: expect.stringMatching(isoDateRegex),
         region: 'us-east-1',
         resources: [],
         detail: {

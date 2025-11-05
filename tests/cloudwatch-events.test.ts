@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { CloudWatchScheduledEventStub, DEFAULT_ACCOUNT_ID } from '../src';
+import { isoDateRegex } from './helpers';
 
 describe('#cloudwatch-events', () => {
   describe('#cloudWatchScheduledEventStub', () => {
@@ -7,12 +8,12 @@ describe('#cloudwatch-events', () => {
       const event = CloudWatchScheduledEventStub();
 
       expect(event).toEqual({
-        version: '0',
+        version: '1',
         id: expect.any(String),
         'detail-type': 'Scheduled Event',
         source: 'test',
         account: DEFAULT_ACCOUNT_ID,
-        time: expect.any(String),
+        time: expect.stringMatching(isoDateRegex),
         region: expect.any(String),
         resources: [],
         detail: {},
@@ -26,12 +27,12 @@ describe('#cloudwatch-events', () => {
       });
 
       expect(event).toEqual({
-        version: '0',
+        version: '1',
         id: expect.any(String),
         'detail-type': 'Scheduled Event',
         source: 'test',
         account: DEFAULT_ACCOUNT_ID,
-        time: expect.any(String),
+        time: expect.stringMatching(isoDateRegex),
         region: 'us-west-2',
         resources: [],
         detail: { key: 'value' },

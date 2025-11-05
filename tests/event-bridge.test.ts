@@ -1,17 +1,18 @@
 import { describe, expect, it } from 'vitest';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION, EventBridgeEventStub } from '../src';
+import { isoDateRegex, uuidv1Regex } from './helpers';
 
 describe('#event-bridge', () => {
   it('should return a valid event', () => {
     const event = EventBridgeEventStub('TestDetailType', { key: 'value' });
 
     expect(event).toEqual({
-      version: '0',
-      id: '12345678-1234-1234-1234-123456789012',
+      version: '1',
+      id: expect.stringMatching(uuidv1Regex),
       'detail-type': 'TestDetailType',
       source: 'test',
       account: DEFAULT_ACCOUNT_ID,
-      time: expect.any(String),
+      time: expect.stringMatching(isoDateRegex),
       region: DEFAULT_REGION,
       resources: [],
       detail: { key: 'value' },
@@ -26,12 +27,12 @@ describe('#event-bridge', () => {
     );
 
     expect(event).toEqual({
-      version: '0',
-      id: '12345678-1234-1234-1234-123456789012',
+      version: '1',
+      id: expect.stringMatching(uuidv1Regex),
       'detail-type': 'TestDetailType',
       source: 'test',
       account: '098765432109',
-      time: expect.any(String),
+      time: expect.stringMatching(isoDateRegex),
       region: 'us-west-2',
       resources: [],
       detail: { key: 'value' },
@@ -46,12 +47,12 @@ describe('#event-bridge', () => {
     );
 
     expect(event).toEqual({
-      version: '0',
-      id: '12345678-1234-1234-1234-123456789012',
+      version: '1',
+      id: expect.stringMatching(uuidv1Regex),
       'detail-type': 'TestDetailType',
       source: 'test',
       account: '112233445566',
-      time: expect.any(String),
+      time: expect.stringMatching(isoDateRegex),
       region: 'eu-central-1',
       resources: [],
       detail: { key: 'value' },

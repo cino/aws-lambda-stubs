@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { LexV2EventStub } from '../src';
-import { isUuidV4Regex } from './helpers';
+import { uuidV4Regex } from './helpers';
 
 describe('#lex-v2', () => {
   it('should return a valid event', () => {
@@ -44,7 +44,7 @@ describe('#lex-v2', () => {
           state: 'InProgress',
         },
         sessionAttributes: {},
-        originatingRequestId: expect.stringMatching(isUuidV4Regex),
+        originatingRequestId: expect.stringMatching(uuidV4Regex),
       },
       transcriptions: [],
       requestAttributes: {},
@@ -97,7 +97,7 @@ describe('#lex-v2', () => {
           state: 'InProgress',
         },
         sessionAttributes: {},
-        originatingRequestId: expect.stringMatching(isUuidV4Regex),
+        originatingRequestId: expect.stringMatching(uuidV4Regex),
       },
       transcriptions: [],
       requestAttributes: {},

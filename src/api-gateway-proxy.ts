@@ -14,6 +14,7 @@ import type {
   APIGatewayProxyWithLambdaAuthorizerEvent,
 } from 'aws-lambda';
 import type { Merge } from 'type-fest';
+import { v4 as uuidv4 } from 'uuid';
 import {
   APIGatewayEventRequestContextV2Stub,
   APIGatewayEventRequestContextV2WithAuthorizerStub,
@@ -27,7 +28,6 @@ import {
 import { currentEpochTime, deepMerge } from './utils';
 
 // V1
-
 type PartialAPIGatewayProxyWithLambdaAuthorizerEvent<TAuthorizerContext> = Merge<
   Partial<APIGatewayProxyWithLambdaAuthorizerEvent<TAuthorizerContext>>,
   {
@@ -187,17 +187,17 @@ export const APIGatewayProxyWebsocketEventV2Stub = (
     {
       requestContext: {
         routeKey: '$default',
-        messageId: crypto.randomUUID(),
+        messageId: uuidv4(),
         eventType: 'MESSAGE',
-        extendedRequestId: crypto.randomUUID(),
+        extendedRequestId: uuidv4(),
         messageDirection: 'IN',
         stage: 'prod',
         connectedAt: currentEpoch,
         requestTime: ApiGatewayParsedDateTime(new Date()),
         requestTimeEpoch: currentEpoch,
-        requestId: crypto.randomUUID(),
+        requestId: uuidv4(),
         domainName: `id.execute-api.${DEFAULT_REGION}.amazonaws.com`,
-        connectionId: crypto.randomUUID(),
+        connectionId: uuidv4(),
         apiId: 'example',
       },
       body: '',

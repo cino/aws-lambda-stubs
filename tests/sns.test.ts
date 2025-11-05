@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION, SNSEventStub } from '../src';
+import { isoDateRegex } from './helpers';
 
 describe('#sns', () => {
   it('should return a valid event', () => {
@@ -13,7 +14,7 @@ describe('#sns', () => {
           EventSource: 'aws:sns',
           Sns: {
             SignatureVersion: '1',
-            Timestamp: expect.any(String),
+            Timestamp: expect.stringMatching(isoDateRegex),
             Signature: 'EXAMPLE',
             SigningCertUrl: `https://sns.${DEFAULT_ACCOUNT_ID}.amazonaws.com/SimpleNotificationService-12345678901234567890.pem`,
             MessageId: '95df01b4-ee98-5cb9-9903-4c221d41eb5e',

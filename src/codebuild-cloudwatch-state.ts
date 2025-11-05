@@ -2,7 +2,7 @@ import type { CodeBuildCloudWatchStateEvent, CodeBuildStateEventDetail } from 'a
 import type { Merge } from 'type-fest';
 import { DEFAULT_ACCOUNT_ID } from './common';
 import { EventBridgeEventStub } from './event-bridge';
-import { deepMerge } from './utils';
+import { deepMerge, javaLoggingTimeStampFormat } from './utils';
 
 const codeBuildStateEventDetail: CodeBuildStateEventDetail = {
   'build-status': 'IN_PROGRESS',
@@ -19,7 +19,7 @@ const codeBuildStateEventDetail: CodeBuildStateEventDetail = {
     'timeout-in-minutes': 60,
     'build-complete': false,
     initiator: 'user/example',
-    'build-start-time': new Date().toISOString(),
+    'build-start-time': javaLoggingTimeStampFormat(new Date()),
     source: {
       buildspec: 'buildspec.yml',
       location: 'https://github.com/example/repo.git',

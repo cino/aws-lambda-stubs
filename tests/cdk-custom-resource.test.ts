@@ -5,7 +5,7 @@ import {
   CdkCustomResourceIsCompleteEventStub,
   CdkCustomResourceUpdateEventStub,
 } from '../src';
-import { isUuidV4Regex } from './helpers';
+import { uuidV4Regex } from './helpers';
 
 describe('#cdk-custom-resource', () => {
   describe('#create-event', () => {
@@ -17,7 +17,7 @@ describe('#cdk-custom-resource', () => {
         ServiceToken: 'arn:aws:lambda:us-east-1:012345678901:function:my-function',
         ResponseURL: 'https://cdk-custom-resource-response-useast1.s3.amazonaws.com/...',
         StackId: 'arn:aws:cloudformation:us-east-1:012345678901:stack/my-stack/abcd1234-ef56-7890-abcd-1234ef567890',
-        RequestId: expect.stringMatching(isUuidV4Regex),
+        RequestId: expect.stringMatching(uuidV4Regex),
         ResourceType: 'Custom::MyCustomResource',
         LogicalResourceId: 'MyCustomResource',
         ResourceProperties: {
@@ -42,7 +42,7 @@ describe('#cdk-custom-resource', () => {
         ServiceToken: 'arn:aws:lambda:us-east-1:012345678901:function:my-function',
         ResponseURL: 'https://cdk-custom-resource-response-useast1.s3.amazonaws.com/...',
         StackId: 'arn:aws:cloudformation:us-east-1:012345678901:stack/my-stack/abcd1234-ef56-7890-abcd-1234ef567890',
-        RequestId: expect.stringMatching(isUuidV4Regex),
+        RequestId: expect.stringMatching(uuidV4Regex),
         ResourceType: 'Custom::MyCustomResource',
         LogicalResourceId: 'MyCustomResource',
         ResourceProperties: {
@@ -63,7 +63,7 @@ describe('#cdk-custom-resource', () => {
         ServiceToken: 'arn:aws:lambda:us-east-1:012345678901:function:my-function',
         ResponseURL: 'https://cdk-custom-resource-response-useast1.s3.amazonaws.com/...',
         StackId: 'arn:aws:cloudformation:us-east-1:012345678901:stack/my-stack/abcd1234-ef56-7890-abcd-1234ef567890',
-        RequestId: expect.stringMatching(isUuidV4Regex),
+        RequestId: expect.stringMatching(uuidV4Regex),
         ResourceType: 'Custom::MyCustomResource',
         LogicalResourceId: 'MyCustomResource',
         ResourceProperties: {
@@ -94,7 +94,7 @@ describe('#cdk-custom-resource', () => {
         ServiceToken: 'arn:aws:lambda:us-east-1:012345678901:function:my-function',
         ResponseURL: 'https://cdk-custom-resource-response-useast1.s3.amazonaws.com/...',
         StackId: 'arn:aws:cloudformation:us-east-1:012345678901:stack/my-stack/abcd1234-ef56-7890-abcd-1234ef567890',
-        RequestId: expect.stringMatching(isUuidV4Regex),
+        RequestId: expect.stringMatching(uuidV4Regex),
         ResourceType: 'Custom::MyCustomResource',
         LogicalResourceId: 'MyCustomResource',
         ResourceProperties: {
@@ -121,7 +121,7 @@ describe('#cdk-custom-resource', () => {
         ServiceToken: 'arn:aws:lambda:us-east-1:012345678901:function:my-function',
         ResponseURL: 'https://cdk-custom-resource-response-useast1.s3.amazonaws.com/...',
         StackId: 'arn:aws:cloudformation:us-east-1:012345678901:stack/my-stack/abcd1234-ef56-7890-abcd-1234ef567890',
-        RequestId: expect.stringMatching(isUuidV4Regex),
+        RequestId: expect.stringMatching(uuidV4Regex),
         ResourceType: 'Custom::MyCustomResource',
         LogicalResourceId: 'MyCustomResource',
         ResourceProperties: {
@@ -147,7 +147,7 @@ describe('#cdk-custom-resource', () => {
         ServiceToken: 'arn:aws:lambda:us-east-1:012345678901:function:my-function',
         ResponseURL: 'https://cdk-custom-resource-response-useast1.s3.amazonaws.com/...',
         StackId: 'arn:aws:cloudformation:us-east-1:012345678901:stack/my-stack/abcd1234-ef56-7890-abcd-1234ef567890',
-        RequestId: expect.stringMatching(isUuidV4Regex),
+        RequestId: expect.stringMatching(uuidV4Regex),
         ResourceType: 'Custom::MyCustomResource',
         LogicalResourceId: 'MyCustomResource',
         ResourceProperties: {

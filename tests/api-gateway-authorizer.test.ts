@@ -8,7 +8,7 @@ import {
   DEFAULT_ACCOUNT_ID,
   DEFAULT_REGION,
 } from '../src';
-import { ipv4Regex, isUuidV4Regex } from './helpers';
+import { clfDateRegex, ipv4Regex, uuidV4Regex } from './helpers';
 
 describe('#api-gateway-authorizer', () => {
   describe('token-authorizer', () => {
@@ -62,7 +62,7 @@ describe('#api-gateway-authorizer', () => {
               ...APIGatewayEventRequestContextWithAuthorizerStub().identity,
               sourceIp: expect.stringMatching(ipv4Regex),
             },
-            requestId: expect.stringMatching(isUuidV4Regex),
+            requestId: expect.stringMatching(uuidV4Regex),
             requestTimeEpoch: expect.any(Number),
           },
         },
@@ -97,7 +97,7 @@ describe('#api-gateway-authorizer', () => {
               ...APIGatewayEventRequestContextWithAuthorizerStub().identity,
               sourceIp: expect.stringMatching(ipv4Regex),
             },
-            requestId: expect.stringMatching(isUuidV4Regex),
+            requestId: expect.stringMatching(uuidV4Regex),
             requestTimeEpoch: expect.any(Number),
           },
         },
@@ -130,9 +130,9 @@ describe('#api-gateway-authorizer', () => {
               ...APIGatewayEventRequestContextV2Stub().http,
               sourceIp: expect.stringMatching(ipv4Regex),
             },
-            requestId: expect.stringMatching(isUuidV4Regex),
+            requestId: expect.stringMatching(uuidV4Regex),
           },
-          time: expect.any(String),
+          time: expect.stringMatching(clfDateRegex),
           timeEpoch: expect.any(Number),
         },
         pathParameters: {},
@@ -169,9 +169,9 @@ describe('#api-gateway-authorizer', () => {
               ...APIGatewayEventRequestContextV2Stub().http,
               sourceIp: expect.stringMatching(ipv4Regex),
             },
-            requestId: expect.stringMatching(isUuidV4Regex),
+            requestId: expect.stringMatching(uuidV4Regex),
             stage: 'dev',
-            time: expect.any(String),
+            time: expect.stringMatching(clfDateRegex),
             timeEpoch: expect.any(Number),
           },
         },

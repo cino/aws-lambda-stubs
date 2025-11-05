@@ -5,6 +5,7 @@ import {
   KinesisStreamEventStub,
   KinesisStreamTumblingWindowEventStub,
 } from '../src';
+import { epochTimeRegex } from './helpers';
 
 describe('#kinesis', () => {
   describe('#stream', () => {
@@ -26,7 +27,7 @@ describe('#kinesis', () => {
               partitionKey: '1',
               sequenceNumber: '49545115243490985018280067714973144582180062593244200961',
               data: 'SGVsbG8sIHRoaXMgaXMgYSB0ZXN0IG1lc3NhZ2Uh',
-              approximateArrivalTimestamp: expect.any(Number),
+              approximateArrivalTimestamp: expect.toSatisfy((val: number) => epochTimeRegex.test(val.toString())),
             },
           },
         ],
@@ -59,7 +60,7 @@ describe('#kinesis', () => {
               partitionKey: 'custom-partition-key',
               sequenceNumber: '49545115243490985018280067714973144582180062593244200961',
               data: 'SGVsbG8sIHRoaXMgaXMgYSB0ZXN0IG1lc3NhZ2Uh',
-              approximateArrivalTimestamp: expect.any(Number),
+              approximateArrivalTimestamp: expect.toSatisfy((val: number) => epochTimeRegex.test(val.toString())),
             },
           },
         ],

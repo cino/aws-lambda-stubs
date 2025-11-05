@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { S3EventStub } from '../src';
-import { ipRegex } from './helpers';
+import { ipRegex, isoDateRegex } from './helpers';
 
 describe('#s3', () => {
   it('should return a valid event', () => {
@@ -12,7 +12,7 @@ describe('#s3', () => {
           awsRegion: 'us-east-1',
           eventName: 'ObjectCreated:Put',
           eventSource: 'aws:s3',
-          eventTime: expect.any(String),
+          eventTime: expect.stringMatching(isoDateRegex),
           eventVersion: '2.1',
           glacierEventData: undefined,
           userIdentity: {

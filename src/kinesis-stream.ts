@@ -6,7 +6,7 @@ import type {
 } from 'aws-lambda';
 import type { Merge } from 'type-fest';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './common';
-import { deepMerge } from './utils';
+import { currentEpochTime, deepMerge } from './utils';
 
 type PartialKinesisStreamRecord = Merge<
   Partial<KinesisStreamRecord>,
@@ -33,7 +33,7 @@ const KinesisStreamRecordStub = (overrides: PartialKinesisStreamRecord = {}): Ki
         partitionKey: '1',
         sequenceNumber: '49545115243490985018280067714973144582180062593244200961',
         data: 'SGVsbG8sIHRoaXMgaXMgYSB0ZXN0IG1lc3NhZ2Uh', // "Hello, this is a test message!" in base64
-        approximateArrivalTimestamp: Date.now(),
+        approximateArrivalTimestamp: currentEpochTime(),
       },
     },
     overrides as Partial<KinesisStreamRecord>

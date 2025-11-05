@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION, MSKEventStub } from '../src';
+import { epochTimeRegex } from './helpers';
 
 describe('#msk', () => {
   it('should return a valid event', () => {
@@ -15,7 +16,7 @@ describe('#msk', () => {
             topic: 'test-topic',
             partition: 0,
             offset: 123,
-            timestamp: expect.any(Number),
+            timestamp: expect.toSatisfy((val: number) => epochTimeRegex.test(val.toString())),
             timestampType: 'CREATE_TIME',
             key: 'abcDEFghiJKLmnoPQRstuVWXyz1234==',
             value: 'SGVsbG8sIHRoaXMgaXMgYSB0ZXN0Lg==',

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { CloudWatchAlarmEventStub, DEFAULT_ACCOUNT_ID } from '../src';
-import { instanceIdRegex } from './helpers';
+import { instanceIdRegex, isoDateRegex } from './helpers';
 
 describe('#cloudwatch-alarm', () => {
   describe('#cloudWatchAlarmEventStub', () => {
@@ -11,7 +11,7 @@ describe('#cloudwatch-alarm', () => {
         source: 'aws.cloudwatch',
         alarmArn: `arn:aws:cloudwatch:us-east-1:${DEFAULT_ACCOUNT_ID}:alarm:example-alarm`,
         accountId: DEFAULT_ACCOUNT_ID,
-        time: expect.any(String),
+        time: expect.stringMatching(isoDateRegex),
         region: 'us-east-1',
         alarmData: {
           alarmName: 'lambda-demo-metric-alarm',
@@ -66,7 +66,7 @@ describe('#cloudwatch-alarm', () => {
         source: 'aws.cloudwatch',
         alarmArn: `arn:aws:cloudwatch:us-west-2:${DEFAULT_ACCOUNT_ID}:alarm:example-alarm`,
         accountId: DEFAULT_ACCOUNT_ID,
-        time: expect.any(String),
+        time: expect.stringMatching(isoDateRegex),
         region: 'us-west-2',
         alarmData: {
           alarmName: 'lambda-demo-metric-alarm',

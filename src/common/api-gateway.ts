@@ -4,6 +4,7 @@ import type {
   APIGatewayEventRequestContextWithAuthorizer,
 } from 'aws-lambda';
 import type { Merge } from 'type-fest';
+import { v4 as uuidv4 } from 'uuid';
 import { currentEpochTime, deepMerge, randomIpAddress } from '../utils';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './consts';
 
@@ -49,7 +50,7 @@ export const APIGatewayEventRequestContextWithAuthorizerStub = <TAuthorizer>(
       identity: APIGatewayEventIdentityStub(),
       path: '/prod/resource',
       stage: 'prod',
-      requestId: crypto.randomUUID(),
+      requestId: uuidv4(),
       requestTimeEpoch: currentEpochTime(),
       resourceId: 'resource-id',
       resourcePath: '/resource',
@@ -73,7 +74,6 @@ export type PartialAPIGatewayEventRequestContextV2 = Merge<
 export const APIGatewayEventRequestContextV2Stub = (
   overrides: PartialAPIGatewayEventRequestContextV2 = {}
 ): APIGatewayEventRequestContextV2 => {
-
   return deepMerge(
     {
       accountId: DEFAULT_ACCOUNT_ID,
@@ -87,7 +87,7 @@ export const APIGatewayEventRequestContextV2Stub = (
         sourceIp: randomIpAddress(),
         userAgent: 'Custom User Agent String',
       },
-      requestId: crypto.randomUUID(),
+      requestId: uuidv4(),
       routeKey: '$default',
       stage: 'prod',
       time: ApiGatewayParsedDateTime(new Date()),

@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION, SQSEventStub } from '../src';
+import { epochTimeRegex, uuidV4Regex } from './helpers';
 
 describe('#sqs', () => {
   it('should return a valid event', () => {
@@ -8,14 +9,14 @@ describe('#sqs', () => {
     expect(event).toEqual({
       Records: [
         {
-          messageId: '1',
+          messageId: expect.stringMatching(uuidV4Regex),
           receiptHandle: 'receipt-handle',
           body: JSON.stringify({ key: 'value' }),
           attributes: {
             ApproximateReceiveCount: '1',
-            SentTimestamp: expect.any(String),
+            SentTimestamp: expect.stringMatching(epochTimeRegex),
             SenderId: 'sender-id',
-            ApproximateFirstReceiveTimestamp: expect.any(String),
+            ApproximateFirstReceiveTimestamp: expect.stringMatching(epochTimeRegex),
           },
           messageAttributes: {},
           md5OfBody: 'a7353f7cddce808de0032747a0b7be50',
@@ -42,14 +43,14 @@ describe('#sqs', () => {
     expect(event).toEqual({
       Records: [
         {
-          messageId: '1',
+          messageId: expect.stringMatching(uuidV4Regex),
           receiptHandle: 'receipt-handle',
           body: JSON.stringify({ key: 'overridden value' }),
           attributes: {
             ApproximateReceiveCount: '5',
-            SentTimestamp: expect.any(String),
+            SentTimestamp: expect.stringMatching(epochTimeRegex),
             SenderId: 'sender-id',
-            ApproximateFirstReceiveTimestamp: expect.any(String),
+            ApproximateFirstReceiveTimestamp: expect.stringMatching(epochTimeRegex),
           },
           messageAttributes: {},
           md5OfBody: 'e37de0b98a183ba8239e8f826c37c27e',

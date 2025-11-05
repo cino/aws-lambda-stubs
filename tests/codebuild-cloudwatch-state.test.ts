@@ -7,6 +7,7 @@ import {
   CodeBuildStateEventDetailSucceededStub,
   DEFAULT_ACCOUNT_ID,
 } from '../src';
+import { isoDateRegex, javaLoggingTimeStampFormatRegex } from './helpers';
 
 describe('#codebuild-cloudwatch-state', () => {
   describe('#in-progress', () => {
@@ -14,12 +15,12 @@ describe('#codebuild-cloudwatch-state', () => {
       const event = CodeBuildCloudWatchStateEventStub(CodeBuildStateEventDetailInProgressStub());
 
       expect(event).toEqual({
-        version: '0',
+        version: '1',
         id: expect.any(String),
         'detail-type': 'CodeBuild Build State Change',
         source: 'aws.codebuild',
         account: DEFAULT_ACCOUNT_ID,
-        time: expect.any(String),
+        time: expect.stringMatching(isoDateRegex),
         region: 'us-east-1',
         resources: [],
         detail: {
@@ -37,7 +38,7 @@ describe('#codebuild-cloudwatch-state', () => {
             'timeout-in-minutes': 60,
             'build-complete': false,
             initiator: 'user/example',
-            'build-start-time': expect.any(String), // TODO Make Matcher for Sep 1, 2017 4:12:29 PM
+            'build-start-time': expect.stringMatching(javaLoggingTimeStampFormatRegex),
             source: {
               buildspec: 'buildspec.yml',
               location: 'https://github.com/example/repo.git',
@@ -94,12 +95,12 @@ describe('#codebuild-cloudwatch-state', () => {
       const event = CodeBuildCloudWatchStateEventStub(CodeBuildStateEventDetailSucceededStub());
 
       expect(event).toEqual({
-        version: '0',
+        version: '1',
         id: expect.any(String),
         'detail-type': 'CodeBuild Build State Change',
         source: 'aws.codebuild',
         account: DEFAULT_ACCOUNT_ID,
-        time: expect.any(String),
+        time: expect.stringMatching(isoDateRegex),
         region: 'us-east-1',
         resources: [],
         detail: {
@@ -117,7 +118,7 @@ describe('#codebuild-cloudwatch-state', () => {
             'timeout-in-minutes': 60,
             'build-complete': false,
             initiator: 'user/example',
-            'build-start-time': expect.any(String), // TODO Make Matcher for Sep 1, 2017 4:12:29 PM
+            'build-start-time': expect.stringMatching(javaLoggingTimeStampFormatRegex),
             source: {
               buildspec: 'buildspec.yml',
               location: 'https://github.com/example/repo.git',
@@ -174,12 +175,12 @@ describe('#codebuild-cloudwatch-state', () => {
       const event = CodeBuildCloudWatchStateEventStub(CodeBuildStateEventDetailFailedStub());
 
       expect(event).toEqual({
-        version: '0',
+        version: '1',
         id: expect.any(String),
         'detail-type': 'CodeBuild Build State Change',
         source: 'aws.codebuild',
         account: DEFAULT_ACCOUNT_ID,
-        time: expect.any(String),
+        time: expect.stringMatching(isoDateRegex),
         region: 'us-east-1',
         resources: [],
         detail: {
@@ -197,7 +198,7 @@ describe('#codebuild-cloudwatch-state', () => {
             'timeout-in-minutes': 60,
             'build-complete': false,
             initiator: 'user/example',
-            'build-start-time': expect.any(String), // TODO Make Matcher for Sep 1, 2017 4:12:29 PM
+            'build-start-time': expect.stringMatching(javaLoggingTimeStampFormatRegex),
             source: {
               buildspec: 'buildspec.yml',
               location: 'https://github.com/example/repo.git',
@@ -254,12 +255,12 @@ describe('#codebuild-cloudwatch-state', () => {
       const event = CodeBuildCloudWatchStateEventStub(CodeBuildStateEventDetailStoppedStub());
 
       expect(event).toEqual({
-        version: '0',
+        version: '1',
         id: expect.any(String),
         'detail-type': 'CodeBuild Build State Change',
         source: 'aws.codebuild',
         account: DEFAULT_ACCOUNT_ID,
-        time: expect.any(String),
+        time: expect.stringMatching(isoDateRegex),
         region: 'us-east-1',
         resources: [],
         detail: {
@@ -277,7 +278,7 @@ describe('#codebuild-cloudwatch-state', () => {
             'timeout-in-minutes': 60,
             'build-complete': false,
             initiator: 'user/example',
-            'build-start-time': expect.any(String), // TODO Make Matcher for Sep 1, 2017 4:12:29 PM
+            'build-start-time': expect.stringMatching(javaLoggingTimeStampFormatRegex),
             source: {
               buildspec: 'buildspec.yml',
               location: 'https://github.com/example/repo.git',

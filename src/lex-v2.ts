@@ -1,5 +1,6 @@
 import type { LexV2Bot, LexV2Event, LexV2SessionState } from 'aws-lambda';
 import type { Merge } from 'type-fest';
+import { v4 as uuidv4 } from 'uuid';
 import { deepMerge } from './utils';
 
 type PartialLexV2Event = Merge<
@@ -50,7 +51,7 @@ export const LexV2EventStub = (overrides: PartialLexV2Event = {}): LexV2Event =>
           state: 'InProgress',
         },
         sessionAttributes: {},
-        originatingRequestId: crypto.randomUUID(),
+        originatingRequestId: uuidv4(),
       },
       transcriptions: [],
       requestAttributes: {},

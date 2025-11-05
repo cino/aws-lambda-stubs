@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION, GuardDutyScanResultNotificationEventStub } from '../src';
+import { isoDateRegex, uuidv1Regex } from './helpers';
 
 describe('#guard-duty-event-notification', () => {
   it('should return a valid event', () => {
@@ -7,11 +8,11 @@ describe('#guard-duty-event-notification', () => {
 
     expect(event).toEqual({
       version: '1',
-      id: 'abcd1234-ef56-7890-ab12-34567890cdef',
+      id: expect.stringMatching(uuidv1Regex),
       'detail-type': 'GuardDuty Malware Protection Object Scan Result',
       source: 'aws.guardduty',
       account: DEFAULT_ACCOUNT_ID,
-      time: expect.any(String),
+      time: expect.stringMatching(isoDateRegex),
       region: DEFAULT_REGION,
       resources: [
         `arn:aws:guardduty:${DEFAULT_REGION}:${DEFAULT_ACCOUNT_ID}:detector/12abc34d567e8f9012gh345i678j90kl/scans/scan-id-1234abcd`,
@@ -54,11 +55,11 @@ describe('#guard-duty-event-notification', () => {
 
     expect(event).toEqual({
       version: '1',
-      id: 'abcd1234-ef56-7890-ab12-34567890cdef',
+      id: expect.stringMatching(uuidv1Regex),
       'detail-type': 'GuardDuty Malware Protection Object Scan Result',
       source: 'aws.guardduty',
       account: '098765432109',
-      time: expect.any(String),
+      time: expect.stringMatching(isoDateRegex),
       region: 'us-west-2',
       resources: [
         'arn:aws:guardduty:us-west-2:098765432109:detector/12abc34d567e8f9012gh345i678j90kl/scans/scan-id-1234abcd',

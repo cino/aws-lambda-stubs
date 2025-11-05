@@ -4,7 +4,7 @@ import {
   APIGatewayEventRequestContextWithAuthorizerStub,
   DEFAULT_ACCOUNT_ID,
 } from '../../src';
-import { ipv4Regex, isUuidV4Regex } from '../helpers';
+import { clfDateRegex, ipv4Regex, uuidV4Regex } from '../helpers';
 
 describe('#api-gateway', () => {
   describe('api-gateway-event-request-context-with-authorizer', () => {
@@ -37,7 +37,7 @@ describe('#api-gateway', () => {
         },
         path: '/prod/resource',
         stage: 'prod',
-        requestId: expect.stringMatching(isUuidV4Regex),
+        requestId: expect.stringMatching(uuidV4Regex),
         requestTimeEpoch: expect.any(Number),
         resourceId: 'resource-id',
         resourcePath: '/resource',
@@ -76,7 +76,7 @@ describe('#api-gateway', () => {
         },
         path: '/prod/resource',
         stage: 'prod',
-        requestId: expect.stringMatching(isUuidV4Regex),
+        requestId: expect.stringMatching(uuidV4Regex),
         requestTimeEpoch: expect.any(Number),
         resourceId: 'resource-id',
         resourcePath: '/resource',
@@ -100,10 +100,10 @@ describe('#api-gateway', () => {
           sourceIp: expect.stringMatching(ipv4Regex),
           userAgent: 'Custom User Agent String',
         },
-        requestId: expect.stringMatching(isUuidV4Regex),
+        requestId: expect.stringMatching(uuidV4Regex),
         routeKey: '$default',
         stage: 'prod',
-        time: expect.stringMatching(/^\d{2}\/\w{3}\/\d{4}:\d{2}:\d{2}:\d{2} [+-]\d{4}$/),
+        time: expect.stringMatching(clfDateRegex),
         timeEpoch: expect.any(Number),
       });
     });
@@ -126,10 +126,10 @@ describe('#api-gateway', () => {
           sourceIp: expect.stringMatching(ipv4Regex),
           userAgent: 'Custom User Agent String',
         },
-        requestId: expect.stringMatching(isUuidV4Regex),
+        requestId: expect.stringMatching(uuidV4Regex),
         routeKey: '$default',
         stage: 'prod',
-        time: expect.stringMatching(/^\d{2}\/\w{3}\/\d{4}:\d{2}:\d{2}:\d{2} [+-]\d{4}$/),
+        time: expect.stringMatching(clfDateRegex),
         timeEpoch: expect.any(Number),
       });
     });

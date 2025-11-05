@@ -1,5 +1,6 @@
 import type { AppSyncAuthorizerEvent, AppSyncResolverEvent } from 'aws-lambda';
 import type { Merge } from 'type-fest';
+import { v4 as uuidv4 } from 'uuid';
 import { DEFAULT_ACCOUNT_ID } from './common';
 import { deepMerge } from './utils';
 
@@ -10,7 +11,7 @@ export const AppSyncAuthorizerEventStub = (overrides: Partial<AppSyncAuthorizerE
       requestContext: {
         apiId: '1234567890',
         accountId: DEFAULT_ACCOUNT_ID,
-        requestId: crypto.randomUUID(),
+        requestId: uuidv4(),
         queryString: 'query { getUser(id: "1") { name } }',
         operationName: 'getUser',
         variables: {

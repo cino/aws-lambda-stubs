@@ -1,7 +1,8 @@
 import crypto from 'node:crypto';
 import type { SQSEvent, SQSRecord } from 'aws-lambda';
+import { v4 as uuidv4 } from 'uuid';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './common';
-import { deepMerge } from './utils';
+import { currentEpochTime, deepMerge } from './utils';
 
 type omittedKeys = 'attributes' | 'messageAttributes' | 'body';
 
@@ -13,7 +14,7 @@ interface PartialSQSRecord extends Omit<Partial<SQSRecord>, omittedKeys> {
 
 const SQSRecordStub = (overrides: PartialSQSRecord = {}): SQSRecord => {
   const region = overrides.awsRegion ?? DEFAULT_REGION;
-  const nowIso = new Date().toISOString();
+  const nowEpoch = currentEpochTime().toString();
 
   const body = overrides.body || { key: 'value' };
   const stringifiedBody = JSON.stringify(body);
@@ -21,14 +22,14 @@ const SQSRecordStub = (overrides: PartialSQSRecord = {}): SQSRecord => {
 
   return deepMerge<SQSRecord>(
     {
-      messageId: '1',
+      messageId: uuidv4(),
       receiptHandle: 'receipt-handle',
       body: stringifiedBody,
       attributes: {
         ApproximateReceiveCount: '1',
-        SentTimestamp: nowIso,
+        SentTimestamp: nowEpoch,
         SenderId: 'sender-id',
-        ApproximateFirstReceiveTimestamp: nowIso,
+        ApproximateFirstReceiveTimestamp: nowEpoch,
       },
       messageAttributes: {},
       md5OfBody: crypto.createHash('md5').update(stringifiedBody).digest('hex'),

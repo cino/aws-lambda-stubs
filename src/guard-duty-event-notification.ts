@@ -2,6 +2,7 @@ import type { GuardDutyScanResultNotificationEvent, GuardDutyScanResultNotificat
 import type { Merge } from 'type-fest';
 import type { PartialEventBridgeEvent } from './common';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './common';
+import { EventBridgeEventStub } from './event-bridge';
 import { deepMerge } from './utils';
 
 type PartialGuardDutyScanResultNotificationEvent = Merge<
@@ -24,18 +25,9 @@ export const GuardDutyScanResultNotificationEventStub = (
   const account = overrides.account ?? DEFAULT_ACCOUNT_ID;
 
   return deepMerge(
-    {
-      version: '1',
-      id: 'abcd1234-ef56-7890-ab12-34567890cdef',
-      'detail-type': 'GuardDuty Malware Protection Object Scan Result',
-      source: 'aws.guardduty',
-      account,
-      time: new Date().toISOString(),
-      region,
-      resources: [
-        `arn:aws:guardduty:${region}:${account}:detector/12abc34d567e8f9012gh345i678j90kl/scans/scan-id-1234abcd`,
-      ],
-      detail: {
+    EventBridgeEventStub<GuardDutyScanResultNotificationEventDetail>(
+      'GuardDuty Malware Protection Object Scan Result',
+      {
         schemaVersion: '1.0',
         scanStatus: 'COMPLETED',
         resourceType: 'S3_OBJECT',
@@ -51,7 +43,15 @@ export const GuardDutyScanResultNotificationEventStub = (
           threats: null,
         },
       },
-    },
+      {
+        region,
+        account,
+        source: 'aws.guardduty',
+        resources: [
+          `arn:aws:guardduty:${region}:${account}:detector/12abc34d567e8f9012gh345i678j90kl/scans/scan-id-1234abcd`,
+        ],
+      }
+    ),
     overrides as Partial<GuardDutyScanResultNotificationEvent>
   ) as GuardDutyScanResultNotificationEvent;
 };

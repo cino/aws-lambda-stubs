@@ -1,4 +1,5 @@
 import type { EventBridgeEvent } from 'aws-lambda';
+import { v1 as uuidv1 } from 'uuid';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './common';
 
 export const EventBridgeEventStub = <TDetail extends object>(
@@ -10,8 +11,8 @@ export const EventBridgeEventStub = <TDetail extends object>(
   const account = overrides.account ?? DEFAULT_ACCOUNT_ID;
 
   return {
-    version: '0',
-    id: '12345678-1234-1234-1234-123456789012',
+    version: '1',
+    id: uuidv1(),
     'detail-type': detailType,
     source: 'test',
     account,

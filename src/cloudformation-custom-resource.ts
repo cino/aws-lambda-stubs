@@ -3,6 +3,7 @@ import type {
   CloudFormationCustomResourceDeleteEvent,
   CloudFormationCustomResourceUpdateEvent,
 } from 'aws-lambda';
+import { v4 as uuidv4 } from 'uuid';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './common';
 
 export const CloudFormationCustomResourceCreateEventStub = (
@@ -13,7 +14,7 @@ export const CloudFormationCustomResourceCreateEventStub = (
     ServiceToken: `arn:aws:lambda:${DEFAULT_REGION}:${DEFAULT_ACCOUNT_ID}:function:my-function`,
     ResponseURL: 'https://cloudformation-custom-resource-response-useast1.s3.amazonaws.com/...',
     StackId: `arn:aws:cloudformation:${DEFAULT_REGION}:${DEFAULT_ACCOUNT_ID}:stack/my-stack/abcd1234-ef56-7890-abcd-1234ef567890`,
-    RequestId: crypto.randomUUID(),
+    RequestId: uuidv4(),
     ResourceType: 'Custom::MyCustomResource',
     LogicalResourceId: 'MyCustomResource',
     ResourceProperties: {
@@ -33,7 +34,7 @@ export const CloudFormationCustomResourceUpdateEventStub = (
     ServiceToken: `arn:aws:lambda:${DEFAULT_REGION}:${DEFAULT_ACCOUNT_ID}:function:my-function`,
     ResponseURL: 'https://cloudformation-custom-resource-response-useast1.s3.amazonaws.com/...',
     StackId: `arn:aws:cloudformation:${DEFAULT_REGION}:${DEFAULT_ACCOUNT_ID}:stack/my-stack/abcd1234-ef56-7890-abcd-1234ef567890`,
-    RequestId: crypto.randomUUID(),
+    RequestId: uuidv4(),
     ResourceType: 'Custom::MyCustomResource',
     LogicalResourceId: 'MyCustomResource',
     PhysicalResourceId: 'my-physical-resource-id',
@@ -59,7 +60,7 @@ export const CloudFormationCustomResourceDeleteEventStub = (
     ServiceToken: `arn:aws:lambda:${DEFAULT_REGION}:${DEFAULT_ACCOUNT_ID}:function:my-function`,
     ResponseURL: 'https://cloudformation-custom-resource-response-useast1.s3.amazonaws.com/...',
     StackId: `arn:aws:cloudformation:${DEFAULT_REGION}:${DEFAULT_ACCOUNT_ID}:stack/my-stack/abcd1234-ef56-7890-abcd-1234ef567890`,
-    RequestId: crypto.randomUUID(),
+    RequestId: uuidv4(),
     ResourceType: 'Custom::MyCustomResource',
     LogicalResourceId: 'MyCustomResource',
     ResourceProperties: {

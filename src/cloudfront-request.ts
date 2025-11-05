@@ -1,4 +1,5 @@
 import type { CloudFrontRequest, CloudFrontRequestEvent, CloudFrontRequestEventRecord } from 'aws-lambda';
+import { v4 as uuidv4 } from 'uuid';
 import { cloudFrontRequestStub } from './common';
 import { deepMerge } from './utils';
 
@@ -26,7 +27,7 @@ const CloudFrontRequestEventRecordStub = (
           distributionDomainName: distributionDomainName,
           distributionId: 'EDFDVBD632BHDS5',
           eventType: 'viewer-request',
-          requestId: crypto.randomUUID(),
+          requestId: uuidv4(),
         },
         request: cloudFrontRequestStub({
           headers: {

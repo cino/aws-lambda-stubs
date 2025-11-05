@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { CloudFrontRequestEventStub } from '../src';
-import { isUuidV4Regex } from './helpers';
+import { uuidV4Regex } from './helpers';
 
 describe('#cloudfront-request', () => {
   it('should return a valid event', () => {
@@ -14,7 +14,7 @@ describe('#cloudfront-request', () => {
               distributionDomainName: 'd111111abcdef8.cloudfront.net',
               distributionId: 'EDFDVBD632BHDS5',
               eventType: 'viewer-request',
-              requestId: expect.stringMatching(isUuidV4Regex),
+              requestId: expect.stringMatching(uuidV4Regex),
             },
             request: {
               clientIp: expect.any(String),
@@ -55,7 +55,7 @@ describe('#cloudfront-request', () => {
               distributionDomainName: 'override.cloudfront.net',
               distributionId: 'EDFDVBD632BHDS5',
               eventType: 'viewer-request',
-              requestId: expect.stringMatching(isUuidV4Regex),
+              requestId: expect.stringMatching(uuidV4Regex),
             },
             request: {
               clientIp: expect.any(String),

@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION, SESEventStub } from '../src';
+import { isoDateRegex } from './helpers';
 
 describe('#ses', () => {
   it('should return a valid event', () => {
@@ -12,7 +13,7 @@ describe('#ses', () => {
           eventSource: 'aws:ses',
           ses: {
             mail: {
-              timestamp: expect.any(String),
+              timestamp: expect.stringMatching(isoDateRegex),
               source: 'Example <email@example.com>',
               messageId: 'message-id',
               destination: ['recipient@example.com'],

@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION, FireHoseTransformationEventStub } from '../src';
+import { epochTimeRegex } from './helpers';
 
 describe('#kinesis-firehose-transformation', () => {
   it('should return a valid event', () => {
@@ -12,7 +13,7 @@ describe('#kinesis-firehose-transformation', () => {
       records: [
         {
           recordId: 'record-id-123',
-          approximateArrivalTimestamp: expect.any(Number),
+          approximateArrivalTimestamp: expect.toSatisfy((val: number) => epochTimeRegex.test(val.toString())),
           data: 'SGVsbG8sIHRoaXMgaXMgYSB0ZXN0IG1lc3NhZ2Uh',
         },
       ],
@@ -37,7 +38,7 @@ describe('#kinesis-firehose-transformation', () => {
       records: [
         {
           recordId: 'custom-record-id',
-          approximateArrivalTimestamp: expect.any(Number),
+          approximateArrivalTimestamp: expect.toSatisfy((val: number) => epochTimeRegex.test(val.toString())),
           data: 'Q3VzdG9tIGRhdGE=',
         },
       ],

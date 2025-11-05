@@ -1,6 +1,6 @@
 {
   "name": "aws-lambda-stubs",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -54,5 +54,8 @@
     "test": "vitest",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "build": "tsc -p tsconfig.build.json"
+  },
+  "dependencies": {
+    "uuid": "^13.0.0"
   }
 }
