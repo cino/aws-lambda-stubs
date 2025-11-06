@@ -51,7 +51,7 @@ jobs:
       pull-requests: write
     strategy:
       matrix:
-        version: [20, 22, 24, 25, 26]
+        version: [20, 22, 24, 25]
 
     steps:
       - name: Checkout code
