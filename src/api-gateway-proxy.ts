@@ -25,7 +25,7 @@ import {
   type PartialAPIGatewayEventRequestContextV2,
   randomIpAddress,
 } from './common';
-import { currentEpochTime, deepMerge } from './utils';
+import { currentEpochTime, deepMerge, randomString } from './utils';
 
 // V1
 type PartialAPIGatewayProxyWithLambdaAuthorizerEvent<TAuthorizerContext> = Merge<
@@ -182,6 +182,7 @@ export const APIGatewayProxyWebsocketEventV2Stub = (
   overrides: PartialAPIGatewayProxyWebsocketEventV2 = {}
 ): APIGatewayProxyWebsocketEventV2 => {
   const currentEpoch = currentEpochTime();
+  const apiId = randomString(10);
 
   return deepMerge<APIGatewayProxyWebsocketEventV2>(
     {
@@ -196,9 +197,9 @@ export const APIGatewayProxyWebsocketEventV2Stub = (
         requestTime: ApiGatewayParsedDateTime(new Date()),
         requestTimeEpoch: currentEpoch,
         requestId: uuidv4(),
-        domainName: `id.execute-api.${DEFAULT_REGION}.amazonaws.com`,
+        domainName: `${apiId}.execute-api.${DEFAULT_REGION}.amazonaws.com`,
         connectionId: uuidv4(),
-        apiId: 'example',
+        apiId,
       },
       body: '',
       isBase64Encoded: false,

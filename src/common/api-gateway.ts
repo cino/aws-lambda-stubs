@@ -5,7 +5,7 @@ import type {
 } from 'aws-lambda';
 import type { Merge } from 'type-fest';
 import { v4 as uuidv4 } from 'uuid';
-import { currentEpochTime, deepMerge, randomIpAddress } from '../utils';
+import { currentEpochTime, deepMerge, randomIpAddress, randomString } from '../utils';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './consts';
 
 export type PartialAPIGatewayEventRequestContext<TAuthorizer> = Merge<
@@ -41,10 +41,13 @@ export const APIGatewayEventRequestContextWithAuthorizerStub = <TAuthorizer>(
     authorizer: undefined,
   }
 ): APIGatewayEventRequestContextWithAuthorizer<TAuthorizer> => {
+  const apiId = overrides.apiId || randomString(10);
+
   return deepMerge<APIGatewayEventRequestContextWithAuthorizer<TAuthorizer>>(
     {
       accountId: DEFAULT_ACCOUNT_ID,
-      apiId: 'example',
+      apiId,
+      domainPrefix: apiId,
       protocol: 'HTTP/1.1',
       httpMethod: 'GET',
       identity: APIGatewayEventIdentityStub(),
@@ -74,12 +77,14 @@ export type PartialAPIGatewayEventRequestContextV2 = Merge<
 export const APIGatewayEventRequestContextV2Stub = (
   overrides: PartialAPIGatewayEventRequestContextV2 = {}
 ): APIGatewayEventRequestContextV2 => {
+  const apiId = overrides.apiId || randomString(10);
+
   return deepMerge(
     {
       accountId: DEFAULT_ACCOUNT_ID,
-      apiId: 'example',
-      domainName: `id.execute-api.${DEFAULT_REGION}.amazonaws.com`,
-      domainPrefix: 'id',
+      apiId,
+      domainName: `${apiId}.execute-api.${DEFAULT_REGION}.amazonaws.com`,
+      domainPrefix: apiId,
       http: {
         method: 'GET',
         path: '/prod/resource',

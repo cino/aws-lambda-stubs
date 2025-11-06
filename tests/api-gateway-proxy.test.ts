@@ -30,11 +30,12 @@ describe('#api-gateway-proxy', () => {
         stageVariables: null,
         requestContext: {
           accountId: DEFAULT_ACCOUNT_ID,
-          apiId: 'example',
+          apiId: expect.stringMatching(/^[a-zA-Z0-9]{10}$/),
           authorizer: {
             principalId: '1234567890',
             integrationLatency: 100,
           },
+          domainPrefix: event.requestContext.apiId,
           identity: {
             accessKey: null,
             accountId: null,
@@ -83,11 +84,12 @@ describe('#api-gateway-proxy', () => {
         stageVariables: null,
         requestContext: {
           accountId: DEFAULT_ACCOUNT_ID,
-          apiId: 'example',
+          apiId: expect.stringMatching(/^[a-zA-Z0-9]{10}$/),
           authorizer: {
             principalId: '1234567890',
             integrationLatency: 100,
           },
+          domainPrefix: event.requestContext.apiId,
           identity: {
             accessKey: null,
             accountId: null,
@@ -138,13 +140,14 @@ describe('#api-gateway-proxy', () => {
         stageVariables: null,
         requestContext: {
           accountId: DEFAULT_ACCOUNT_ID,
-          apiId: 'example',
+          apiId: expect.stringMatching(/^[a-zA-Z0-9]{10}$/),
           authorizer: {
             claims: {
               sub: '1234567890',
               email: 'john.doe@example.com',
             },
           },
+          domainPrefix: event.requestContext.apiId,
           identity: {
             accessKey: null,
             accountId: null,
@@ -193,13 +196,14 @@ describe('#api-gateway-proxy', () => {
         stageVariables: null,
         requestContext: {
           accountId: DEFAULT_ACCOUNT_ID,
-          apiId: 'example',
+          apiId: expect.stringMatching(/^[a-zA-Z0-9]{10}$/),
           authorizer: {
             claims: {
               sub: '1234567890',
               email: 'john.doe@example.com',
             },
           },
+          domainPrefix: event.requestContext.apiId,
           identity: {
             accessKey: null,
             accountId: null,
@@ -248,9 +252,9 @@ describe('#api-gateway-proxy', () => {
         queryStringParameters: {},
         requestContext: {
           accountId: DEFAULT_ACCOUNT_ID,
-          apiId: 'example',
-          domainName: `id.execute-api.${DEFAULT_REGION}.amazonaws.com`,
-          domainPrefix: 'id',
+          apiId: expect.stringMatching(/^[a-zA-Z0-9]{10}$/),
+          domainName: `${event.requestContext.apiId}.execute-api.${DEFAULT_REGION}.amazonaws.com`,
+          domainPrefix: event.requestContext.apiId,
           http: {
             method: 'GET',
             path: '/prod/resource',
@@ -288,9 +292,9 @@ describe('#api-gateway-proxy', () => {
         queryStringParameters: {},
         requestContext: {
           accountId: DEFAULT_ACCOUNT_ID,
-          apiId: 'example',
-          domainName: `id.execute-api.${DEFAULT_REGION}.amazonaws.com`,
-          domainPrefix: 'id',
+          apiId: expect.stringMatching(/^[a-zA-Z0-9]{10}$/),
+          domainName: `${event.requestContext.apiId}.execute-api.${DEFAULT_REGION}.amazonaws.com`,
+          domainPrefix: event.requestContext.apiId,
           http: {
             method: 'POST',
             path: '/custom/path',
@@ -324,9 +328,9 @@ describe('#api-gateway-proxy', () => {
           requestTime: expect.stringMatching(clfDateRegex),
           requestTimeEpoch: expect.any(Number),
           requestId: expect.stringMatching(uuidV4Regex),
-          domainName: `id.execute-api.${DEFAULT_REGION}.amazonaws.com`,
+          domainName: `${event.requestContext.apiId}.execute-api.${DEFAULT_REGION}.amazonaws.com`,
           connectionId: expect.stringMatching(uuidV4Regex),
-          apiId: 'example',
+          apiId: expect.stringMatching(/^[a-zA-Z0-9]{10}$/),
         },
         body: '',
         isBase64Encoded: false,
@@ -355,9 +359,9 @@ describe('#api-gateway-proxy', () => {
           requestTime: expect.stringMatching(clfDateRegex),
           requestTimeEpoch: expect.any(Number),
           requestId: expect.stringMatching(uuidV4Regex),
-          domainName: `id.execute-api.${DEFAULT_REGION}.amazonaws.com`,
+          domainName: `${event.requestContext.apiId}.execute-api.${DEFAULT_REGION}.amazonaws.com`,
           connectionId: expect.stringMatching(uuidV4Regex),
-          apiId: 'example',
+          apiId: expect.stringMatching(/^[a-zA-Z0-9]{10}$/),
         },
         body: 'Test message',
         isBase64Encoded: false,
@@ -381,7 +385,7 @@ describe('#api-gateway-proxy', () => {
         queryStringParameters: {},
         requestContext: {
           accountId: DEFAULT_ACCOUNT_ID,
-          apiId: 'example',
+          apiId: expect.stringMatching(/^[a-zA-Z0-9]{10}$/),
           authorizer: {
             jwt: {
               claims: {
@@ -393,8 +397,8 @@ describe('#api-gateway-proxy', () => {
             principalId: '1234567890',
             integrationLatency: 100,
           },
-          domainName: `id.execute-api.${DEFAULT_REGION}.amazonaws.com`,
-          domainPrefix: 'id',
+          domainName: `${event.requestContext.apiId}.execute-api.${DEFAULT_REGION}.amazonaws.com`,
+          domainPrefix: event.requestContext.apiId,
           http: {
             method: 'GET',
             path: '/prod/resource',
@@ -433,7 +437,7 @@ describe('#api-gateway-proxy', () => {
         queryStringParameters: {},
         requestContext: {
           accountId: DEFAULT_ACCOUNT_ID,
-          apiId: 'example',
+          apiId: expect.stringMatching(/^[a-zA-Z0-9]{10}$/),
           authorizer: {
             jwt: {
               claims: {
@@ -445,8 +449,8 @@ describe('#api-gateway-proxy', () => {
             principalId: '1234567890',
             integrationLatency: 100,
           },
-          domainName: `id.execute-api.${DEFAULT_REGION}.amazonaws.com`,
-          domainPrefix: 'id',
+          domainName: `${event.requestContext.apiId}.execute-api.${DEFAULT_REGION}.amazonaws.com`,
+          domainPrefix: event.requestContext.apiId,
           http: {
             method: 'POST',
             path: '/custom/path',
@@ -479,10 +483,10 @@ describe('#api-gateway-proxy', () => {
         queryStringParameters: {},
         requestContext: {
           accountId: DEFAULT_ACCOUNT_ID,
-          apiId: 'example',
+          apiId: expect.stringMatching(/^[a-zA-Z0-9]{10}$/),
           authorizer: { lambda: { key: 'value' } },
-          domainName: `id.execute-api.${DEFAULT_REGION}.amazonaws.com`,
-          domainPrefix: 'id',
+          domainName: `${event.requestContext.apiId}.execute-api.${DEFAULT_REGION}.amazonaws.com`,
+          domainPrefix: event.requestContext.apiId,
           http: {
             method: 'GET',
             path: '/prod/resource',
@@ -523,10 +527,10 @@ describe('#api-gateway-proxy', () => {
         queryStringParameters: {},
         requestContext: {
           accountId: DEFAULT_ACCOUNT_ID,
-          apiId: 'example',
+          apiId: expect.stringMatching(/^[a-zA-Z0-9]{10}$/),
           authorizer: { lambda: { key: 'value' } },
-          domainName: `id.execute-api.${DEFAULT_REGION}.amazonaws.com`,
-          domainPrefix: 'id',
+          domainName: `${event.requestContext.apiId}.execute-api.${DEFAULT_REGION}.amazonaws.com`,
+          domainPrefix: event.requestContext.apiId,
           http: {
             method: 'POST',
             path: '/custom/path',
@@ -567,7 +571,7 @@ describe('#api-gateway-proxy', () => {
         queryStringParameters: {},
         requestContext: {
           accountId: DEFAULT_ACCOUNT_ID,
-          apiId: 'example',
+          apiId: expect.stringMatching(/^[a-zA-Z0-9]{10}$/),
           authorizer: {
             iam: {
               accessKey: 'AKIAEXAMPLE',
@@ -579,8 +583,8 @@ describe('#api-gateway-proxy', () => {
               userId: 'AIDAIEXAMPLE',
             },
           },
-          domainName: `id.execute-api.${DEFAULT_REGION}.amazonaws.com`,
-          domainPrefix: 'id',
+          domainName: `${event.requestContext.apiId}.execute-api.${DEFAULT_REGION}.amazonaws.com`,
+          domainPrefix: event.requestContext.apiId,
           http: {
             method: 'GET',
             path: '/prod/resource',
@@ -629,7 +633,7 @@ describe('#api-gateway-proxy', () => {
         queryStringParameters: {},
         requestContext: {
           accountId: DEFAULT_ACCOUNT_ID,
-          apiId: 'example',
+          apiId: expect.stringMatching(/^[a-zA-Z0-9]{10}$/),
           authorizer: {
             iam: {
               accessKey: 'AKIAEXAMPLE',
@@ -641,8 +645,8 @@ describe('#api-gateway-proxy', () => {
               userId: 'AIDAIEXAMPLE',
             },
           },
-          domainName: `id.execute-api.${DEFAULT_REGION}.amazonaws.com`,
-          domainPrefix: 'id',
+          domainName: `${event.requestContext.apiId}.execute-api.${DEFAULT_REGION}.amazonaws.com`,
+          domainPrefix: event.requestContext.apiId,
           http: {
             method: 'POST',
             path: '/custom/path',

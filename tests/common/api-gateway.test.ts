@@ -13,7 +13,8 @@ describe('#api-gateway', () => {
 
       expect(event).toEqual({
         accountId: DEFAULT_ACCOUNT_ID,
-        apiId: 'example',
+        apiId: expect.stringMatching(/^[a-zA-Z0-9]{10}$/),
+        domainPrefix: event.apiId,
         protocol: 'HTTP/1.1',
         httpMethod: 'GET',
         identity: {
@@ -52,7 +53,8 @@ describe('#api-gateway', () => {
 
       expect(event).toEqual({
         accountId: 'overridden-account-id',
-        apiId: 'example',
+        apiId: expect.stringMatching(/^[a-zA-Z0-9]{10}$/),
+        domainPrefix: event.apiId,
         protocol: 'HTTP/1.1',
         httpMethod: 'GET',
         identity: {
@@ -90,9 +92,9 @@ describe('#api-gateway', () => {
 
       expect(event).toEqual({
         accountId: DEFAULT_ACCOUNT_ID,
-        apiId: 'example',
-        domainName: 'id.execute-api.us-east-1.amazonaws.com',
-        domainPrefix: 'id',
+        apiId: expect.stringMatching(/^[a-zA-Z0-9]{10}$/),
+        domainName: `${event.apiId}.execute-api.us-east-1.amazonaws.com`,
+        domainPrefix: event.apiId,
         http: {
           method: 'GET',
           path: '/prod/resource',
@@ -116,9 +118,9 @@ describe('#api-gateway', () => {
 
       expect(event).toEqual({
         accountId: 'overridden-account-id',
-        apiId: 'example',
-        domainName: 'id.execute-api.us-east-1.amazonaws.com',
-        domainPrefix: 'id',
+        apiId: expect.stringMatching(/^[a-zA-Z0-9]{10}$/),
+        domainName: `${event.apiId}.execute-api.us-east-1.amazonaws.com`,
+        domainPrefix: event.apiId,
         http: {
           method: 'POST',
           path: '/prod/resource',
