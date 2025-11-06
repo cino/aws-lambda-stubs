@@ -4,6 +4,7 @@ import type {
   CodePipelineCloudWatchStageEvent,
 } from 'aws-lambda';
 import type { Merge } from 'type-fest';
+import { v1 as uuidv1 } from 'uuid';
 import { EventBridgeEventStub } from './event-bridge';
 import { deepMerge } from './utils';
 
@@ -26,7 +27,7 @@ export const CodePipelineCloudWatchActionEventStub = (
     EventBridgeEventStub<CodePipelineCloudWatchActionEvent['detail']>('CodePipeline Action Execution State Change', {
       pipeline: 'my-pipeline',
       version: 1,
-      'execution-id': '12345678-1234-1234-1234-123456789012',
+      'execution-id': uuidv1(),
       stage: 'Source',
       action: 'SourceAction',
       state: 'STARTED',
@@ -58,7 +59,7 @@ export const CodePipelineCloudWatchPipelineEventStub = (
         pipeline: 'my-pipeline',
         version: 1,
         state: 'STARTED',
-        'execution-id': '12345678-1234-1234-1234-123456789012',
+        'execution-id': uuidv1(),
       }
     ),
     overrides as Partial<CodePipelineCloudWatchPipelineEvent>
@@ -79,7 +80,7 @@ export const CodePipelineCloudWatchStageEventStub = (
     EventBridgeEventStub<CodePipelineCloudWatchStageEvent['detail']>('CodePipeline Stage Execution State Change', {
       pipeline: 'my-pipeline',
       version: 1,
-      'execution-id': '12345678-1234-1234-1234-123456789012',
+      'execution-id': uuidv1(),
       stage: 'BuildStage',
       state: 'SUCCEEDED',
     }),

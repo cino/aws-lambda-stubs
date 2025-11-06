@@ -24,7 +24,7 @@ describe('#codepipeline-cloudwatch', () => {
         detail: {
           pipeline: 'my-pipeline',
           version: 1,
-          'execution-id': '12345678-1234-1234-1234-123456789012',
+          'execution-id': expect.stringMatching(uuidv1Regex),
           stage: 'Source',
           action: 'SourceAction',
           state: 'STARTED',
@@ -58,7 +58,7 @@ describe('#codepipeline-cloudwatch', () => {
         detail: {
           pipeline: 'my-pipeline',
           version: 1,
-          'execution-id': '12345678-1234-1234-1234-123456789012',
+          'execution-id': expect.stringMatching(uuidv1Regex),
           stage: 'Source',
           action: 'OverriddenAction',
           state: 'SUCCEEDED',
@@ -90,7 +90,7 @@ describe('#codepipeline-cloudwatch', () => {
           pipeline: 'my-pipeline',
           version: 1,
           state: 'STARTED',
-          'execution-id': '12345678-1234-1234-1234-123456789012',
+          'execution-id': expect.stringMatching(uuidv1Regex),
         },
       });
     });
@@ -115,7 +115,7 @@ describe('#codepipeline-cloudwatch', () => {
           pipeline: 'my-pipeline',
           version: 1,
           state: 'SUCCEEDED',
-          'execution-id': '12345678-1234-1234-1234-123456789012',
+          'execution-id': expect.stringMatching(uuidv1Regex),
         },
       });
     });
@@ -137,7 +137,7 @@ describe('#codepipeline-cloudwatch', () => {
         detail: {
           pipeline: 'my-pipeline',
           version: 1,
-          'execution-id': '12345678-1234-1234-1234-123456789012',
+          'execution-id': expect.stringMatching(uuidv1Regex),
           stage: 'BuildStage',
           state: 'SUCCEEDED',
         },
@@ -164,7 +164,7 @@ describe('#codepipeline-cloudwatch', () => {
         detail: {
           pipeline: 'my-pipeline',
           version: 1,
-          'execution-id': '12345678-1234-1234-1234-123456789012',
+          'execution-id': expect.stringMatching(uuidv1Regex),
           stage: 'OverriddenStage',
           state: 'FAILED',
         },

@@ -12,7 +12,7 @@ describe('#cloudfront-request', () => {
           cf: {
             config: {
               distributionDomainName: 'd111111abcdef8.cloudfront.net',
-              distributionId: 'EDFDVBD632BHDS5',
+              distributionId: expect.stringMatching(/^[A-Z0-9]{14}$/),
               eventType: 'viewer-request',
               requestId: expect.stringMatching(uuidV4Regex),
             },
@@ -53,7 +53,7 @@ describe('#cloudfront-request', () => {
           cf: {
             config: {
               distributionDomainName: 'override.cloudfront.net',
-              distributionId: 'EDFDVBD632BHDS5',
+              distributionId: expect.stringMatching(/^[A-Z0-9]{14}$/),
               eventType: 'viewer-request',
               requestId: expect.stringMatching(uuidV4Regex),
             },

@@ -1,7 +1,7 @@
 import type { CloudFrontRequest, CloudFrontRequestEvent, CloudFrontRequestEventRecord } from 'aws-lambda';
 import { v4 as uuidv4 } from 'uuid';
 import { cloudFrontRequestStub } from './common';
-import { deepMerge } from './utils';
+import { deepMerge, randomString } from './utils';
 
 interface PartialCloudFrontRequestEventRecord {
   cf?: {
@@ -25,7 +25,7 @@ const CloudFrontRequestEventRecordStub = (
       cf: {
         config: {
           distributionDomainName: distributionDomainName,
-          distributionId: 'EDFDVBD632BHDS5',
+          distributionId: randomString(14).toUpperCase(),
           eventType: 'viewer-request',
           requestId: uuidv4(),
         },
