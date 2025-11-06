@@ -4,7 +4,7 @@ import {
   APIGatewayEventRequestContextWithAuthorizerStub,
   DEFAULT_ACCOUNT_ID,
 } from '../../src';
-import { clfDateRegex, ipv4Regex, uuidV4Regex } from '../helpers';
+import { clfDateRegex, ipv4Regex, userAgentRegex, uuidV4Regex } from '../helpers';
 
 describe('#api-gateway', () => {
   describe('api-gateway-event-request-context-with-authorizer', () => {
@@ -100,7 +100,7 @@ describe('#api-gateway', () => {
           path: '/prod/resource',
           protocol: 'HTTP/1.1',
           sourceIp: expect.stringMatching(ipv4Regex),
-          userAgent: 'Custom User Agent String',
+          userAgent: expect.stringMatching(userAgentRegex),
         },
         requestId: expect.stringMatching(uuidV4Regex),
         routeKey: '$default',
@@ -126,7 +126,7 @@ describe('#api-gateway', () => {
           path: '/prod/resource',
           protocol: 'HTTP/1.1',
           sourceIp: expect.stringMatching(ipv4Regex),
-          userAgent: 'Custom User Agent String',
+          userAgent: expect.stringMatching(userAgentRegex),
         },
         requestId: expect.stringMatching(uuidV4Regex),
         routeKey: '$default',

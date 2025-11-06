@@ -8,7 +8,7 @@ import {
   DEFAULT_ACCOUNT_ID,
   DEFAULT_REGION,
 } from '../src';
-import { clfDateRegex, ipv4Regex, uuidV4Regex } from './helpers';
+import { clfDateRegex, ipv4Regex, userAgentRegex, uuidV4Regex } from './helpers';
 
 describe('#api-gateway-authorizer', () => {
   describe('token-authorizer', () => {
@@ -47,7 +47,7 @@ describe('#api-gateway-authorizer', () => {
         path: '/prod/resource',
         httpMethod: 'GET',
         headers: {
-          'User-Agent': 'Custom User Agent String',
+          'User-Agent': expect.stringMatching(userAgentRegex),
           Accept: '*/*',
         },
         multiValueHeaders: {},
@@ -84,7 +84,7 @@ describe('#api-gateway-authorizer', () => {
         path: '/prod/resource',
         httpMethod: 'GET',
         headers: {
-          'User-Agent': 'Custom User Agent String',
+          'User-Agent': expect.stringMatching(userAgentRegex),
           Accept: '*/*',
         },
         multiValueHeaders: {},
@@ -123,7 +123,7 @@ describe('#api-gateway-authorizer', () => {
         rawQueryString: '',
         cookies: [],
         headers: {
-          'User-Agent': 'Custom User Agent String',
+          'User-Agent': expect.stringMatching(userAgentRegex),
           Accept: '*/*',
         },
         queryStringParameters: {},
@@ -133,6 +133,7 @@ describe('#api-gateway-authorizer', () => {
             http: {
               ...APIGatewayEventRequestContextV2Stub().http,
               sourceIp: expect.stringMatching(ipv4Regex),
+              userAgent: event.headers?.['User-Agent'],
             },
             requestId: expect.stringMatching(uuidV4Regex),
           },
@@ -165,7 +166,7 @@ describe('#api-gateway-authorizer', () => {
         rawQueryString: '',
         cookies: [],
         headers: {
-          'User-Agent': 'Custom User Agent String',
+          'User-Agent': expect.stringMatching(userAgentRegex),
           Accept: '*/*',
         },
         queryStringParameters: {},
@@ -175,6 +176,7 @@ describe('#api-gateway-authorizer', () => {
             http: {
               ...APIGatewayEventRequestContextV2Stub().http,
               sourceIp: expect.stringMatching(ipv4Regex),
+              userAgent: event.headers?.['User-Agent'],
             },
             apiId: expect.stringMatching(/^[a-zA-Z0-9]{10}$/),
             domainName: `${event.requestContext.apiId}.execute-api.${DEFAULT_REGION}.amazonaws.com`,

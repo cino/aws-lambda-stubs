@@ -11,7 +11,7 @@ import {
   DEFAULT_REGION,
   type PartialAPIGatewayEventRequestContextV2,
 } from './common';
-import { deepMerge } from './utils';
+import { deepMerge, randomUserAgent } from './utils';
 
 export const APIGatewayTokenAuthorizerEventStub = (
   overrides: Partial<APIGatewayTokenAuthorizerEvent> = {}
@@ -36,7 +36,7 @@ export const APIGatewayRequestAuthorizerEventStub = (
       path: '/prod/resource',
       httpMethod: 'GET',
       headers: {
-        'User-Agent': 'Custom User Agent String',
+        'User-Agent': randomUserAgent(),
         Accept: '*/*',
       },
       multiValueHeaders: {},
@@ -60,6 +60,8 @@ type PartialAPIGatewayRequestAuthorizerEventV2 = Merge<
 export const APIGatewayRequestAuthorizerEventV2Stub = (
   overrides: PartialAPIGatewayRequestAuthorizerEventV2 = {}
 ): APIGatewayRequestAuthorizerEventV2 => {
+  const userAgent = overrides.headers?.['User-Agent'] ?? randomUserAgent();
+
   return deepMerge(
     {
       version: '2.0',
@@ -71,11 +73,15 @@ export const APIGatewayRequestAuthorizerEventV2Stub = (
       rawQueryString: '',
       cookies: [],
       headers: {
-        'User-Agent': 'Custom User Agent String',
+        'User-Agent': userAgent,
         Accept: '*/*',
       },
       queryStringParameters: {},
-      requestContext: APIGatewayEventRequestContextV2Stub(),
+      requestContext: APIGatewayEventRequestContextV2Stub({
+        http: {
+          userAgent: userAgent,
+        }
+      }),
       pathParameters: {},
       stageVariables: {},
     },

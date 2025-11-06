@@ -5,7 +5,7 @@ import type {
 } from 'aws-lambda';
 import type { Merge } from 'type-fest';
 import { v4 as uuidv4 } from 'uuid';
-import { currentEpochTime, deepMerge, randomIpAddress, randomString } from '../utils';
+import { currentEpochTime, deepMerge, randomIpAddress, randomString, randomUserAgent } from '../utils';
 import { DEFAULT_ACCOUNT_ID, DEFAULT_REGION } from './consts';
 
 export type PartialAPIGatewayEventRequestContext<TAuthorizer> = Merge<
@@ -90,7 +90,7 @@ export const APIGatewayEventRequestContextV2Stub = (
         path: '/prod/resource',
         protocol: 'HTTP/1.1',
         sourceIp: randomIpAddress(),
-        userAgent: 'Custom User Agent String',
+        userAgent:randomUserAgent(),
       },
       requestId: uuidv4(),
       routeKey: '$default',
