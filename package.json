@@ -57,5 +57,8 @@
   },
   "dependencies": {
     "uuid": "^13.0.0"
+  },
+  "overrides": {
+    "rollup": "4.52.5"
   }
 }
