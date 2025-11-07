@@ -37,6 +37,7 @@ coverage/
 
 # Miscellaneous
 .github
+.devcontainer
 .husky
 examples
 tests

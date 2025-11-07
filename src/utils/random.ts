@@ -12,24 +12,21 @@ export const randomIpAddress = (type: IPType = 'ipv4'): string => {
   ).join(':');
 };
 
-type InstanceId = `i-${string}`;
-export const randomInstanceId = (): InstanceId => {
-  const randomHex = () =>
-    Math.floor(Math.random() * 0xffffffff)
-      .toString(16)
-      .padStart(8, '0');
-
-  return `i-${randomHex()}${randomHex()}` as InstanceId;
-};
-
-export const randomString = (length: number): string => {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+export const randomString = (
+  length: number,
+  chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+): string => {
   let result = '';
   for (let i = 0; i < length; i++) {
     result += chars.charAt(Math.floor(Math.random() * chars.length));
   }
 
   return result;
+};
+
+type InstanceId = `i-${string}`;
+export const randomInstanceId = (): InstanceId => {
+  return `i-${randomString(16, '0123456789abcdef')}` as InstanceId;
 };
 
 export const randomUserAgent = (): string => {
