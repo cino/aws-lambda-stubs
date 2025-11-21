@@ -140,8 +140,8 @@ export const APIGatewayEventIdentityStub = (
     user: null,
     userAgent: null,
     userArn: null,
-    vpcId: null,
-    vpceId: null,
+    vpcId: undefined,
+    vpceId: undefined,
     ...overrides,
   };
 };
