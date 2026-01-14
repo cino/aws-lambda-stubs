@@ -11,8 +11,8 @@ interface PartialCloudFrontRequestEventRecord {
       eventType: string;
       requestId: string;
     }>;
+    request?: Partial<CloudFrontRequest>;
   };
-  request?: Partial<CloudFrontRequest>;
 }
 
 const CloudFrontRequestEventRecordStub = (
