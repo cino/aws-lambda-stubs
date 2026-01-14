@@ -14,9 +14,9 @@ export interface PartialCloudFrontResponseEventRecord {
       eventType: string;
       requestId: string;
     }>;
+    request?: Partial<CloudFrontRequest>;
+    response?: Partial<CloudFrontResponse>;
   };
-  request?: Partial<CloudFrontRequest>;
-  response?: Partial<CloudFrontResponse>;
 }
 
 const CloudFrontResponseEventRecordStub = (

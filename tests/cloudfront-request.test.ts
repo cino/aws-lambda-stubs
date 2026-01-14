@@ -43,6 +43,9 @@ describe('#cloudfront-request', () => {
           config: {
             distributionDomainName: 'override.cloudfront.net',
           },
+          request: {
+            uri: '/override/path.jpg',
+          },
         },
       },
     ]);
@@ -60,7 +63,7 @@ describe('#cloudfront-request', () => {
             request: {
               clientIp: expect.any(String),
               method: 'GET',
-              uri: '/images/image.jpg',
+              uri: '/override/path.jpg',
               querystring: '',
               headers: {
                 host: [
