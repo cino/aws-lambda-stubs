@@ -54,6 +54,12 @@ describe('#cloudfront-response', () => {
           config: {
             distributionDomainName: 'override.cloudfront.net',
           },
+          request: {
+            uri: '/override/path.jpg',
+          },
+          response: {
+            status: '201',
+          },
         },
       },
     ]);
@@ -71,7 +77,7 @@ describe('#cloudfront-response', () => {
             request: {
               clientIp: expect.any(String),
               method: 'GET',
-              uri: '/images/image.jpg',
+              uri: '/override/path.jpg',
               querystring: '',
               headers: {
                 host: [
@@ -83,7 +89,7 @@ describe('#cloudfront-response', () => {
               },
             },
             response: {
-              status: '200',
+              status: '201',
               statusDescription: 'OK',
               headers: {
                 'content-type': [
